@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<expoze xmlns="http://www.amplecode.org/schema/expoze"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.amplecode.org/schema/expoze expoze-1.0.xsd">
+
+  <requests>
+  
+    <request>
+      <name>getDataElement</name>
+      <type>document</type>
+      <bean>org.hisp.dhis.dataelement.DataElementService</bean>
+      <method>getDataElement</method>
+      <methodTypes>
+        <value>get</value>
+        <value>post</value>
+      </methodTypes>
+      <parameters>
+        <parameter>
+          <type>java.lang.Integer</type>
+          <name>id</name>
+        </parameter>
+      </parameters>
+      <template>dataElement.vm</template>
+      <contentType>text/xml</contentType>
+    </request>
+
+    <request>
+      <name>getDataElements</name>
+      <bean>org.hisp.dhis.dataelement.DataElementService</bean>
+      <method>getAllDataElements</method>
+      <template>dataElements.vm</template>
+      <responses>
+        <response>
+          <format>json</format>
+          <template>dataElementsJson.vm</template>
+          <contentType>application/json</contentType>
+        </response>
+        <response>
+          <format>xml</format>
+          <template>dataElementsXml.vm</template>
+          <contentType>text/xml</contentType>
+        </response>
+      </responses>
+    </request>
+    
+  </requests>
+  
+</expoze>

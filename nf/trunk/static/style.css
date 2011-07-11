@@ -1,0 +1,13 @@
+.videoBox {
+	width:600px;
+	height:337px;
+	background-color:#c0c0c0;
+	border:1px solid black;
+	margin:10px;
+}
+.description {
+	border:1px solid black;
+	width:600px;
+	margin:10px;
+	margin-bottom:40px;
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persons>
+#foreach ( $person in $object )
+	<person>
+		<name>$encoder.xmlEncode( $person.name )</name>
+		<address>$encoder.xmlEncode( $person.address )</address>
+	</person>
+#end
+</persons>

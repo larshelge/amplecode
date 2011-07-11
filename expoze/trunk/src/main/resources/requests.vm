@@ -1,0 +1,32 @@
+<html>
+<body>
+
+<table style="width:2100px">
+	<tr>
+		<th style="width:300px; text-align:left;">Name</th>
+        <th style="width:200px; text-align:left;">Type</th>
+		<th style="width:400px; text-align:left;">Bean</th>
+		<th style="width:300px; text-align:left;">Method</th>
+		<th style="width:300px; text-align:left;">Parameters [type name]</th>
+        <th style="width:300px; text-align:left;">Template</th>
+        <th style="width:300px; text-align:left;">Content type</th>
+	</tr>
+    #foreach( $request in $object.getSortedRequests() )
+	<tr>
+        <td><a href="$!{request.name}.service">${request.name}</a></td>
+        <td>$!{request.type}</td>
+        <td>$!{request.bean}</td>
+        <td>$!{request.method}</td>
+        <td>
+        #foreach( $parameter in $request.parameters )
+        	[$!{parameter.type} $!{parameter.name}]
+        #end
+        </td>
+        <td>$!{request.template}</td>        
+        <td>$!{request.contentType}</td>
+    </tr>
+    #end
+</table>
+
+</body>
+</html>

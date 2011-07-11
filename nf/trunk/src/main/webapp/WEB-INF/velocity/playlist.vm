@@ -1,0 +1,60 @@
+#parse( "control.vm" )
+
+<div style="position:relative; top:10px;">
+	
+<form id="playlistForm" method="post" action="savePlaylist">
+	
+<input type="hidden" name="id" value="$!{playlist.id}">
+<input type="hidden" name="code" value="$!{playlist.code}">
+
+<p class="title1">Spilleliste</p>
+
+<table width="600px">
+<tr>
+<th colspan="2">Detaljer</th>
+</tr>
+<tr>
+<td>Navn</td>
+<td><input type="text" name="name" style="width:300px" value="$!{playlist.name}"></td>
+</tr>
+<tr>
+<td>Beskrivelse</td>
+<td><input type="text" name="description" style="width:300px" value="$!{playlist.description}"></td>
+</tr>
+<tr>
+<td>Tilgjengelige<br>brukere</td>
+<td><select multiple size="6" id="availableUsers" style="width:300px" ondblclick="moveOption( 'availableUsers', 'selectedUsers' )">
+#foreach( $user in $users )
+<option value="${user.id}">${user.firstname} ${user.lastname}</option>
+#end
+</select></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="button" onclick="moveOption( 'availableUsers', 'selectedUsers' )" value="Velg"><input type="button" onclick="moveOption( 'selectedUsers', 'availableUsers' )" value="Fjern"></td>
+</tr>
+<tr>
+<td>Valgte<br>brukere</td>
+<td><select multiple size="6" id="selectedUsers" name="users" style="width:300px" ondblclick="moveOption( 'selectedUsers', 'availableUsers' )">
+#foreach( $user in $!{playlist.users} )
+<option value="${user.id}">${user.firstname} ${user.lastname}</option>
+#end
+</select></td>
+</tr>
+#if( ${playlist} )
+<tr>
+<td>URL</td>
+<td>$!{baseUrl}play?code=$!{playlist.code}</td>
+</tr>
+#end
+<tr>
+<td></td>
+<td><input type="button" value="Lagre" onclick="submitPlaylistForm()"><input type="button" onclick="window.location.href='listPlaylists'" value="Avbryt"></td>
+</tr>
+</table>
+
+</form>
+	
+</div>
+
+#parse( "footer.vm" )

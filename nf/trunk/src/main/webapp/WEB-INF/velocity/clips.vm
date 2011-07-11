@@ -1,0 +1,93 @@
+
+#macro( paging $type )
+<div class="paging">
+
+#if( $paging.previous )
+<a href="javascript:searchPagedQuery( '${query}', '${type}', '${paging.previousPage}' )">Forrige</a> 
+#else
+<label>Forrige</label>
+#end
+
+#foreach( $p in [${paging.startPage}..${paging.endPage}] )
+#if( $p != $paging.currentPage )
+<a href="javascript:searchPagedQuery( '${query}', '${type}', '${p}' )">${p}</a>
+#else
+${p}
+#end
+#end
+
+#if( $paging.next )
+<a href="javascript:searchPagedQuery( '${query}', '${type}', '${paging.nextPage}' )">Neste</a> 
+#else
+<label>Neste</label>
+#end
+
+</div>
+#end
+
+<script>
+$( document ).ready( function() {
+  initClips();
+});
+</script>
+
+#if( $clips && $clips.size() > 0 )
+
+#if( $paging )
+#paging( 'video' )
+#end
+
+<ul class="clipList">
+#foreach( $clip in $!clips )
+  #if( $!currentUser.hasAuth( "ROLE_MANAGER" ) )
+  <div style="float:right; padding-top:4px; cursor:pointer">
+    <img src="images/edit-small.png" title="Endre" onclick="updateClip( '${clip.id}' )" class="transparent"><br>
+  	<img src="images/delete-small.png" title="Slett" onclick="removeClip( '${clip.id}' )" class="transparent">
+  </div>
+  #end
+  <li name="${clip.id}" class="clipItem" title="$!{clip.categoryName} - $!{clip.personName}">
+  	<div style="float:left; padding-right:10px">
+  	  <img src="images/video.png" alt="Video">
+  	</div>
+  	<div>
+      $!{clip.categoryShortName}<br>
+	  $!{clip.personShortName}<br>
+	  $!{clip.event.name} #if( !${clip.event.name} )<br>#end
+	</div>
+  </li>
+#end
+</ul>
+
+#elseif( $clips )
+<p class="title2">Ingen videoklipp funnet</p>
+#end
+
+#if( $!docs && $!docs.size() > 0 )
+
+#if( $paging )
+#paging( 'document' )
+#end
+
+<ul class="clipList">
+#foreach( $doc in $!docs )
+  #if( $!currentUser.hasAuth( "ROLE_MANAGER" ) )
+  <div style="float:right; padding-top:4px; cursor:pointer">
+    <img src="images/edit-small.png" title="Endre" onclick="updateDocument( '${doc.id}' )" class="transparent"><br>
+  	<img src="images/delete-small.png" title="Slett" onclick="removeDocument( '${doc.id}' )" class="transparent">
+  </div>
+  #end
+  <li name="${doc.id}" class="documentItem" title="$!{doc.title}">
+    <span style="float:left; padding-right:10px">
+      <img src="images/document.png" alt="Document">
+    </span>
+    <span>
+      $!{doc.displayTitle}<br>
+      $!{doc.categoryName}
+    </span>
+  </li>
+#end
+</ul>
+
+#elseif( $docs )
+<p class="title2">Ingen dokumenter funnet</p>
+#end

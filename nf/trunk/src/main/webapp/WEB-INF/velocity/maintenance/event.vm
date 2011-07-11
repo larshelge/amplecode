@@ -1,0 +1,58 @@
+#parse( "maintenance/control.vm" )
+
+<script type="text/javascript">
+$( document ).ready( function() {
+$( "#date" ).datepicker( { dateFormat: 'yy-mm-dd' } );
+$( "#eventForm" ).validate( { rules: validationRules.rules.event } );
+} );
+</script>
+	
+<div style="position:relative; top:20px;">
+	
+<form id="eventForm" method="post" action="saveEvent">
+	
+<input type="hidden" name="id" value="$!{event.id}">
+<input type="hidden" name="name" value="$!{event.name}">
+<input type="hidden" name="code" value="$!{event.code}">
+
+<p class="title1">Kamp</p>
+
+<table width="600px">
+<tr>
+<th colspan="2">Detaljer</th>
+</tr>
+<tr>
+<td>Sted</td>
+<td><input type="text" id="location" name="location" style="width:300px" value="$!{event.location}"></td>
+</tr>
+<tr>
+<td>Dato</td>
+<td><input type="text" id="date" name="date" style="width:300px" value="$!encode.date( $!{event.date} )"></td>
+</tr>
+<tr>
+<td>Hjemmelag</td>
+<td><select id="homeTeam" name="homeTeam" style="width:200px">
+#foreach( $team in $teams )
+<option value="${team.id}"#if( $event && $team == $event.homeTeam ) selected="selected"#end>${team.name}</option>
+#end
+</select></td>
+</tr>
+<tr>
+<td>Bortelag</td>
+<td><select id="awayTeam" name="awayTeam" style="width:200px">
+#foreach( $team in $teams )
+<option value="${team.id}"#if( $event && $team == $event.awayTeam ) selected="selected"#end>${team.name}</option>
+#end
+</select></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" value="Lagre"><input type="button" onclick="window.location.href='listEvents'" value="Avbryt"></td>
+</tr>
+</table>
+
+</form>
+	
+</div>
+
+#parse( "footer.vm" )

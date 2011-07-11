@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>org.amplecode</groupId>
+  <artifactId>cave-process</artifactId>
+  <version>1.0.3</version>
+  <packaging>jar</packaging>
+  <name>Cave Process Framework</name>
+  
+  <description>Framework for running background processes and keeping track with their states.</description>
+  
+  <url>http://amplecode.org/wiki/Cave/ProcessFramework</url>
+  
+  <scm>
+    <url>svn+ssh://svn.amplecode.org/var/svn/repo/cave</url>
+  </scm>
+  
+  <organization>
+    <name>AmpleCode</name>
+    <url>http://amplecode.org</url>
+  </organization>
+  
+  <developers>
+    <developer>
+      <name>Torgeir Lorange Ostby</name>
+      <email>torgeilo@gmail.com</email>
+    </developer>
+  </developers>
+  
+  <licenses>
+    <license>
+      <name>BSD</name>
+      <url>http://amplecode.org/license/license_bsd.txt</url>
+    </license>
+  </licenses>
+    
+  <dependencies>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging-api</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>2.0.8</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.14</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <distributionManagement>
+    <repository>
+      <id>amplecode_maven2_repo</id>
+      <name>AmpleCode Maven 2 repository</name>
+      <url>scp://login.amplecode.org/var/www/amplecode/maven2</url>
+    </repository>
+  </distributionManagement>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <configuration>
+          <links>
+            <link>http://java.sun.com/j2se/1.5.0/docs/api</link>
+            <link>http://static.springframework.org/spring/docs/2.0.x/api</link>
+          </links>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>

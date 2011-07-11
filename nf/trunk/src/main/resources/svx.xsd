@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<xs:schema xmlns="http://www.toppfotball.no/schema" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://www.toppfotball.no/schema" elementFormDefault="qualified">
+
+<xs:complexType name="XCategory">
+	<xs:attribute name="code" use="required" type="xs:string"/>
+	<xs:attribute name="name" use="required" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="XTeam">
+	<xs:attribute name="code" use="required" type="xs:string"/>
+	<xs:attribute name="name" use="required" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="XPerson">
+	<xs:attribute name="code" use="required" type="xs:string"/>
+	<xs:attribute name="name" use="required" type="xs:string"/>	
+</xs:complexType>
+
+<xs:complexType name="XEvent">
+	<xs:attribute name="code" use="required" type="xs:string"/>
+	<xs:attribute name="date" use="required" type="xs:date"/>
+	<xs:attribute name="location" type="xs:string"/>
+	<xs:attribute name="homeTeam" type="xs:string"/>
+	<xs:attribute name="awayTeam" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="XClip">
+	<xs:sequence>
+		<xs:element name="categories" minOccurs="0" maxOccurs="1">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="category" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>					
+		</xs:element>
+		<xs:element name="persons" minOccurs="0" maxOccurs="1">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="person" minOccurs="0" maxOccurs="unbounded" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>					
+		</xs:element>
+	</xs:sequence>
+	<xs:attribute name="start" type="xs:int" use="required"/>
+	<xs:attribute name="filename" type="xs:string" use="required"/>
+	<xs:attribute name="team" type="xs:string" use="required"/>
+	<xs:attribute name="event" type="xs:string" use="required"/>
+</xs:complexType>
+
+<xs:element name="svx">
+	<xs:complexType>
+		<xs:sequence>
+			
+			<!-- Category -->
+			
+			<xs:element name="categories" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="category" minOccurs="0" maxOccurs="unbounded" type="XCategory"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<!-- Team -->
+			
+			<xs:element name="teams" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="team" minOccurs="0" maxOccurs="unbounded" type="XTeam"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<!-- Person -->
+			
+			<xs:element name="persons" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="person" minOccurs="0" maxOccurs="unbounded" type="XPerson"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<!-- Events -->
+			
+			<xs:element name="events" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="event" minOccurs="0" maxOccurs="unbounded" type="XEvent"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<!-- Clips -->
+			
+			<xs:element name="clips" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="clip" minOccurs="0" maxOccurs="unbounded" type="XClip"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+</xs:schema>

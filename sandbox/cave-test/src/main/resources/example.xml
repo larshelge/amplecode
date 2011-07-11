@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cave xmlns="http://www.amplecode.org/cave" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.amplecode.org/cave cave-basic.xsd">
+  
+  <includables>
+    <includable id="connectionPooling">
+      <properties>
+        hibernate.c3p0.min_size = 2
+        hibernate.c3p0.max_size = 20
+        hibernate.c3p0.acquire_increment = 2
+        hibernate.c3p0.timeout = 5000
+        hibernate.c3p0.max_statements = 50
+        hibernate.c3p0.idle_test_period = 300
+      </properties>
+    </includable>
+    
+    <includable id="mysql">
+      <properties>
+        hibernate.dialect = org.hibernate.dialect.MySQLDialect
+        hibernate.connection.driver_class = com.mysql.jdbc.Driver
+      </properties>
+    </includable>
+    
+    <includable id="postgres">
+      <properties>
+        hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+        hibernate.connection.driver_class = org.postgresql.Driver
+      </properties>
+    </includable>
+    
+    <includable id="hsqldb">
+      <properties>
+        hibernate.dialect = org.hibernate.dialect.HSQLDialect
+        hibernate.connection.driver_class = org.hsqldb.jdbcDriver
+        hibernate.connection.url = jdbc:hsqldb:.
+      </properties>
+    </includable>
+  </includables>
+  
+  <sessionFactories>
+    <sessionFactory id="test">
+      <name>HyperSonic</name>
+      <description>Empty in-memory HSQL database for testing</description>
+      <includes>
+        <include ref="hsqldb"/>
+      </includes>
+      <properties>
+        hibernate.connection.username = sa
+        hibernate.connection.password =
+        hibernate.connection.pool_size = 10
+        hibernate.hbm2ddl.auto = create-drop
+      </properties>
+      <mappingResources>
+        <resource src="Person.hbm.xml"/>
+      </mappingResources>
+    </sessionFactory>
+    
+    <sessionFactory id="jharkhand">
+      <name>Jharkhand (MySQL)</name>
+      <description>MySQL database with data from Jharkhand</description>
+      <includes>
+        <include ref="connectionPooling"/>
+        <include ref="mysql"/>
+      </includes>
+      <properties>
+        hibernate.connection.url = jdbc:mysql://localhost/jharkhand?useUnicode=true&amp;characterEncoding=UTF-8
+        hibernate.connection.username = jharkhand
+        hibernate.connection.password = jharkhand
+        hibernate.hbm2ddl.auto = update
+      </properties>
+    </sessionFactory>
+    
+    <sessionFactory id="gujarat">
+      <name>Gujarat (MySQL)</name>
+      <description>MySQL database with data from Gujarat</description>
+      <includes>
+        <include ref="connectionPooling"/>
+        <include ref="mysql"/>
+      </includes>
+      <properties>
+        hibernate.connection.url = jdbc:mysql://localhost/gujarat?useUnicode=true&amp;characterEncoding=UTF-8
+        hibernate.connection.username = gujarat
+        hibernate.connection.password = gujarat
+        hibernate.hbm2ddl.auto = update
+      </properties>
+    </sessionFactory>
+    
+    <sessionFactory id="hue">
+      <name>Hue (PostgreSQL)</name>
+      <description>PostgreSQL database with data from Hue</description>
+      <includes>
+        <include ref="connectionPooling"/>
+        <include ref="postgres"/>
+      </includes>
+      <properties>
+        hibernate.connection.url = jdbc:postgresql:hue
+        hibernate.connection.username = hue
+        hibernate.connection.password = hue
+        hibernate.hbm2ddl.auto = update
+      </properties>
+    </sessionFactory>
+  </sessionFactories>
+  
+  <defaultSessionFactory ref="jharkhand"/>
+  <testSessionFactory ref="test"/>
+  
+</cave>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.amplecode.org/cave"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.amplecode.org/cave"
+  elementFormDefault="qualified">
+  
+  <xs:simpleType name="propertiesType">
+    <!-- The element must contain at least one property -->
+    <xs:restriction base="xs:string">
+      <xs:whiteSpace value="preserve"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="mappingResourcesType">
+    <xs:sequence>
+      <xs:element name="resource">
+        <xs:complexType>
+          <xs:attribute name="src" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:element name="cave">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="includables" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="includable" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="properties" type="propertiesType" minOccurs="0"
+                      maxOccurs="1"/>
+                    <xs:element name="mappingResources" type="mappingResourcesType" minOccurs="0"
+                      maxOccurs="1"/>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:ID" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="sessionFactories">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sessionFactory" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <!-- Name element cannot be empty -->
+                    <xs:element name="name" type="xs:string"/>
+                    <!-- Description element cannot be empty -->
+                    <xs:element name="description" type="xs:string"/>
+                    <!-- A database must have at least one property, either included or declared below -->
+                    <xs:element name="includes" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="include" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <!-- The ref attribute must reference an includable id -->
+                              <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="properties" type="propertiesType" minOccurs="0"
+                      maxOccurs="1"/>
+                    <xs:element name="mappingResources" type="mappingResourcesType" minOccurs="0"
+                      maxOccurs="1"/>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:ID" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+          <xs:unique name="configurationNameUnique">
+            <xs:selector xpath="sessionFactory"/>
+            <xs:field xpath="name"/>
+          </xs:unique>
+        </xs:element>
+        <xs:element name="defaultSessionFactory">
+          <xs:complexType>
+            <!-- The ref attribute must reference a database id -->
+            <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="testSessionFactory">
+          <xs:complexType>
+            <!-- The ref attribute must reference a database id -->
+            <xs:attribute name="ref" type="xs:IDREF" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

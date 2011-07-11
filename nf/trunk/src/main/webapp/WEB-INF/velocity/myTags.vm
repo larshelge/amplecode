@@ -1,0 +1,11 @@
+
+<table class="myTable">
+#set( $columns = 5 )
+	
+#foreach( $tag in $clip.tags )
+#set( $count = $velocityCount % $columns )
+#if ( $count == 1 )<tr>#end
+<td class="myItem" onclick="searchQuery( '${tag.name}' )" title="$!{tag.name}">$!{tag.getSubName( 18 )}</td>
+#if ( $count == 0 )</tr>#end
+#end
+</table>

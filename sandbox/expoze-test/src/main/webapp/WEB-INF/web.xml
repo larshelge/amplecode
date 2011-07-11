@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+  "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+  <display-name>Expoze Test WebService</display-name>
+  
+  <!-- Spring -->
+  
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:/META-INF/beans.xml</param-value>
+  </context-param>
+  
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!-- Expoze -->
+  
+  <servlet>
+    <servlet-name>SpringWebService</servlet-name>
+    <servlet-class>org.amplecode.expoze.dispatcher.SpringWebServiceServletDispatcher</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SpringWebService</servlet-name>
+    <url-pattern>*.service</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

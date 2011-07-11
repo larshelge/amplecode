@@ -1,0 +1,26 @@
+#parse( "header.vm" )
+
+<script type="text/javascript">
+$(document).ready( function() {
+$( "#email" ).focus();
+$( "#userForm" ).validate( { rules: validationRules.rules.userRestoreRequest } );
+} );
+</script>
+
+<div style="position:relative; top:50px;">
+	
+<form id="userForm" method="post" action="requestUserRestore">
+
+<p class="title1">Skriv inn brukernavn / e-post adresse $!{username}</p>
+
+<p>Du vil motta instruksjoner for hvordan gjenopprette kontoen din om kort tid</p>
+
+<p><input type="text" id="username" name="username" style="width:300px" autocomplete="off"></p>
+
+<p><input type="submit" value="Send e-post"></p>
+
+</form>
+
+</div>
+
+#parse( "footer.vm" )

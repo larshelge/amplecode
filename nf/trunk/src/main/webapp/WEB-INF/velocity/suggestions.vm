@@ -1,0 +1,4 @@
+#set( $size = $suggestions.size() )
+[ #foreach ( $suggestion in $suggestions )
+{ "value":"${suggestion.name}", "id":"${suggestion.id}" }#if( $velocityCount < $size ),#end
+#end ]

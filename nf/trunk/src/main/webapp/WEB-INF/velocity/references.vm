@@ -1,0 +1,97 @@
+#parse( "control.vm" )
+
+<script type="text/javascript">
+
+$( document ).ready( function()
+{
+    initReferences();
+        
+    #if ( ${code} )
+    playVideoByCode( '${code}' );
+    searchAssociations( '${code}' );
+    #end
+} );
+
+</script>
+
+<!-- Logo -->
+
+<div id="logo"><a href="references"><img src="images/logo.png" alt="Logo"></a></div>
+
+<!-- Header -->
+
+<div id="header">
+<table>
+<tr>
+<td>Kategorier, spiller eller lag</td>
+<td>Type</td>
+<td></td>
+</tr>
+<tr>
+<td><input type="text" id="query" style="width:300px; height:23px"></td>
+<td><select id="queryType" style="width:112px;height:10px">
+<option value="video">Video</option>
+<option value="document">Artikler</option>
+</select></td>
+<td><input type="button" id="searchButton" value="S&oslash;k" style="width:95px;height:29px" onclick="searchReferences()">
+<input type="button" id="categoryButton" value="Kategorier" onclick="displayCategoryTree()" style="width:95px;height:29px"></td>
+</tr>
+</table>
+</div>
+
+<!-- Search area to the left -->
+
+<div id="search"></div>
+
+<!-- Intro box -->
+
+<div class="box" id="intro" onclick="playLatestVideo()"></div>
+
+<!-- Tree area -->
+
+<div class="box" id="tree" style="display:none"></div>
+
+<!-- Video area -->
+
+<div id="video" style="display:none">
+
+<div class="box" id="player"></div>
+
+<div id="playerOptions">
+<input type="button" value="Tags" onclick="togglePlayerTags()" style="height:27px">
+<input type="button" value="Inkluder" onclick="togglePlayerEmbed()" style="height:27px">
+<input type="button" value="URL" onclick="togglePlayerUrl()" style="height:27px">
+#if( $currentUser )
+<input type="button" value="Kommentarer" onclick="togglePlayerComments()" style="height:27px">
+<input type="button" value="Spilleliste" onclick="togglePlayerPlaylist()" style="height:27px">
+#end
+<input type="button" value="Endre st&oslash;rrelse" onclick="changeViewMode()" style="height:27px">
+</div>
+
+<div id="playerTags" style="display:block"></div>
+
+<div id="playerEmbed"></div>
+
+<div id="playerUrl"></div>
+
+<div id="playerComments"></div>
+
+<div id="playerPlaylist"></div>
+
+</div>
+
+<!-- Document area -->
+
+<div id="document" style="display:none">
+
+<div class="box" id="viewer"></div>
+
+<div id="viewerOptions">
+<input type="button" value="Inkluder" onclick="toggleViewerEmbed()" style="height:27px">
+</div>
+
+<div id="viewerEmbed"></div>
+
+</div>
+
+#parse( "footer.vm" )

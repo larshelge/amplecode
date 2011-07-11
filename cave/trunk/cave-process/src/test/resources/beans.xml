@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+  
+  <bean id="org.amplecode.cave.process.ProcessCoordinator"
+    class="org.amplecode.cave.process.SpringProcessCoordinator"
+    destroy-method="close"/>
+  
+  <bean id="internal-process-a"
+    class="org.amplecode.cave.process.test.SleepingProcess"
+    scope="prototype">
+    <property name="millis" value="10"/>
+    <property name="group" value="group1"/>
+  </bean>
+  
+  <bean id="internal-process-b"
+    class="org.amplecode.cave.process.test.SleepingProcess"
+    scope="prototype">
+    <property name="millis" value="10"/>
+    <property name="group" value="group1"/>
+    <property name="serialToGroup" value="true"/>
+  </bean>
+  
+  <bean id="internal-process-c"
+    class="org.amplecode.cave.process.test.SleepingProcess"
+    scope="prototype">
+    <property name="millis" value="10"/>
+    <property name="serialToAll" value="true"/>
+  </bean>
+  
+  <bean id="internal-process-d"
+    class="org.amplecode.cave.process.test.SleepingProcessSerialToAll"
+    scope="prototype">
+    <property name="millis" value="10000"/>
+  </bean>
+  
+</beans>

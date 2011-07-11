@@ -1,0 +1,15 @@
+#parse( "header.vm" )
+
+<div id="control">
+<a href="references">Referanse-bibliotek</a>&nbsp;|
+<a href="feedback">Tilbakemelding</a>&nbsp;|
+<a href="listPlaylists">Spillelister</a>&nbsp;|
+<a href="listCategories">Vedlikehold</a>&nbsp;|
+#if( $currentUser )
+<a href="logout">Logg ut</a>&nbsp;|
+Logget inn som $!{currentUser.firstname} $!{currentUser.lastname}&nbsp;|
+#else
+<a href="login">Logg inn</a>&nbsp;|
+#end
+Laget av <a href="http://toppfotballsenter.no"><span style="color:#6fd33d">Norsk Toppfotballsenter</span></a>
+</div>

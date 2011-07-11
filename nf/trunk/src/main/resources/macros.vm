@@ -1,0 +1,30 @@
+
+#macro( objectList $header $newUrl $deleteUrl $list )
+
+#parse( "maintenance/control.vm" )
+
+<div style="position:relative;top:20px;">
+
+<p class="title1">${header}</p>
+
+<p><a href="${newUrl}">Lag ny</a></p>
+
+<table width="800px">
+<tr>
+<th style="text-align:left">Navn</th>
+<th style="text-align:center" colspan="2">Handling</th>
+</tr>
+#foreach( $object in $list )
+<tr>
+<td style="text-align:left">${object.name}</td>
+<td style="width:30px;text-align:center"><a href="${newUrl}?id=${object.id}"><img src="images/edit.png" alt="Endre"></a></td>
+<td style="width:30px;text-align:center"><a href="${deleteUrl}?id=${object.id}"><img src="images/delete.png" alt="Slett"></a></td>
+</tr>
+#end
+</table>
+
+</div>
+
+#parse( "footer.vm" )
+
+#end

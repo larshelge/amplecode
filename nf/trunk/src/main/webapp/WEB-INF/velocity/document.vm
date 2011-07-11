@@ -1,0 +1,11 @@
+
+<a href="${staticBaseUrl}${document.path}"><img style="margin-left:40px; margin-top:30px" src="images/download.png" alt="Last ned"></a>
+
+<dl style="margin-left:40px">
+	<dt><b>Tittel:</b></dt>
+	<dd>${document.title}</dd>
+</dl>
+<dl style="margin-left:40px">
+	<dt><b>Beskrivelse:</b></dt>
+	<dd>${document.description}</dd>
+</dl>

@@ -1,0 +1,78 @@
+#parse( "control.vm" )
+
+<script type="text/javascript">
+
+$( document ).ready( function()
+{
+    initFeedback();
+} );
+
+</script>
+
+<!-- Logo -->
+
+<div id="logo"><a href="references"><img src="images/logo.png" alt="Logo"></a></div>
+
+<!-- Header -->
+
+<div id="header">
+<table>
+<tr>
+<td>Kamp eller lag</td>
+<td>Spiller</td>
+<td>Kategorier | <a href="javascript:searchStandard()">Standard</a> | <a href="javascript:searchAll()">Alle</a></td>
+<td>Spilleliste | <a href="javascript:searchMyOwn()">Mine</a> | <a href="javascript:searchShared()">Fra andre</a></td>
+<td style="text-align:center"><a href="javascript:clearFeedbackFields()">T&oslash;m</a></td>
+</tr>
+<tr>
+<td><input type="text" id="eventteam" style="width:164px; height:23px"></td>
+<td><input type="text" id="person" style="width:164px; height:23px"></td>
+<td><input type="text" id="category" style="width:164px; height:23px"></td>
+<td><input type="text" id="playlist" style="width:164px; height:23px"></td>
+<td><input type="button" id="searchButton" value="S&oslash;k" style="width:60px;height:29px" onclick="searchFeedback()"></td>
+</tr>
+</table>
+</div>
+
+<!-- Search area to the left -->
+
+<div id="search"></div>
+
+<!-- Intro box -->
+
+<div class="box" id="intro" onclick="playLatestVideo()"></div>
+
+<!-- Tree box -->
+
+<div class="box" id="tree" style="display:none"></div>
+
+<!-- Video box -->
+
+<div id="video" style="display:none">
+
+<div class="box" id="player"></div>
+
+<div id="playerOptions">
+<input type="button" value="Tags" onclick="togglePlayerTags()" style="height:27px">
+<input type="button" value="Inkluder" onclick="togglePlayerEmbed()" style="height:27px">
+<input type="button" value="URL" onclick="togglePlayerUrl()" style="height:27px">
+#if( $currentUser )
+<input type="button" value="Kommentarer" onclick="togglePlayerComments()" style="height:27px">
+<input type="button" value="Spilleliste" onclick="togglePlayerPlaylist()" style="height:27px">
+#end
+<input type="button" value="Endre st&oslash;rrelse" onclick="changeViewMode()" style="height:27px">
+</div>
+
+<div id="playerTags" style="display:block"></div>
+
+<div id="playerEmbed"></div>
+
+<div id="playerUrl"></div>
+
+<div id="playerComments"></div>
+
+<div id="playerPlaylist"></div>
+
+</div>
+
+#parse( "footer.vm" )

@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>org.amplecode</groupId>
+  <artifactId>quick</artifactId>
+  <version>1.6</version>
+  <packaging>jar</packaging>
+  <name>Quick</name>
+	
+  <description>Framework for high-performance JDBC batch operations.</description>
+  
+  <url>http://amplecode.org/wiki/Quick</url>
+  
+  <scm>
+    <url>svn+ssh://svn.amplecode.org/var/svn/repo/quick</url>
+  </scm>
+  
+  <organization>
+    <name>AmpleCode</name>
+    <url>http://amplecode.org</url>
+  </organization>
+  
+  <developers>
+    <developer>
+      <name>Lars Helge Oeverland</name>
+      <email>larshelge@gmail.com</email>
+    </developer>
+  </developers>
+  
+  <licenses>
+    <license>
+      <name>BSD</name>
+      <url>http://amplecode.org/license/license_bsd.txt</url>
+    </license>
+  </licenses>
+
+  <issueManagement>
+	<system>Trac</system>
+	<url>http://www.amplecode.org/report</url>
+  </issueManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>3.0.5.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>1.6.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>2.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>3.0.5.RELEASE</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>3.0.5.RELEASE</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <distributionManagement>
+    <repository>
+      <id>amplecode_maven2_repo</id>
+      <name>AmpleCode Maven 2 repository</name>
+      <url>scp://login.amplecode.org/var/www/amplecode/maven2</url>
+    </repository>
+  </distributionManagement>
+  
+  <repositories>
+    <repository>
+    <id>amplecode_maven2_repo</id>
+    <name>AmpleCode Maven 2 repository</name>
+    <url>http://www.amplecode.org/maven2</url>
+    </repository>
+  </repositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+	
+</project>

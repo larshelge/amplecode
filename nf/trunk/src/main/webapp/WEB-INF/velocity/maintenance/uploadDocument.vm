@@ -1,0 +1,78 @@
+#parse( "maintenance/control.vm" )
+
+<script type="text/javascript">
+
+$( document ).ready( function()
+{
+	initDocument();
+} );
+
+</script>
+
+<div style="position:relative; top:50px;">
+
+<p class="title1">Last opp dokument</p>
+
+<form id="documentForm" method="post" action="uploadDocument" enctype="multipart/form-data">
+	
+<input type="hidden" id="id" name="id" value="$!{document.id}">
+<input type="hidden" id="code" name="code" value="$!{document.code}">
+<input type="hidden" id="path" name="path" value="$!{document.path}">
+
+<table width="600px">
+
+<tr>
+<td>Tittel</td>
+<td><input type="text" name="title" style="width:300px" value="$!{document.title}"></td>
+</tr>
+
+<tr>
+<td>Beskrivelse</td>
+<td><textarea name="description" style="width:300px; height:100px">$!{document.description}</textarea></td>
+</tr>
+
+<tr>
+<td>Tilgjengelige kategorier</td>
+<td><input type="text" id="availableCategories" style="width:300px"></td>
+</tr>
+<td>Valgte kategorier</td>
+<td><select multiple id="selectedCategories" size="6" name="categories" style="width:300px">
+#foreach( $category in $!document.categories )
+<option value="${category.id}">$category.name</option>
+#end	
+</select></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="button" value="Fjern valgte" style="width:150px" onclick="removeSelectedFromList( 'selectedCategories' )"></td>
+</tr>
+
+<tr>
+<td>Minimum autorisasjon</td>
+<td>
+<select name="requiredAuthority" style="width:300px">
+<option value="">Ingen restriksjon</option>
+#foreach( $role in $userroles )
+<option value="${role}"#if( $document && $document.requiredAuthority == $role ) selected#end>${role}</option>
+#end
+</select>
+</td>
+</tr>
+
+<tr>
+<td>Document</td>
+<td><input type="file" name="file"></td>
+</tr>
+
+<tr>
+<td></td>
+<td><input type="button" value="Lagre" onclick="submitDocument()"></td>
+</tr>
+
+</table>
+
+</form>
+
+</div>
+
+#parse( "footer.vm" )

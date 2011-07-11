@@ -1,0 +1,40 @@
+#parse( "header.vm" )
+
+<script type="text/javascript">
+$(document).ready( function() {
+$( "#userForm" ).validate( { rules: validationRules.rules.userRestore } );
+} );
+</script>
+
+<div style="position:relative; top:50px;">
+	
+<form id="userForm" method="post" action="restoreUser">
+	
+<input type="hidden" name="username" value="$!{username}">
+<input type="hidden" name="restoreCode" value="$!{restoreCode}">
+
+<p class="title1">Velg nytt passord for $!{username}</p>
+
+<table width="600px">
+<tr>
+<th colspan="2" style="text-align:left">Detaljer</th>
+</tr>
+<tr>
+<td>Passord</td>
+<td><input type="password" id="password" name="password" style="width:300px" autocomplete="off"></td>
+</tr>
+<tr>
+<td>Gjenta passord</td>
+<td><input type="password" id="passwordRepeat" name="passwordRepeat" style="width:300px" autocomplete="off"></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" value="Lagre"></td>
+</tr>
+</table>
+
+</form>
+	
+</div>
+
+#parse( "footer.vm" )

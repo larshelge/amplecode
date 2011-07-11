@@ -1,0 +1,12 @@
+#parse( "maintenance/control.vm" )
+
+<div style="position:relative; top:70px;">
+<ul>
+<li>Static base url: $!staticBaseUrl</li>
+<li>Static location: $!staticLocation</li>
+<li>Base url: $!baseUrl</li>
+<li>Current user: $!currentUser</li>
+</ul>
+</div>
+
+#parse( "footer.vm" )

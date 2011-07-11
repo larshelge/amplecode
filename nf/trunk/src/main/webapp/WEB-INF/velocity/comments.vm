@@ -1,0 +1,9 @@
+
+<div class="myInput"><input type="text" id="commentField" style="width:600px">
+<input type="button" value="Lag ny" onclick="saveComment( '${clip.id}' )" style="width:70px">
+</div> 
+
+#foreach( $comment in $clip.comments )
+<div class="myHeader">${comment.owner.firstname} ${comment.owner.lastname} - ${comment.lastUpdated} - <a href="#" onclick="deleteComment( '${clip.id}', '${comment.id}' )">Slett</a></div>
+<div class="myBody">${comment.body}</div> 
+#end

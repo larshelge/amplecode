@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<expoze xmlns="http://www.amplecode.org/schema/expoze"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.amplecode.org/schema/expoze expoze-1.0.xsd">
+
+  <requests>
+      
+    <request>
+      <request>getPerson</request>
+      <bean>personService</bean>
+      <method>getPerson</method>
+      <parameters>
+        <parameter>
+          <type>int</type>
+          <name>id</name>
+        </parameter>
+      </parameters>
+      <template>person.vm</template>
+    </request>
+    
+    <request>
+      <request>getAllPersons</request>
+      <bean>personService</bean>
+      <method>getAllPersons</method>
+      <template>persons.vm</template>
+    </request>
+    
+  </requests>
+
+</expoze>

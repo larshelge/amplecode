@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.amplecode.org/schema/expoze"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.amplecode.org/schema/expoze">
+
+  <xsd:element name="expoze">
+    <xsd:complexType>
+      <xsd:sequence>
+      
+        <xsd:element name="requests">
+          <xsd:complexType>
+            <xsd:sequence>
+              
+              <xsd:element name="request">
+                <xsd:annotation>
+                  <xsd:documentation>
+                    A HTTP request definition.
+                  </xsd:documentation>
+                </xsd:annotation>
+                
+                <xsd:complexType>
+                  <xsd:sequence>
+                  
+                    <xsd:element name="name" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>
+                          The name of the request.
+                        </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    
+                    <xsd:element name="type">
+                      <xsd:annotation>
+                        <xsd:documentation>
+                          The type of the Request. Defaults to "document".
+                        </xsd:documentation>
+                      </xsd:annotation>
+                      <xsd:simpleType>
+                        <xsd:restriction base="xsd:string">
+                          <xsd:enumeration value="document"/>
+                          <xsd:enumeration value="chart"/>
+                          <xsd:enumeration value="file"/>
+                        </xsd:restriction>
+                      </xsd:simpleType>
+                    </xsd:element>
+                               
+                    <xsd:element name="bean" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>
+                          The identifier of the Spring bean that is to be exposed.
+                        </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    
+                    <xsd:element name="method" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>
+                          The name of the interface method that is to be exposed.
+                        </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    
+                    <xsd:element name="methodTypes">
+                      <xsd:complexType>
+                        <xsd:sequence>
+
+	                      <xsd:element name="value" type="xsd:string">
+	                        <xsd:annotation>
+	                          <xsd:documentation>
+	                            The name of HTTP method to accept for a request (either GET, POST, PUT, DELETE).
+	                          </xsd:documentation>
+	                        </xsd:annotation>
+	                      </xsd:element>                    
+
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    
+                    <xsd:element name="parameters">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                        
+                          <xsd:element name="parameter">
+                            <xsd:complexType>
+                              <xsd:sequence>
+                              
+                                <xsd:element name="type">
+                                  <xsd:annotation>
+                                    <xsd:documentation>
+                                      The Class type of the method parameter.
+                                    </xsd:documentation>
+                                  </xsd:annotation>
+                                  <xsd:simpleType>
+                                    <xsd:restriction base="xsd:string">
+                                      <xsd:enumeration value="java.lang.String"/>
+                                      <xsd:enumeration value="java.lang.Integer"/>
+                                      <xsd:enumeration value="java.lang.Short"/>
+                                      <xsd:enumeration value="java.lang.Long"/>
+                                      <xsd:enumeration value="java.lang.Float"/>
+                                      <xsd:enumeration value="java.lang.Double"/>
+                                      <xsd:enumeration value="java.lang.Byte"/>
+                                      <xsd:enumeration value="int"/>
+                                      <xsd:enumeration value="short"/>
+                                      <xsd:enumeration value="long"/>
+                                      <xsd:enumeration value="float"/>
+                                      <xsd:enumeration value="double"/>
+                                      <xsd:enumeration value="byte"/>
+                                    </xsd:restriction>
+                                  </xsd:simpleType>
+                                </xsd:element>
+                                
+                                <xsd:element name="name" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>
+                                      The name of the method parameter.
+                                    </xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>                    
+                     
+                    <xsd:element name="template" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>
+                          The name of the Velocity template that is the basis for the generated Response.
+                        </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                              
+                    <xsd:element name="contentType" type="xsd:string">
+                      <xsd:annotation>
+                        <xsd:documentation>
+                          The content type. Defaults to "text/xml".
+                        </xsd:documentation>
+                      </xsd:annotation>
+                    </xsd:element>
+                    
+                    <xsd:element name="responses">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                        
+                          <xsd:element name="response">
+                            <xsd:complexType>
+                              <xsd:sequence>
+                              
+                                <xsd:element name="format" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>
+                                      The format of the Response.
+                                    </xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>                                
+                                
+			                    <xsd:element name="type">
+			                      <xsd:annotation>
+			                        <xsd:documentation>
+			                          The type of the Request. Defaults to "document".
+			                        </xsd:documentation>
+			                      </xsd:annotation>
+			                      <xsd:simpleType>
+			                        <xsd:restriction base="xsd:string">
+			                          <xsd:enumeration value="document"/>
+			                          <xsd:enumeration value="chart"/>
+			                          <xsd:enumeration value="file"/>
+			                        </xsd:restriction>
+			                      </xsd:simpleType>
+			                    </xsd:element>
+			                               
+			                    <xsd:element name="bean" type="xsd:string">
+			                      <xsd:annotation>
+			                        <xsd:documentation>
+			                          The identifier of the Spring bean that is to be exposed.
+			                        </xsd:documentation>
+			                      </xsd:annotation>
+			                    </xsd:element>
+			                    
+			                    <xsd:element name="method" type="xsd:string">
+			                      <xsd:annotation>
+			                        <xsd:documentation>
+			                          The name of the interface method that is to be exposed.
+			                        </xsd:documentation>
+			                      </xsd:annotation>
+			                    </xsd:element>
+                    
+			                    <xsd:element name="parameters">
+			                      <xsd:complexType>
+			                        <xsd:sequence>
+			                        
+			                          <xsd:element name="parameter">
+			                            <xsd:complexType>
+			                              <xsd:sequence>
+			                              
+			                                <xsd:element name="type">
+			                                  <xsd:annotation>
+			                                    <xsd:documentation>
+			                                      The Class type of the method parameter.
+			                                    </xsd:documentation>
+			                                  </xsd:annotation>
+			                                  <xsd:simpleType>
+			                                    <xsd:restriction base="xsd:string">
+			                                      <xsd:enumeration value="java.lang.String"/>
+			                                      <xsd:enumeration value="java.lang.Integer"/>
+			                                      <xsd:enumeration value="java.lang.Short"/>
+			                                      <xsd:enumeration value="java.lang.Long"/>
+			                                      <xsd:enumeration value="java.lang.Float"/>
+			                                      <xsd:enumeration value="java.lang.Double"/>
+			                                      <xsd:enumeration value="java.lang.Byte"/>
+			                                      <xsd:enumeration value="int"/>
+			                                      <xsd:enumeration value="short"/>
+			                                      <xsd:enumeration value="long"/>
+			                                      <xsd:enumeration value="float"/>
+			                                      <xsd:enumeration value="double"/>
+			                                      <xsd:enumeration value="byte"/>
+			                                    </xsd:restriction>
+			                                  </xsd:simpleType>
+			                                </xsd:element>
+			                                
+			                                <xsd:element name="name" type="xsd:string">
+			                                  <xsd:annotation>
+			                                    <xsd:documentation>
+			                                      The name of the method parameter.
+			                                    </xsd:documentation>
+			                                  </xsd:annotation>
+			                                </xsd:element>
+			                                
+			                              </xsd:sequence>
+			                            </xsd:complexType>
+			                          </xsd:element>
+			                        
+			                        </xsd:sequence>
+			                      </xsd:complexType>
+			                    </xsd:element>                    
+                     
+                                <xsd:element name="template" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>
+                                      The name of the Velocity template that is the basis for the generated Response.
+                                    </xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                
+                                <xsd:element name="contentType" type="xsd:string">
+                                  <xsd:annotation>
+                                    <xsd:documentation>
+                                      The content type of the Response. Defaults to "text/xml".
+                                    </xsd:documentation>
+                                  </xsd:annotation>
+                                </xsd:element>
+                                
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                    
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+</xsd:schema>
