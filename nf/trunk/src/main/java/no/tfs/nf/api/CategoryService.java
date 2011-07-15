@@ -15,4 +15,6 @@ public interface CategoryService
     Collection<Category> getRootCategories();
     
     List<ClipCategory> getClipCategoriesLikeName( String name );
+    
+    Statistics getStatistics();
 }

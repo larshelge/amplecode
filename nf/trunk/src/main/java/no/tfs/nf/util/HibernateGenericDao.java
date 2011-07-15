@@ -12,12 +12,16 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 public class HibernateGenericDao<T>
     implements GenericDao<T>
 {
     @Autowired
     protected SessionFactory sessionFactory;
+    
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
     
     private Class<T> clazz;
 

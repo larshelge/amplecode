@@ -21,10 +21,10 @@ import org.springframework.stereotype.Repository;
 public class HibernateClipDao
     extends HibernateGenericDao<Clip> implements ClipDao
 {
+    //TODO include type
+    
     private static final Log log = LogFactory.getLog( HibernateClipDao.class );
         
-    //TODO type
-    
     @Override
     protected Class<Clip> getClazz()
     {

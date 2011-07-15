@@ -1,13 +1,17 @@
 package no.tfs.nf.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
 
 import no.tfs.nf.api.Category;
 import no.tfs.nf.api.CategoryDao;
+import no.tfs.nf.api.Statistics;
 import no.tfs.nf.util.HibernateGenericDao;
 
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -39,5 +43,27 @@ public class HibernateCategoryDao
     public Collection<Category> getRootCategories()
     {
         return getCriteria( Restrictions.eq( "root", true ) ).list();
+    }
+
+    @Override
+    public Statistics getStatistics()
+    {
+        final Statistics stats = new Statistics();
+        
+        String sql = 
+            "select distinct ca.name as categoryname, (" +
+            "select count(category_id) from clipcategory where category_id=ca.id ) as clipcount " +
+            "from category ca, clip order by clipcount desc;";
+        
+        jdbcTemplate.query( sql, new RowCallbackHandler()
+        {          
+            @Override
+            public void processRow( ResultSet rs ) throws SQLException
+            {
+                stats.getCategoryClipCount().add( rs.getString( "categoryname" ) + ": " + rs.getInt( "clipcount" ) );                
+            }
+        } );
+        
+        return stats;
     }
 }

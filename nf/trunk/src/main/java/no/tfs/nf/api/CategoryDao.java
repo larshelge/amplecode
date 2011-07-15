@@ -12,4 +12,6 @@ public interface CategoryDao
     Collection<Category> getLikeName( String name );
     
     Collection<Category> getRootCategories();
+    
+    Statistics getStatistics();
 }

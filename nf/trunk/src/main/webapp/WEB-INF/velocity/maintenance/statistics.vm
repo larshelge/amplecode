@@ -1,0 +1,15 @@
+#parse( "maintenance/control.vm" )
+
+<div style="position:relative; top:50px;">
+
+<p class="title1">Statistikk</p>
+
+<p class="title2">Klipp per kategori</p>
+
+<ul>
+#foreach( $stat in $statistics.categoryClipCount )
+<li>$stat</li>
+#end
+</ul>
+
+#parse( "footer.vm" )

@@ -157,6 +157,10 @@
   </bean>
   -->
   
+  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+
   <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
     <property name="driverClass" value="org.postgresql.Driver"/>
     <property name="jdbcUrl" value="jdbc:postgresql:nf"/>

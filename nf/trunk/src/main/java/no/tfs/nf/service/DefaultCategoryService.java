@@ -13,6 +13,7 @@ import no.tfs.nf.api.CategoryDao;
 import no.tfs.nf.api.CategoryService;
 import no.tfs.nf.api.ClipCategory;
 import no.tfs.nf.api.GenericDao;
+import no.tfs.nf.api.Statistics;
 import no.tfs.nf.util.DefaultGenericService;
 
 @Service
@@ -71,5 +72,11 @@ public class DefaultCategoryService
         }
         
         return clipCategories;
+    }
+
+    @Override
+    public Statistics getStatistics()
+    {
+        return categoryDao.getStatistics();
     }
 }
