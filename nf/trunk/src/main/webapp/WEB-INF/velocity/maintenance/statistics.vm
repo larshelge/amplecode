@@ -1,6 +1,6 @@
 #parse( "maintenance/control.vm" )
 
-<div style="position:relative; top:50px;">
+<div style="position:relative; top:20px;">
 
 <p class="title1">Statistikk</p>
 

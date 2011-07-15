@@ -1,6 +1,6 @@
 #parse( "maintenance/control.vm" )
 
-<div style="position:relative; top:70px;">
+<div style="position:relative; top:20px;">
 <ul>
 <li>Static base url: $!staticBaseUrl</li>
 <li>Static location: $!staticLocation</li>

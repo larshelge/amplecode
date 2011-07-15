@@ -9,7 +9,7 @@ $( document ).ready( function()
 
 </script>
 
-<div style="position:relative; top:50px;">
+<div style="position:relative; top:20px;">
 
 <p class="title1">Last opp video</p>
 
