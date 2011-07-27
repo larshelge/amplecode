@@ -168,4 +168,14 @@
     <property name="password" value="nf"/>
   </bean>
   
+  <!-- Deletion -->
+  
+  <bean id="deletionInterceptor" class="no.tfs.nf.support.deletion.DeletionInterceptor"/>
+  
+  <aop:config>
+	<aop:aspect ref="deletionInterceptor">
+      <aop:before pointcut="execution( * no.tfs.nf.api.GenericService.delete(..) )" method="intercept" />
+	</aop:aspect>
+  </aop:config>
+  
 </beans>

@@ -7,7 +7,11 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class DefaultDeletionManager
     implements DeletionManager
 {
@@ -16,17 +20,19 @@ public class DefaultDeletionManager
     private static final String DELETE_METHOD_PREFIX = "delete";
     private static final String ALLOW_METHOD_PREFIX = "allowDelete";
     
-    private List<DeletionHandler> handlers = new ArrayList<DeletionHandler>();
+    @Autowired
+    private List<DeletionHandler> deletionHandlers = new ArrayList<DeletionHandler>();
 
-    public void setHandlers( List<DeletionHandler> handlers )
+    public void setHandlers( List<DeletionHandler> deletionHandlers )
     {
-        this.handlers = handlers;
+        this.deletionHandlers = deletionHandlers;
     }
     
     // -------------------------------------------------------------------------
     // DeletionManager implementation
     // -------------------------------------------------------------------------
     
+    @Transactional
     public void execute( Object object )
     {
         Class<?> clazz = object.getClass();
@@ -45,15 +51,15 @@ public class DefaultDeletionManager
         {
             Method allowMethod = DeletionHandler.class.getMethod( allowMethodName, new Class[] { clazz }  );
 
-            for ( DeletionHandler handler : handlers )
-            {   
+            for ( DeletionHandler handler : deletionHandlers )
+            {
                 currentHandler = handler.getClass().getSimpleName();
 
                 boolean allow = (Boolean) allowMethod.invoke( handler, object );
                 
                 if ( !allow )
                 {
-                    throw new DeleteNotAllowedException( DeleteNotAllowedException.ERROR_ASSOCIATED_BY_OTHER_OBJECTS, handler.getClassName() );
+                    throw new DeleteNotAllowedException( DeleteNotAllowedException.ERROR_ASSOCIATED_BY_OTHER_OBJECTS, handler.getTargetClass().getSimpleName() );
                 }
             }
         }
@@ -80,7 +86,7 @@ public class DefaultDeletionManager
         {
             Method deleteMethod = DeletionHandler.class.getMethod( deleteMethodName, new Class[] { clazz } );
 
-            for ( DeletionHandler handler : handlers )
+            for ( DeletionHandler handler : deletionHandlers )
             {
                 currentHandler = handler.getClass().getSimpleName();
                 
