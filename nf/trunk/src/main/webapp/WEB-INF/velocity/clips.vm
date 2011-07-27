@@ -91,3 +91,5 @@ $( document ).ready( function() {
 #elseif( $docs )
 <p class="title2">Ingen dokumenter funnet</p>
 #end
+
+<div id="confirmRemoveDiv" style="display:none">Vennligst bekreft at du vil slette dette klippet!</div>

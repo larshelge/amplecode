@@ -547,12 +547,12 @@ function updateClip( id )
 
 function removeClip( id )
 {
-	var ok = confirm( 'Vil du slette dette klippet?' );
-	
-	if ( ok )
-	{
+	$( '#confirmRemoveDiv' ).dialog( { title: 'Bekreft sletting', buttons: { 'OK': function() {
 		window.location.href = 'deleteVideo?id=' + id;
-	}
+	}, "Avbryt": function() {
+		$( this ).dialog( 'close' );
+	} }
+	} );
 }
 
 function updateDocument( id )
@@ -568,6 +568,20 @@ function removeDocument( id )
 	{
 		window.location.href = 'deleteDocument?id=' + id;
 	}
+}
+
+// -----------------------------------------------------------------------------
+// Delete
+// -----------------------------------------------------------------------------
+
+function removeObject( url, name )
+{
+	$( '#confirmDeleteDiv' ).dialog( { title: name, buttons: { 'OK': function() {
+		window.location.href = url; 
+	}, "Avbryt": function() {
+		$( this ).dialog( 'close' );
+	} }
+	} );
 }
 
 // -----------------------------------------------------------------------------

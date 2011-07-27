@@ -18,12 +18,14 @@
 <tr>
 <td style="text-align:left">${object.name}</td>
 <td style="width:30px;text-align:center"><a href="${newUrl}?id=${object.id}"><img src="images/edit.png" alt="Endre"></a></td>
-<td style="width:30px;text-align:center"><a href="${deleteUrl}?id=${object.id}"><img src="images/delete.png" alt="Slett"></a></td>
+<td style="width:30px;text-align:center"><a href="javascript:removeObject( '${deleteUrl}?id=${object.id}', '${object.name}' )"><img src="images/delete.png" alt="Slett"></a></td>
 </tr>
 #end
 </table>
 
 </div>
+
+<div id="confirmDeleteDiv">Vennligst bekreft at du vil slette dette objektet!</div>
 
 #parse( "footer.vm" )
 
