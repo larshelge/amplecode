@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
 $(document).ready( function() {
-$( "#personForm" ).validate( { rules: validationRules.rules.person } );
+$( "#personForm" ).validate( { rules: validationRules.rules.person, messages: validationRules.messages.person } );
 } );
 </script>
 

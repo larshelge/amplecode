@@ -38,7 +38,8 @@ rules: {
   	code: {
   	  required: true,
       minlength: 2,
-      maxlength: 20 },
+      maxlength: 20,
+      remote: "categoryCodeAvailable" },
     name: {
       required: true,
       minlength: 2,
@@ -48,7 +49,8 @@ rules: {
   	code: {
   	  required: true,
       minlength: 2,
-      maxlength: 20 },
+      maxlength: 20,
+      remote: "teamCodeAvailable" },
     name: {
       required: true,
       minlength: 2,
@@ -67,7 +69,8 @@ rules: {
   	code: {
   	  required: true,
       minlength: 2,
-      maxlength: 20 },
+      maxlength: 20,
+      remote: "personCodeAvailable" },
     name: {
       required: true,
       minlength: 2,
@@ -77,6 +80,18 @@ rules: {
 messages: {
   user: {
   	username: {
-      remote: "E-post adressen er allerede registert" }
+      remote: "E-post adressen er allerede benyttet" }
+  },
+  category: {
+  	code: {
+  	  remote: "Koden er allerede benyttet" }
+  },
+  team: {
+  	code: {
+  	  remote: "Koden er allerede benyttet" }
+  },
+  person: {
+  	code: {
+  	  remote: "Koden er allerede benyttet" }
   }
 } };

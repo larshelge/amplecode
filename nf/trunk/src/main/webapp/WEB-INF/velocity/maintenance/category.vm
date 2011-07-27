@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
 $(document).ready( function() {
-$( "#categoryForm" ).validate( { rules: validationRules.rules.category } );
+$( "#categoryForm" ).validate( { rules: validationRules.rules.category, messages: validationRules.messages.category } );
 } );
 </script>
 

@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -65,5 +66,11 @@ public class TeamController
     public ModelAndView listTeams()
     {
         return new ModelAndView( "maintenance/teams" ).addObject( "teams", sort( teamService.getAll(), new TagNameComparator<Team>() ) );
+    }
+
+    @RequestMapping("/teamCodeAvailable")
+    public @ResponseBody Boolean codeAvailable( @RequestParam String code )
+    {
+        return teamService.getByCode( code ) == null;
     }
 }

@@ -81,4 +81,10 @@ public class CategoryController
         
         return "forward:listCategories";
     }
+
+    @RequestMapping("/categoryCodeAvailable")
+    public @ResponseBody Boolean codeAvailable( @RequestParam String code )
+    {
+        return categoryService.getByCode( code ) == null;
+    }
 }

@@ -91,7 +91,7 @@ public class UserController
     }
     
     @RequestMapping("/usernameAvailable")
-    public @ResponseBody Boolean usernameExists( @RequestParam String username )
+    public @ResponseBody Boolean usernameAvailable( @RequestParam String username )
     {
         return userService.getByUsername( username ) == null;
     }

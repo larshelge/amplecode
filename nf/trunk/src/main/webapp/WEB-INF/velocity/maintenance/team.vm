@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
 $(document).ready( function() {
-$( "#teamForm" ).validate( { rules: validationRules.rules.team } );
+$( "#teamForm" ).validate( { rules: validationRules.rules.team, messages: validationRules.messages.team } );
 } );
 </script>
 

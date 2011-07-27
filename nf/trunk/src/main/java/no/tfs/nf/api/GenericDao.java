@@ -37,6 +37,24 @@ public interface GenericDao<T>
     T load( int id );
     
     /**
+     * Retrieves the object with the given code. Assumes that there is a code
+     * property on the relevant object with a uniqueness constraint.
+     * 
+     * @param code the code.
+     * @return the object with the given code.
+     */
+    T getByCode( String code );
+
+    /**
+     * Retrieves the object with the given name. Assumes that there is a name
+     * property on the relevant object with a uniqueness constraint.
+     * 
+     * @param code the name.
+     * @return the object with the given name.
+     */
+    T getByName( String name );
+    
+    /**
      * Retrieves a Collection of all objects.
      * 
      * @return a Collection of all objects.

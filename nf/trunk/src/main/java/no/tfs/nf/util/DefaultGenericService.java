@@ -36,6 +36,12 @@ public class DefaultGenericService<T>
     }
 
     @Override
+    public T getByCode( String code )
+    {
+        return getGenericDao().getByCode( code );
+    }
+    
+    @Override
     public Collection<T> getAll()
     {
         return getGenericDao().getAll();
