@@ -10,7 +10,7 @@ $( "#categoryForm" ).validate( { rules: validationRules.rules.category, messages
 	
 <form id="categoryForm" method="post" action="saveCategory">
 	
-<input type="hidden" name="id" value="$!{category.id}">
+<input type="hidden" id="id" name="id" value="$!{category.id}">
 
 <p class="title1">Kategori</p>
 

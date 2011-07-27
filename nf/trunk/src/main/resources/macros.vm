@@ -25,7 +25,7 @@
 
 </div>
 
-<div id="confirmDeleteDiv">Vennligst bekreft at du vil slette dette objektet!</div>
+<div id="confirmDeleteDiv" style="display:none">Vennligst bekreft at du vil slette dette objektet!</div>
 
 #parse( "footer.vm" )
 

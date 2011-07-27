@@ -1,7 +1,6 @@
 package no.tfs.nf.web;
 
 import static no.tfs.nf.util.CollectionUtilsWrapper.sort;
-
 import no.tfs.nf.api.Person;
 import no.tfs.nf.api.PersonService;
 import no.tfs.nf.comparator.TagNameComparator;
@@ -69,8 +68,18 @@ public class PersonController
     }
 
     @RequestMapping("/personCodeAvailable")
-    public @ResponseBody Boolean codeAvailable( @RequestParam String code )
+    public @ResponseBody Boolean codeAvailable( @RequestParam String code, @RequestParam(value="id",required=false) Integer id )
     {
+        if ( id != null ) // Update
+        {
+            Person person = personService.get( id );
+            
+            if ( person != null && person.getCode().trim().equals( code.trim() ) )
+            {
+                return true;
+            }
+        }
+        
         return personService.getByCode( code ) == null;
     }
 }

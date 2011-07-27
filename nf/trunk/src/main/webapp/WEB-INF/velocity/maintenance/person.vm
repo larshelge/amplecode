@@ -10,7 +10,7 @@ $( "#personForm" ).validate( { rules: validationRules.rules.person, messages: va
 	
 <form id="personForm" method="post" action="savePerson">
 	
-<input type="hidden" name="id" value="$!{person.id}">
+<input type="hidden" id="id" name="id" value="$!{person.id}">
 
 <p class="title1">Person</p>
 

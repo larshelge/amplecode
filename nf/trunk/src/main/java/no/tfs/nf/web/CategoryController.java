@@ -83,8 +83,18 @@ public class CategoryController
     }
 
     @RequestMapping("/categoryCodeAvailable")
-    public @ResponseBody Boolean codeAvailable( @RequestParam String code )
+    public @ResponseBody Boolean codeAvailable( @RequestParam String code, @RequestParam(value="id",required=false) Integer id )
     {
+        if ( id != null ) // Update
+        {
+            Category category = categoryService.get( id );
+            
+            if ( category != null && category.getCode().trim().equals( code.trim() ) )
+            {
+                return true;
+            }
+        }
+        
         return categoryService.getByCode( code ) == null;
     }
 }

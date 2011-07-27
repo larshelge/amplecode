@@ -39,7 +39,16 @@ rules: {
   	  required: true,
       minlength: 2,
       maxlength: 20,
-      remote: "categoryCodeAvailable" },
+      remote: {
+      	url: "categoryCodeAvailable",
+      	data: {
+      	  code: function() {
+      	  	return $( '#code' ).val(); },
+      	  id: function() {
+      	  	return $( '#id' ).val(); }
+      	}
+      }
+  	},
     name: {
       required: true,
       minlength: 2,
@@ -50,7 +59,16 @@ rules: {
   	  required: true,
       minlength: 2,
       maxlength: 20,
-      remote: "teamCodeAvailable" },
+      remote: {
+      	url: "teamCodeAvailable",
+      	data: {
+      	  code: function() {
+      	  	return $( '#code' ).val(); },
+      	  id: function() {
+      	  	return $( '#id' ).val(); }
+      	}
+      }
+  	},
     name: {
       required: true,
       minlength: 2,
@@ -70,7 +88,16 @@ rules: {
   	  required: true,
       minlength: 2,
       maxlength: 20,
-      remote: "personCodeAvailable" },
+      remote: {
+      	url: "personCodeAvailable",
+      	data: {
+      	  code: function() {
+      	  	return $( '#code' ).val(); },
+      	  id: function() {
+      	  	return $( '#id' ).val(); }
+      	}
+      }
+  	},
     name: {
       required: true,
       minlength: 2,

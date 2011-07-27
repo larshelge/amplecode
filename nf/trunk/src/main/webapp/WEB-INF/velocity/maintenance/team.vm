@@ -10,7 +10,7 @@ $( "#teamForm" ).validate( { rules: validationRules.rules.team, messages: valida
 	
 <form id="teamForm" method="post" action="saveTeam">
 	
-<input type="hidden" name="id" value="$!{team.id}">
+<input type="hidden" id="id" name="id" value="$!{team.id}">
 
 <p class="title1">Lag</p>
 

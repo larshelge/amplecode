@@ -1,7 +1,6 @@
 package no.tfs.nf.web;
 
 import static no.tfs.nf.util.CollectionUtilsWrapper.sort;
-
 import no.tfs.nf.api.Team;
 import no.tfs.nf.api.TeamService;
 import no.tfs.nf.comparator.TagNameComparator;
@@ -69,8 +68,18 @@ public class TeamController
     }
 
     @RequestMapping("/teamCodeAvailable")
-    public @ResponseBody Boolean codeAvailable( @RequestParam String code )
+    public @ResponseBody Boolean codeAvailable( @RequestParam String code, @RequestParam(value="id",required=false) Integer id )
     {
+        if ( id != null ) // Update
+        {
+            Team team = teamService.get( id );
+            
+            if ( team != null && team.getCode().trim().equals( code.trim() ) )
+            {
+                return true;
+            }
+        }
+        
         return teamService.getByCode( code ) == null;
     }
 }
