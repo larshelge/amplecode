@@ -34,7 +34,7 @@ $( document ).ready( function()
 <option value="document">Artikler</option>
 </select></td>
 <td><input type="button" id="searchButton" value="S&oslash;k" style="width:95px;height:29px" onclick="searchReferences()">
-<input type="button" id="categoryButton" value="Kategorier" onclick="displayCategoryTree()" style="width:95px;height:29px"></td>
+<input type="button" id="categoryButton" value="Kategorier" onclick="displayCategoryOverview()" style="width:95px;height:29px"></td>
 </tr>
 </table>
 </div>

@@ -2,6 +2,7 @@ package no.tfs.nf.web;
 
 import static no.tfs.nf.util.UrlUtils.PARAM_SUGGESTIONS;
 import no.tfs.nf.api.CategoryService;
+import no.tfs.nf.api.ClipService;
 import no.tfs.nf.api.PersonService;
 import no.tfs.nf.api.PlaylistService;
 import no.tfs.nf.api.TagService;
@@ -24,6 +25,9 @@ public class TagController
     
     @Autowired
     private PlaylistService playlistService;
+    
+    @Autowired
+    private ClipService clipService;
     
     @Autowired
     private TagService tagService;
@@ -117,5 +121,11 @@ public class TagController
     public ModelAndView getClipCategories( @RequestParam String term )
     {
         return new ModelAndView( "clipCategories" ).addObject( PARAM_SUGGESTIONS, categoryService.getClipCategoriesLikeName( term ) );
+    }
+    
+    @RequestMapping("/myTags")
+    public ModelAndView myTags( @RequestParam Integer clipId )
+    {
+        return new ModelAndView( "myTags" ).addObject( "tags", clipService.get( clipId ).getTags() );
     }
 }

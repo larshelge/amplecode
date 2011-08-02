@@ -145,10 +145,4 @@ public class ClipController
     {
         return new ModelAndView( "clips" ).addObject( "clips", clipService.getLatest( Paging.DEFAULT_PAGE_SIZE ) );
     }
-    
-    @RequestMapping("/myTags")
-    public ModelAndView myTags( @RequestParam Integer clipId )
-    {
-        return new ModelAndView().addObject( "clip", clipService.get( clipId ) );
-    }
 }

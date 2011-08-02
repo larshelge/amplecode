@@ -158,6 +158,7 @@ div.box
   width: 700px;
   height: 394px;
   border: 1px solid #b0b0b0;
+  overflow: auto;
 }
 
 /* Intro */
@@ -174,9 +175,8 @@ div#tree
 {
   width: 670px;
   height: 364px;
-  padding: 15px;
+  padding: 5px;
   display: block;
-  background-image: url(../images/intro.jpg);
 }
 
 /* Video */

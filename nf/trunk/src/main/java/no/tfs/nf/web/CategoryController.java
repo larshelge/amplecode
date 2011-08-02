@@ -97,4 +97,10 @@ public class CategoryController
         
         return categoryService.getByCode( code ) == null;
     }
+    
+    @RequestMapping("/categoryOverview")
+    public ModelAndView categoryOverview()
+    {
+        return new ModelAndView( "myTags" ).addObject( "tags", sort( categoryService.getAll(), new TagNameComparator<Category>() ) );
+    }
 }

@@ -141,6 +141,24 @@ function initFeedback()
 // CategoryTree
 // -----------------------------------------------------------------------------
 
+function displayCategoryOverview()
+{
+	if ( $f( 'player' ) )
+    {
+    	$f( 'player' ).stop();
+    }
+    
+	$( '#intro' ).css( 'display', 'none' );
+	$( '#tree' ).css( 'display', 'block' );
+	$( '#video' ).css( 'display', 'none' );
+	$( '#document' ).css( 'display', 'none' );
+	
+	$( '#tree' ).load( 'categoryOverview' );
+}
+
+/**
+ * NOTE not in use at the moment
+ */
 function displayCategoryTree()
 {
 	if ( $f( 'player' ) )
