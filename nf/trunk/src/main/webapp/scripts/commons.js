@@ -313,10 +313,10 @@ function playVideoInternal( clip )
     	src: 'scripts/flowplayer.swf?c=' + (new Date()).getTime(), wmode: 'opaque' }, {
     	clip: {
     		url: url,
-    		provider: 'lighttpd'
+    		provider: 'pseudostreaming'
     	},
     	plugins: {
-    		lighttpd: {
+    		pseudostreaming: {
     			url: 'scripts/flowplayer.pseudostreaming.swf'
     		}
     	}    	
