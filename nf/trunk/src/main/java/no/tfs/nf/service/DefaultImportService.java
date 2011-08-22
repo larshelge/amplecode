@@ -181,7 +181,7 @@ public class DefaultImportService
         
         log.info( "Imported clips" );
     }
-       
+    
     private void importVideoFiles( Svx svx, Map<String, String> filenameMap )
         throws IOException
     {
@@ -255,7 +255,7 @@ public class DefaultImportService
     /**
      * Creates a mapping between the physical filenames on the Clip objects in
      * the Svx instance and generated random unique names. The mapping holds
-     * on key per file.
+     * one key per file.
      */
     private Map<String, String> getFilenameMap( Svx svx )
     {
