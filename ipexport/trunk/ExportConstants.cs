@@ -10,16 +10,16 @@ namespace IPExport
     /// </summary>
     class ExportConstants
     {
-        public static string EXPORT_LOCATION = "d:\\lars\\export\\";
-        public static string EXPORT_FILENAME = EXPORT_LOCATION + "ipsys_export.xml";
-        public static string DATA_FILENAME = EXPORT_LOCATION + "ipsys_guest.mdb";
+        // public static string EXPORT_LOCATION = "d:\\lars\\export\\";
+        // public static string EXPORT_FILENAME = EXPORT_LOCATION + "ipsys_export.xml";
+        // public static string DATA_FILENAME = EXPORT_LOCATION + "ipsys_guest.mdb";
+        public static string DB_FILENAME = "ipsys_guest.mdb";
 
         public static string SERVER_BASE_URL = "192.168.0.194"; // Change
         public static string SERVER_VERIFICATION_URL = SERVER_BASE_URL;
         public static string UPLOAD_URL = "http://" + SERVER_BASE_URL + ":8080/nf/importStream"; // Change
         public static string UPLOAD_TARGET = "interplay@" + SERVER_BASE_URL + ":upload";
 
-        public static string RELIABLE_VERIFICATION_URL = "www.google.com";
         public static string UPLOAD_CONTENT_TYPE = "application/xml";
         public static string UPLOAD_METHOD = "post";
         public static string XMLNS = "http://www.toppfotball.no/schema";
@@ -33,5 +33,11 @@ namespace IPExport
         public static int RESULT_SUCCESS = 0;
         public static int RESULT_NETWORK_UNAVAILABLE = 1;
         public static int RESULT_UPLOAD_SERVER_UNAVAILABLE = 2;
+
+        public static string SERVER_USER = "interplay";
+        public static string SERVER_PWD = "ip4321"; // TODO avoid storing passwords in clear text
+        public static string APP_USER = "interplay@interplay.com";
+        public static string APP_PWD = "interplay";
+
     }
 }

@@ -11,7 +11,8 @@ namespace IPExport
     /// </summary>
     class CommandWrapper
     {
-        private static string connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + ExportConstants.DATA_FILENAME;
+        private static string dataSourcePath = ExportUtils.getExecutableDir() + ExportConstants.DB_FILENAME;
+        private static string connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dataSourcePath;
         private OleDbConnection connection;
         private OleDbDataReader reader;
 

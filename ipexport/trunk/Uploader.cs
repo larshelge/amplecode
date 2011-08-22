@@ -18,7 +18,7 @@ namespace IPExport
         public bool upload(string username, string password)
         {
             Process upload = null;
-            string args = "-pw " + password + " " + ExportConstants.EXPORT_LOCATION + ExportConstants.VIDEO_PATTERN + " " + ExportConstants.UPLOAD_TARGET;
+            string args = "-pw " + password + " " + ExportUtils.getExecutableDir() + ExportConstants.VIDEO_PATTERN + " " + ExportConstants.UPLOAD_TARGET;
             
             try
             {
@@ -37,7 +37,7 @@ namespace IPExport
             }
         }
 
-        public string request(byte[] bytes, string username, string password)
+        public string sendSvx(byte[] bytes, string username, string password)
         {
             string authHeaderValue = "Basic " + base64Encode(username + ":" + password);
 
@@ -51,11 +51,6 @@ namespace IPExport
             stream.Close();
             HttpWebResponse response = (HttpWebResponse) request.GetResponse();
             return response.StatusDescription;
-        }
-
-        public bool networkIsAvailable()
-        {
-            return isAvailable(ExportConstants.RELIABLE_VERIFICATION_URL);
         }
 
         public bool serverIsAvailable()
