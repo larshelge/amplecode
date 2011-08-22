@@ -72,13 +72,14 @@ namespace IPExport
                 clip.Offset = (Convert.ToInt32(clipReader["offset"] != null ? clipReader["offset"] : 0) / ExportConstants.FRAMES_PER_SEC);
                 clip.Team = Convert.ToString(clipReader["team"]);
                 clip.Filename = Convert.ToString(clipReader["filename"]);
-                clip.Person = Convert.ToString(clipReader["person"]);
                 clip.Event = Convert.ToString(clipReader["event"]);
 
                 clip.addCategory(Convert.ToString(clipReader["playStart"]));
                 clip.addCategory(Convert.ToString(clipReader["freeVar"]));
                 clip.addCategory(Convert.ToString(clipReader["chance"]));
                 clip.addCategory(Convert.ToString(clipReader["grade"]));
+
+                clip.addPerson(Convert.ToString(clipReader["person"]));
 
                 svx.addClip(clip);
             }
