@@ -192,8 +192,6 @@ public class DefaultImportService
                 String source = UrlUtils.uploadLocation() + filename;
                 String target = UrlUtils.staticLocation() + filenameMap.get( filename );
                 
-                log.info( "Source: '" + source + ", target: '" + target + "'" );
-
                 BufferedInputStream in = null;
                 BufferedOutputStream out = null;
                 
@@ -202,7 +200,9 @@ public class DefaultImportService
                     in = new BufferedInputStream( new FileInputStream( source ) );
                     out = new BufferedOutputStream( new FileOutputStream( target ) );
                     
-                    IOUtils.copy( in, out );
+                    IOUtils.copy( in, out );                    
+
+                    log.info( "Imported file, source: '" + source + ", target: '" + target + "'" );
                 }
                 finally
                 {
