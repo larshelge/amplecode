@@ -21,7 +21,7 @@ public class UrlUtils
     
     private static final String DEFAULT_STATIC_BASE_URL = "http://localhost:81/video/";
     private static final String DEFAULT_STATIC_LOCATION = "/var/www/video/";
-    private static final String DEFAULT_UPLOAD_LOCATION = "/home/larshelg/dev/video/";
+    private static final String DEFAULT_UPLOAD_LOCATION = "/home/interplay/upload/";
     
     public static final String CONFIG_LOCATION = "/opt/nf/nf.properties";
     
