@@ -19,9 +19,11 @@ public class UrlUtils
     private static final String EMPTY = "";
     private static final String PROTOCOL_HTTP = "http://";
     
-    private static final String STATIC_BASE_URL = "http://localhost/video/";
-    private static final String STATIC_LOCATION = "/var/www/video/";
-    private static final String UPLOAD_LOCATION = "/home/larshelg/dev/video/";
+    private static final String DEFAULT_STATIC_BASE_URL = "http://localhost:81/video/";
+    private static final String DEFAULT_STATIC_LOCATION = "/var/www/video/";
+    private static final String DEFAULT_UPLOAD_LOCATION = "/home/interplay/upload/";
+    
+    public static final String CONFIG_LOCATION = "/opt/nf/nf.properties";
     
     public static final String KEY_STATIC_BASE_URL = "static.base.url";
     public static final String KEY_STATIC_LOCATION = "static.location";
@@ -48,7 +50,7 @@ public class UrlUtils
     {
         try
         {
-            properties.load( new FileSystemResource( "/opt/nf/nf.properties" ).getInputStream() );
+            properties.load( new FileSystemResource( CONFIG_LOCATION ).getInputStream() );
             
             log.info( "Loaded nf.properties configuration file" );
             log.info( "Static base URL: " + properties.getProperty( KEY_STATIC_BASE_URL ) );
@@ -70,16 +72,16 @@ public class UrlUtils
     
     public static String staticBaseUrl()
     {
-        return properties.getProperty( KEY_STATIC_BASE_URL, STATIC_BASE_URL );
+        return properties.getProperty( KEY_STATIC_BASE_URL, DEFAULT_STATIC_BASE_URL );
     }
     
     public static String staticLocation()
     {
-        return properties.getProperty( KEY_STATIC_LOCATION, STATIC_LOCATION );
+        return properties.getProperty( KEY_STATIC_LOCATION, DEFAULT_STATIC_LOCATION );
     }
     
     public static String uploadLocation()
     {
-        return properties.getProperty( KEY_UPLOAD_LOCATION, UPLOAD_LOCATION );
+        return properties.getProperty( KEY_UPLOAD_LOCATION, DEFAULT_UPLOAD_LOCATION );
     }
 }

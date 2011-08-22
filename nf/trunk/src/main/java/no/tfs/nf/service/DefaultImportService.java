@@ -162,7 +162,7 @@ public class DefaultImportService
             {
                 for ( String category : c.getCategories().getCategory() )
                 {
-                    clip.getCategories().add( categoryService.getByCode( category ) );
+                    clip.addCategory( categoryService.getByCode( category ) );
                 }
             }
             
@@ -170,7 +170,7 @@ public class DefaultImportService
             {
                 for ( String person : c.getPersons().getPerson() )
                 {
-                    clip.getPersons().add( personService.getByCode( person ) );
+                    clip.addPerson( personService.getByCode( person ) );
                 }
             }
             
@@ -181,7 +181,7 @@ public class DefaultImportService
         
         log.info( "Imported clips" );
     }
-       
+    
     private void importVideoFiles( Svx svx, Map<String, String> filenameMap )
         throws IOException
     {
@@ -192,8 +192,6 @@ public class DefaultImportService
                 String source = UrlUtils.uploadLocation() + filename;
                 String target = UrlUtils.staticLocation() + filenameMap.get( filename );
                 
-                log.info( "Source: '" + source + ", target: '" + target + "'" );
-
                 BufferedInputStream in = null;
                 BufferedOutputStream out = null;
                 
@@ -202,7 +200,9 @@ public class DefaultImportService
                     in = new BufferedInputStream( new FileInputStream( source ) );
                     out = new BufferedOutputStream( new FileOutputStream( target ) );
                     
-                    IOUtils.copy( in, out );
+                    IOUtils.copy( in, out );                    
+
+                    log.info( "Imported file, source: '" + source + ", target: '" + target + "'" );
                 }
                 finally
                 {
@@ -255,7 +255,7 @@ public class DefaultImportService
     /**
      * Creates a mapping between the physical filenames on the Clip objects in
      * the Svx instance and generated random unique names. The mapping holds
-     * on key per file.
+     * one key per file.
      */
     private Map<String, String> getFilenameMap( Svx svx )
     {
