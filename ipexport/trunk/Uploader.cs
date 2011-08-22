@@ -55,7 +55,7 @@ namespace IPExport
 
         public bool serverIsAvailable()
         {
-            return isAvailable(ExportConstants.SERVER_VERIFICATION_URL);
+            return isAvailable(ExportConstants.SERVER_BASE_URL);
         }
 
         private bool isAvailable(string url)

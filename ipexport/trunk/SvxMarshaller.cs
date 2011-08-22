@@ -14,7 +14,7 @@ namespace IPExport
     {
         public void marshal(Svx svx, MemoryStream stream)
         {
-            //XmlWriter writer = new XmlTextWriter(ExportConstants.EXPORT_FILENAME, null); // For debugging
+            //XmlWriter writer = new XmlTextWriter(ExportUtils.getExecutableDir() + ExportConstants.DEBUG_FILENAME, null); // For debugging
 
             XmlWriter writer = new XmlTextWriter(stream, null);
             

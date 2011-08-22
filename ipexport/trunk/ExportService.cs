@@ -17,18 +17,18 @@ namespace IPExport
 
         public int export()
         {
-            Console.WriteLine("Export process started, executable dir: " + ExportUtils.getExecutableDir());
+            Console.WriteLine("Export process started, executable dir: " + ExportUtils.getExecutableDir() + ", server URL: " + ExportConstants.SERVER_BASE_URL);
 
             // Check server connection
 
             bool serverIsAvailable = !uploader.serverIsAvailable();
-
+            /*
             if (!serverIsAvailable)
             {
                 Console.WriteLine("Server is not available, exiting");
 
                 return ExportConstants.RESULT_UPLOAD_SERVER_UNAVAILABLE;
-            }
+            }*/
             
             // Upload video files to server
 
