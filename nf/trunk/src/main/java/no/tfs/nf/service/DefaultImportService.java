@@ -162,7 +162,7 @@ public class DefaultImportService
             {
                 for ( String category : c.getCategories().getCategory() )
                 {
-                    clip.getCategories().add( categoryService.getByCode( category ) );
+                    clip.addCategory( categoryService.getByCode( category ) );
                 }
             }
             
@@ -170,7 +170,7 @@ public class DefaultImportService
             {
                 for ( String person : c.getPersons().getPerson() )
                 {
-                    clip.getPersons().add( personService.getByCode( person ) );
+                    clip.addPerson( personService.getByCode( person ) );
                 }
             }
             

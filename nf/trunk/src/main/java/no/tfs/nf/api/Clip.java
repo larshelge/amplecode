@@ -171,6 +171,17 @@ public class Clip
         return grade;
     }
     
+    public void addCategory( Category category )
+    {
+        ClipCategory clipCategory = new ClipCategory( category, 1 );
+        this.clipCategories.add( clipCategory );
+    }
+    
+    public void addPerson( Person person )
+    {
+        this.persons.add( person );
+    }
+    
     /**
      * Do not use this method for persistence purposes.
      */
