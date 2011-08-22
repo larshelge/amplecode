@@ -48,20 +48,29 @@ namespace IPExport
                 writer.WriteAttributeString("offset", Convert.ToString( clip.Offset ));
                 writer.WriteAttributeString("team", clip.Team);
                 writer.WriteAttributeString("filename", clip.Filename);
-                writer.WriteAttributeString("person", clip.Person);
                 writer.WriteAttributeString("event", clip.Event);
 
                 if (clip.Categories != null && clip.Categories.Count > 0)
                 {
                     writer.WriteStartElement("categories");
-
                     foreach (string category in clip.Categories)
                     {
                         writer.WriteStartElement("category");
                         writer.WriteString(category);
                         writer.WriteEndElement();
                     }
+                    writer.WriteEndElement();
+                }
 
+                if (clip.Persons != null && clip.Persons.Count > 0)
+                {
+                    writer.WriteStartElement("persons");
+                    foreach (string person in clip.Persons)
+                    {
+                        writer.WriteStartElement("person");
+                        writer.WriteString(person);
+                        writer.WriteEndElement();
+                    }
                     writer.WriteEndElement();
                 }
                 

@@ -14,10 +14,12 @@ namespace IPExport
         public static string EXPORT_FILENAME = EXPORT_LOCATION + "ipsys_export.xml";
         public static string DATA_FILENAME = EXPORT_LOCATION + "ipsys_guest.mdb";
 
+        public static string SERVER_BASE_URL = "192.168.0.194"; // Change
+        public static string SERVER_VERIFICATION_URL = SERVER_BASE_URL;
+        public static string UPLOAD_URL = "http://" + SERVER_BASE_URL + ":8080/nf/importStream"; // Change
+        public static string UPLOAD_TARGET = "interplay@" + SERVER_BASE_URL + ":upload";
+
         public static string RELIABLE_VERIFICATION_URL = "www.google.com";
-        public static string SERVER_VERIFICATION_URL = "amplecode.org"; // Temp
-        public static string UPLOAD_URL = "http://192.168.0.194:8080/nf/importStream"; // Temp
-        public static string UPLOAD_TARGET = "interplay@login.amplecode.org:upload";
         public static string UPLOAD_CONTENT_TYPE = "application/xml";
         public static string UPLOAD_METHOD = "post";
         public static string XMLNS = "http://www.toppfotball.no/schema";

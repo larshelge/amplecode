@@ -17,26 +17,32 @@ namespace IPExport
 
         public int export()
         {
-            string username = "interplay";
-            string password = "ip4321";
+            string serverUser = "interplay";
+            string serverPwd = "ip4321";
+            string appUser = "interplay@interplay.com";
+            string appPwd = "interplay";
 
             // Check network connection
             
-            if (!uploader.networkIsAvailable())
+            bool networkIsAvailable = uploader.networkIsAvailable();
+
+            if (!networkIsAvailable)
             {
                 return ExportConstants.RESULT_NETWORK_UNAVAILABLE;
             }
 
             // Check server connection
 
-            if (!uploader.serverIsAvailable())
+            bool serverIsAvailable = !uploader.serverIsAvailable();
+
+            if (!serverIsAvailable)
             {
                 return ExportConstants.RESULT_UPLOAD_SERVER_UNAVAILABLE;
             }
             
             // Upload video files to server
 
-            uploader.upload(username, password); // TODO upload files with clips only
+            bool result = uploader.upload(serverUser, serverPwd); // TODO upload files with clips only
 
             // Get SVX model from database
 
@@ -50,7 +56,7 @@ namespace IPExport
 
             // Send XML stream as request to server
 
-            string status = uploader.request(stream.ToArray(), username, password);
+            string status = uploader.request(stream.ToArray(), appUser, appPwd);
 
             return ExportConstants.RESULT_SUCCESS;
         }

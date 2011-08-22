@@ -15,15 +15,16 @@ namespace IPExport
     /// </summary>
     class Uploader
     {
-        public void upload(string username, string password)
+        public bool upload(string username, string password)
         {
             Process upload = null;
             string args = "-pw " + password + " " + ExportConstants.EXPORT_LOCATION + ExportConstants.VIDEO_PATTERN + " " + ExportConstants.UPLOAD_TARGET;
-
+            
             try
             {
                 upload = Process.Start(ExportConstants.SCP_EXE, args);
                 upload.WaitForExit();
+                return true;
             }
             catch (Exception ex)
             {
