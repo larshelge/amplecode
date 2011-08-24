@@ -313,13 +313,13 @@ function playVideoInternal( clip )
     	src: 'scripts/flowplayer.swf?c=' + (new Date()).getTime(), wmode: 'opaque' }, {
     	clip: {
     		url: url,
-    		provider: 'pseudostreaming'
+    		provider: 'streamserver'
     	},
     	plugins: {
-    		pseudostreaming: {
+    		streamserver: {
     			url: 'scripts/flowplayer.pseudostreaming.swf'
     		}
-    	}    	
+    	}   	
     } );
         
     $f( 'player' ).play();
