@@ -43,7 +43,7 @@ public class DefaultExportService
         svx.setTeams( factory.createSvxTeams() );
         svx.setPersons( factory.createSvxPersons() );
         
-        for ( Category category : categoryService.getStandard() )
+        for ( Category category : categoryService.getAll() )
         {
             svx.getCategories().getCategory().add( category.toX() );
         }
