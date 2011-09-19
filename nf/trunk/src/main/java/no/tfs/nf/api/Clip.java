@@ -202,12 +202,14 @@ public class Clip
     {
         List<String> names = new ArrayList<String>();
         
-        for ( Category category : getCategories() )
+        Set<Category> categories = getCategories();
+        
+        for ( Category category : categories )
         {
             names.add( category.getName() );
         }
         
-        return StringUtils.join( names, ", " );
+        return categories != null && categories.size() > 0 ? StringUtils.join( names, ", " ) : "-";
     }
     
     public String getCategoryShortName()
@@ -225,8 +227,8 @@ public class Clip
         {
             names.add( person.getName() );
         }
-        
-        return StringUtils.join( names, ", " );
+
+        return persons != null && persons.size() > 0 ? StringUtils.join( names, ", " ) : "-";
     }
     
     public String getPersonShortName()
