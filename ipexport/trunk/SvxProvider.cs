@@ -52,14 +52,22 @@ namespace IPExport
             string clipSql =
                 "select MatchAnalyse.RecordFrameStart as offset, TeamCode.TeamCode as team, MatchAnalyse.VideoFileName as filename, " +
                 "PlayerCode.PlayerCode as person, MatchAnalyse.MatchIndex as event, " +
+
                 "(select GroupVariablesCode.VariableCode from GroupVariablesCode " +
                 "where GroupVariablesCode.VariableGroup=1 and (MatchAnalyse.PlayStart mod 10)=GroupVariablesCode.VariablePosition) as playStart, " +
+
                 "(select GroupVariablesCode.VariableCode from GroupVariablesCode " +
                 "where GroupVariablesCode.VariableGroup=3 and (MatchAnalyse.MVar1 mod 10)=GroupVariablesCode.VariablePosition) as freeVar, " +
+
+                "(select GroupVariablesCode.VariableCode from GroupVariablesCode " +
+                "where GroupVariablesCode.VariableGroup=0 and MatchAnalyse.MVar2=GroupVariablesCode.VariablePosition) as freeVar2, " +
+
                 "(select GroupVariablesCode.VariableCode from GroupVariablesCode " +
                 "where GroupVariablesCode.VariableGroup=4 and (MatchAnalyse.Chance mod 10)=GroupVariablesCode.VariablePosition) as chance, " +
+
                 "(select GroupVariablesCode.VariableCode from GroupVariablesCode " +
                 "where GroupVariablesCode.VariableGroup=5 and (MatchAnalyse.Grade mod 10)=GroupVariablesCode.VariablePosition) as grade " +
+
                 "from (MatchAnalyse left join TeamCode on MatchAnalyse.TeamIndex=TeamCode.TeamIndex) " +
                 "left join PlayerCode on MatchAnalyse.PlayerIndexPosFrom=PlayerCode.PlayerIndex";
 
@@ -71,11 +79,12 @@ namespace IPExport
 
                 clip.Offset = (Convert.ToInt32(clipReader["offset"] != null ? clipReader["offset"] : 0) / ExportConstants.FRAMES_PER_SEC);
                 clip.Team = Convert.ToString(clipReader["team"]);
-                clip.Filename = Convert.ToString(clipReader["filename"]);
+                clip.Filename = Convert.ToString(clipReader["filename"] != null ? clipReader["filename"] : "").Trim();
                 clip.Event = Convert.ToString(clipReader["event"]);
 
                 clip.addCategory(Convert.ToString(clipReader["playStart"]));
                 clip.addCategory(Convert.ToString(clipReader["freeVar"]));
+                clip.addCategory(Convert.ToString(clipReader["freeVar2"]));
                 clip.addCategory(Convert.ToString(clipReader["chance"]));
                 clip.addCategory(Convert.ToString(clipReader["grade"]));
 
