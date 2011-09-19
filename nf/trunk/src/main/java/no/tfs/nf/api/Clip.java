@@ -192,7 +192,10 @@ public class Clip
         
         for ( ClipCategory clipCategory : clipCategories )
         {
-            categories.add( clipCategory.getCategory() );
+            if ( clipCategory.getCategory() != null )
+            {
+                categories.add( clipCategory.getCategory() );
+            }
         }
         
         return categories;
