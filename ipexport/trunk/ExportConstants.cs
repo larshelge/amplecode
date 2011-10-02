@@ -20,9 +20,9 @@ namespace IPExport
 
         public static string UPLOAD_CONTENT_TYPE = "application/xml";
         public static string UPLOAD_METHOD = "post";
-        public static string XMLNS = "http://www.toppfotball.no/schema";
+        public static string XMLNS = "http://fotballab.no/schema";
         public static string XSI = "http://www.w3.org/2001/XMLSchema-instance";
-        public static string XSI_LOCATION = "http://www.toppfotball.no/schema svx.xsd";
+        public static string XSI_LOCATION = "http://fotballab.no/schema http://fotballab.no/schema/svx.xsd";
         public static string DATE_FORMAT = "yyyy-MM-dd";
         public static int FRAMES_PER_SEC = 25;
         public static string SCP_EXE = "pscp.exe";

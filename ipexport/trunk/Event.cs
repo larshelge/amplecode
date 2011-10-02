@@ -10,7 +10,6 @@ namespace IPExport
     /// </summary>
     class Event
     {
-        private string code;
         private string date;
         private string location;
         private string homeTeam;
@@ -20,19 +19,12 @@ namespace IPExport
         {
         }
 
-        public Event(string code, string date, string location, string homeTeam, string awayTeam)
+        public Event(string date, string location, string homeTeam, string awayTeam)
         {
-            this.code = code;
             this.date = date;
             this.location = location;
             this.homeTeam = homeTeam;
             this.awayTeam = awayTeam;
-        }
-
-        public string Code
-        {
-            get { return code; }
-            set { this.code = value; }
         }
 
         public string Date

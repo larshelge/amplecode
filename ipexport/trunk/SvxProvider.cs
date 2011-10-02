@@ -26,7 +26,7 @@ namespace IPExport
             // Loading Events / MatchInfo
 
             string eventSql =
-                "select MatchInfo.MatchIndex as code, MatchInfo.Date as date_, MatchInfo.Place as location, TC1.TeamCode as homeTeam, TC2.TeamCode as awayTeam " +
+                "select MatchInfo.Date as date_, MatchInfo.Place as location, TC1.TeamCode as homeTeam, TC2.TeamCode as awayTeam " +
                 "from (MatchInfo left join TeamCode TC1 on MatchInfo.HomeTeamNumb=TC1.TeamIndex) " +
                 "left join TeamCode TC2 on MatchInfo.AwayTeamNumb=TC2.TeamIndex";
 
@@ -36,7 +36,6 @@ namespace IPExport
             {
                 Event event_ = new Event();
                 
-                event_.Code = Convert.ToString(eventReader["code"]);
                 event_.Date = eventReader["date_"] != DBNull.Value ? Convert.ToDateTime(eventReader["date_"]).ToString(ExportConstants.DATE_FORMAT) : "";
                 event_.Location = Convert.ToString(eventReader["location"]);
                 event_.HomeTeam = Convert.ToString(eventReader["homeTeam"]);
