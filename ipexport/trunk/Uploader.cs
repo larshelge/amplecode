@@ -41,16 +41,24 @@ namespace IPExport
         {
             string authHeaderValue = "Basic " + base64Encode(username + ":" + password);
 
-            WebRequest request = WebRequest.Create(ExportConstants.UPLOAD_URL);
-            request.ContentType = ExportConstants.UPLOAD_CONTENT_TYPE;
-            request.Method = ExportConstants.UPLOAD_METHOD;
-            request.ContentLength = bytes.Length;
-            request.Headers.Add("Authorization", authHeaderValue); // Requires user to be present on server
-            Stream stream = request.GetRequestStream();
-            stream.Write(bytes, 0, bytes.Length);
-            stream.Close();
-            HttpWebResponse response = (HttpWebResponse) request.GetResponse();
-            return response.StatusDescription;
+            try
+            {
+                WebRequest request = WebRequest.Create(ExportConstants.UPLOAD_URL);
+                request.ContentType = ExportConstants.UPLOAD_CONTENT_TYPE;
+                request.Method = ExportConstants.UPLOAD_METHOD;
+                request.ContentLength = bytes.Length;
+                request.Headers.Add("Authorization", authHeaderValue); // Requires user to be present on server
+                Stream stream = request.GetRequestStream();
+                stream.Write(bytes, 0, bytes.Length);
+                stream.Close();
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                return response.StatusDescription;
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine("Exception while uploading: " + ex.StackTrace);
+                throw ex;
+            }
         }
 
         public bool serverIsAvailable()
