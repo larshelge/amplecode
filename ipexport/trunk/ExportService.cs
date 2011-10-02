@@ -11,25 +11,16 @@ namespace IPExport
     /// </summary>
     class ExportService
     {
-        SvxProvider provider = new SvxProvider();
-        SvxMarshaller marshaller = new SvxMarshaller();
-        Uploader uploader = new Uploader();
+        private SvxProvider provider = new SvxProvider();
+        private SvxMarshaller marshaller = new SvxMarshaller();
+        private Uploader uploader = new Uploader();
 
         public int export()
         {
             Console.WriteLine("Export process started, executable dir: " + ExportUtils.getExecutableDir() + ", server URL: " + ExportConstants.SERVER_BASE_URL);
 
-            // Check server connection
+            // TODO: Check server connection
 
-            bool serverIsAvailable = !uploader.serverIsAvailable();
-            /*
-            if (!serverIsAvailable)
-            {
-                Console.WriteLine("Server is not available, exiting");
-
-                return ExportConstants.RESULT_UPLOAD_SERVER_UNAVAILABLE;
-            }*/
-            
             // Upload video files to server
 
             bool result = uploader.upload(ExportConstants.SERVER_USER, ExportConstants.SERVER_PWD); // TODO upload files with clips only
