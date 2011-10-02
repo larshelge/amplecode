@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<xs:schema xmlns="http://www.toppfotball.no/schema" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    targetNamespace="http://www.toppfotball.no/schema" elementFormDefault="qualified">
+<xs:schema xmlns="http://fotballab.no/schema" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://fotballab.no/schema" elementFormDefault="qualified">
 
 <xs:complexType name="XCategory">
 	<xs:attribute name="code" use="required" type="xs:string"/>
@@ -18,7 +18,7 @@
 </xs:complexType>
 
 <xs:complexType name="XEvent">
-	<xs:attribute name="code" use="required" type="xs:string"/>
+	<xs:attribute name="code" type="xs:string"/>
 	<xs:attribute name="date" use="required" type="xs:date"/>
 	<xs:attribute name="location" type="xs:string"/>
 	<xs:attribute name="homeTeam" type="xs:string"/>
