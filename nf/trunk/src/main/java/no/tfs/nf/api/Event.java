@@ -50,7 +50,7 @@ public class Event
     {
         if ( homeTeam != null && awayTeam != null )
         {
-            this.name = homeTeam.getName() + " - " + awayTeam.getName() + " (" + DateUtils.getLongDateString( date ) + ")";
+            this.name = homeTeam.getName() + " - " + awayTeam.getName() + " (" + DateUtils.getDateString( date ) + ")";
         }
     }
     
