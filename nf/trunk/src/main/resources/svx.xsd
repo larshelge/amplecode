@@ -18,7 +18,7 @@
 </xs:complexType>
 
 <xs:complexType name="XEvent">
-	<xs:attribute name="code" use="required" type="xs:string"/>
+	<xs:attribute name="code" type="xs:string"/>
 	<xs:attribute name="date" use="required" type="xs:date"/>
 	<xs:attribute name="location" type="xs:string"/>
 	<xs:attribute name="homeTeam" type="xs:string"/>

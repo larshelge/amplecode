@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -141,6 +142,7 @@ public class DefaultImportService
             Event event = new Event().fromX( e );
             event.setHomeTeam( teamService.getByCode( e.getHomeTeam() ) );
             event.setAwayTeam( teamService.getByCode( e.getAwayTeam() ) );
+            event.setCode( UUID.randomUUID().toString() );
             event.setLogicalName();
             eventService.save( event );
             eventMap.put( event.getCode(), event );
