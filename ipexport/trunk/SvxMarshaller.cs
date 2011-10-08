@@ -30,7 +30,6 @@ namespace IPExport
             foreach (Event event_ in svx.Events)
             {
                 writer.WriteStartElement("event");
-                writer.WriteAttributeString("code", event_.Code);
                 writer.WriteAttributeString("date", event_.Date);
                 writer.WriteAttributeString("location", event_.Location);
                 writer.WriteAttributeString("homeTeam", event_.HomeTeam);
