@@ -1,4 +1,3 @@
-
 <div class="myInput"><input type="text" id="playlistTerm" style="width:138px">
 <input type="button" value="S&oslash;k" onclick="searchMyPlaylists( '${clip.id}' )" style="width:70px">
 <input type="button" value="Lag ny" onclick="saveMyPlaylist( '${clip.id}' )" style="width:70px">
@@ -6,25 +5,18 @@
 
 <table class="myTable">
 #set( $columns = 5 )
-	
 #foreach( $playlist in $playlists )
 #set( $count = $velocityCount % $columns )
-
 #if ( $count == 1 )
 <tr>
 #end
-
 #if ( $clip.playlists.contains( $playlist ) )
-<td id="playlist${playlist.id}" class="myItem" style="background-color:#b6dcb6;cursor:pointer" onclick="removeFromPlaylist( '${playlist.id}', '${clip.id}' )">
-	${playlist.name}</td>
+<td id="playlist${playlist.id}" class="myItem" style="background-color:#b6dcb6;cursor:pointer" onclick="removeFromPlaylist( '${playlist.id}', '${clip.id}' )">${playlist.name}</td>
 #else
-<td id="playlist${playlist.id}" class="myItem" onclick="addToPlaylist( '${playlist.id}', '${clip.id}' )">
-	${playlist.name}</td>
+<td id="playlist${playlist.id}" class="myItem" onclick="addToPlaylist( '${playlist.id}', '${clip.id}' )">${playlist.name}</td>
 #end
-
 #if ( $count == 0 )
 </tr>
 #end
-
 #end
 </table>

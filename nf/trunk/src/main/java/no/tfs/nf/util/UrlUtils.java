@@ -35,7 +35,7 @@ public class UrlUtils
     public static final String PARAM_AUTHORITIES = "authorities";
     public static final String PARAM_CURRENT_USER = "currentUser";
     public static final String PARAM_SUGGESTIONS = "suggestions";
-    public static final int MAX_PLAYLIST_RESULTS = 10;
+    public static final int MAX_PLAYLIST_RESULTS = 20;
         
     public static final String DELIMITERS = "[,;]";
     

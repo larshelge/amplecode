@@ -105,7 +105,7 @@ public class PlaylistController
     {
         ModelAndView mav = new ModelAndView( "myPlaylists" );
         
-        mav.addObject( "playlists", playlistService.getOwnedByCurrentUser( UrlUtils.MAX_PLAYLIST_RESULTS ) );
+        mav.addObject( "playlists", playlistService.getOwnedByCurrentUser() );
         mav.addObject( "clip", clipService.get( clipId ) );
         
         return mav;

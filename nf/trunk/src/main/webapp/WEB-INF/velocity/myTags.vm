@@ -1,7 +1,5 @@
-
 <table class="myTable">
 #set( $columns = 4 )
-	
 #foreach( $tag in $tags )
 #set( $count = $velocityCount % $columns )
 #if ( $count == 1 )<tr>#end
