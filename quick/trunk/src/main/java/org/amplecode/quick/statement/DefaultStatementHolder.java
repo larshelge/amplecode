@@ -48,26 +48,21 @@ public class DefaultStatementHolder
 
     private Statement statement;
     
+    public DefaultStatementHolder( Connection connection )
+    {
+        this.connection = connection;
+    }
+    
     public DefaultStatementHolder( Connection connection, boolean pooled )
     {
         this.connection = connection;
         this.pooled = pooled;
-        
-        try
-        {
-            this.statement = connection.createStatement();
-        }
-        catch ( SQLException ex )
-        {
-            forceClose();
-            
-            throw new RuntimeException( "Failed to create statement", ex );            
-        }
+        this.statement = createStatement();
     }
     
     public Statement getStatement()
     {
-        return statement;
+        return statement != null ? statement : createStatement();
     }
     
     public Connection getConnection()
@@ -214,6 +209,20 @@ public class DefaultStatementHolder
             catch ( SQLException ex )
             {   
             }
+        }
+    }
+    
+    private Statement createStatement()
+    {
+        try
+        {
+            return connection.createStatement();
+        }
+        catch ( SQLException ex )
+        {
+            forceClose();
+            
+            throw new RuntimeException( "Failed to create statement", ex );            
         }
     }
 }

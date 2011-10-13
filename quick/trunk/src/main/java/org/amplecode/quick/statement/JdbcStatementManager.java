@@ -30,6 +30,7 @@ package org.amplecode.quick.statement;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import org.amplecode.quick.JdbcConfiguration;
 import org.amplecode.quick.StatementDialect;
@@ -93,7 +94,23 @@ public class JdbcStatementManager
         
         return new DefaultStatementHolder( getConnection(), false );        
     }
-        
+    
+    public StatementHolder getHolder( boolean autoCommit )
+    {
+        try
+        {
+            Connection connection = getConnection();
+            connection.setAutoCommit( autoCommit );
+            return new DefaultStatementHolder( connection );
+        }
+        catch ( SQLException ex )
+        {
+            destroy();
+            
+            throw new RuntimeException( ex );
+        }
+    }
+    
     public void destroy()
     {
         StatementHolder holder = holderTag.get();

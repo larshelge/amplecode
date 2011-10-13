@@ -50,6 +50,8 @@ public interface StatementManager
      * @return a pre-initialized statement object.
      */
     StatementHolder getHolder();
+    
+    StatementHolder getHolder( boolean autoCommit );
        
     /**
      * Closes the StatementHolder object and the underlying database connection.
