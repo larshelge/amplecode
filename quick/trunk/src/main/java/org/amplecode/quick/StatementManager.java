@@ -45,12 +45,20 @@ public interface StatementManager
     /**
      * Gets a pre-initialized StatementHolder object. After the initialize() method
      * is invoked, the StatementHolder provides connection pooling in the sense
-     * that the same underlying Connection will be used until destroy() is invoked.
+     * that the same underlying Connection and Statement will be used until destroy() 
+     * is invoked.
      * 
      * @return a pre-initialized statement object.
      */
     StatementHolder getHolder();
     
+    /**
+     * Gets a pre-initalized StatementHolder object. This method will always
+     * retrieve a new Connection from the database, disregard of initialization.
+     *  
+     * @param autoCommit turn auto-commit on or off for the underlying Connection.
+     * @return a pre-initialized statement object.
+     */
     StatementHolder getHolder( boolean autoCommit );
        
     /**

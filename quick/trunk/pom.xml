@@ -11,10 +11,10 @@
 	
   <description>Framework for high-performance JDBC batch operations.</description>
   
-  <url>http://amplecode.org/wiki/Quick</url>
+  <url>https://github.com/larshelge/amplecode</url>
   
   <scm>
-    <url>svn+ssh://svn.amplecode.org/var/svn/repo/quick</url>
+    <url>https://github.com/larshelge/amplecode</url>
   </scm>
   
   <organization>
@@ -37,8 +37,8 @@
   </licenses>
 
   <issueManagement>
-	<system>Trac</system>
-	<url>http://www.amplecode.org/report</url>
+	<system>GitHub</system>
+	<url>https://github.com/larshelge/amplecode</url>
   </issueManagement>
 
   <dependencies>
@@ -86,7 +86,7 @@
     <repository>
       <id>amplecode_maven2_repo</id>
       <name>AmpleCode Maven 2 repository</name>
-      <url>scp://login.amplecode.org/var/www/amplecode/maven2</url>
+      <url>scp://login.amplecode.org/home/larshelg/maven2</url>
     </repository>
   </distributionManagement>
   
@@ -101,6 +101,13 @@
         </configuration>
       </plugin>
     </plugins>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId> 
+        <artifactId>wagon-ssh</artifactId> 
+        <version>2.0</version> 
+      </extension> 
+    </extensions>
   </build>
 	
 </project>
