@@ -19,7 +19,7 @@ public class UrlUtils
     private static final String EMPTY = "";
     private static final String PROTOCOL_HTTP = "http://";
     
-    private static final String DEFAULT_STATIC_BASE_URL = "http://localhost:81/video/";
+    private static final String DEFAULT_STATIC_BASE_URL = "http://localhost/video/";
     private static final String DEFAULT_STATIC_LOCATION = "/var/www/video/";
     private static final String DEFAULT_UPLOAD_LOCATION = "/home/interplay/upload/";
     
