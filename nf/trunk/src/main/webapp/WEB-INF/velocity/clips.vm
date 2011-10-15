@@ -37,9 +37,17 @@ $( document ).ready( function() {
 #paging( 'video' )
 #end
 
+#if( $!currentUser.hasAuth( "ROLE_MANAGER" ) )
+#set( $editable = true )
+#set( $length = 34 )
+#else
+#set( $editoable = false )
+#set( $length = 38 )
+#end
+
 <ul class="clipList">
 #foreach( $clip in $!clips )
-  #if( $!currentUser.hasAuth( "ROLE_MANAGER" ) )
+  #if( $editable )
   <div style="float:right; padding-top:4px; cursor:pointer">
     <img src="images/edit-small.png" title="Endre" onclick="updateClip( '${clip.id}' )" class="transparent"><br>
   	<img src="images/delete-small.png" title="Slett" onclick="removeClip( '${clip.id}' )" class="transparent">
@@ -50,9 +58,9 @@ $( document ).ready( function() {
   	  <img src="images/video.png" alt="Video">
   	</div>
   	<div>
-      $!{clip.categoryShortName}<br>
-	  $!{clip.personShortName}<br>
-	  $!{clip.event.name} #if( !${clip.event.name} )<br>#end
+      $!{clip.getCategoryName( $length )}<br>
+      $!{clip.getPersonName( $length )}<br>
+      $!{clip.event.name}#if( !${clip.event.name} )<br>#end
 	</div>
   </li>
 #end
@@ -70,7 +78,7 @@ $( document ).ready( function() {
 
 <ul class="clipList">
 #foreach( $doc in $!docs )
-  #if( $!currentUser.hasAuth( "ROLE_MANAGER" ) )
+  #if( $editable )
   <div style="float:right; padding-top:4px; cursor:pointer">
     <img src="images/edit-small.png" title="Endre" onclick="updateDocument( '${doc.id}' )" class="transparent"><br>
   	<img src="images/delete-small.png" title="Slett" onclick="removeDocument( '${doc.id}' )" class="transparent">
@@ -82,7 +90,7 @@ $( document ).ready( function() {
     </span>
     <span>
       $!{doc.displayTitle}<br>
-      $!{doc.categoryName}
+      $!{doc.getCategoryName( $length )}#if( !${doc.categoryName} )<br>#end
     </span>
   </li>
 #end

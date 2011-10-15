@@ -32,7 +32,6 @@ import org.hibernate.annotations.ForeignKey;
 public class Clip
 {
     private static final String NAME_SUFFIX = "..";
-    private static final int NAME_LENGTH = 35;
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -215,11 +214,11 @@ public class Clip
         return categories != null && categories.size() > 0 ? StringUtils.join( names, ", " ) : "-";
     }
     
-    public String getCategoryShortName()
+    public String getCategoryName( int length )
     {
         String cName = getCategoryName();
         
-        return cName.length() > NAME_LENGTH ? StringUtils.substring( cName, 0, NAME_LENGTH - NAME_SUFFIX.length() ) + NAME_SUFFIX : cName;
+        return cName.length() > length ? StringUtils.substring( cName, 0, length - NAME_SUFFIX.length() ) + NAME_SUFFIX : cName;
     }
     
     public String getPersonName()
@@ -234,11 +233,11 @@ public class Clip
         return persons != null && persons.size() > 0 ? StringUtils.join( names, ", " ) : "-";
     }
     
-    public String getPersonShortName()
+    public String getPersonName( int length )
     {
         String pName = getPersonName();
         
-        return pName.length() > NAME_LENGTH ? StringUtils.substring( pName, 0, NAME_LENGTH - NAME_SUFFIX.length() ) + NAME_SUFFIX : pName;
+        return pName.length() > length ? StringUtils.substring( pName, 0, length - NAME_SUFFIX.length() ) + NAME_SUFFIX : pName;
     }
     
     public boolean removeComment( int id )
