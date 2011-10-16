@@ -39,7 +39,7 @@ $( document ).ready( function() {
 
 #if( $!currentUser.hasAuth( "ROLE_MANAGER" ) )
 #set( $editable = true )
-#set( $length = 34 )
+#set( $length = 33 )
 #else
 #set( $editoable = false )
 #set( $length = 38 )
