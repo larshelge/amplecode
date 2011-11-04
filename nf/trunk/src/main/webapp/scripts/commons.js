@@ -185,15 +185,6 @@ function displayCategoryTree()
 // Search
 // -----------------------------------------------------------------------------
 
-function searchAssociations( code )
-{
-	if ( !isEmpty( code ) )
-	{
-		var url = 'asearch?code=' + code;
-		$( '#search' ).load( url );
-	}
-}
-
 function searchQuery( query )
 {
 	if ( !isEmpty( query ) )

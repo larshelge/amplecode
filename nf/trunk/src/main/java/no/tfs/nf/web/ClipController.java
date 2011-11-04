@@ -126,12 +126,6 @@ public class ClipController
         return clipService.getByCode( code );
     }
     
-    @RequestMapping("/asearch")
-    public ModelAndView associationSearch( @RequestParam String code )
-    {
-        return new ModelAndView( "clips" ).addObject( "clips", clipService.getAssociations( code ) );
-    }
-
     @RequestMapping("/latestClipId")
     public @ResponseBody Integer latestClipId()
     {
@@ -146,7 +140,7 @@ public class ClipController
         return new ModelAndView( "clips" ).addObject( "clips", clipService.getLatest( Paging.DEFAULT_PAGE_SIZE ) );
     }
     
-    @RequestMapping("bumpViews")
+    @RequestMapping("/bumpViews")
     public @ResponseBody Boolean bumpViews( @RequestParam Integer id )
     {
         return clipService.bumpViews( id );

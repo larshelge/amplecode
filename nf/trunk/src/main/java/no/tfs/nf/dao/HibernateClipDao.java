@@ -113,17 +113,6 @@ public class HibernateClipDao
     }
     
     @Override
-    @SuppressWarnings("unchecked")
-    public List<Clip> getByPlaylist( String code )
-    {
-        String sql = "select cl.* from clip cl join clip_playlist cp on cl.id = cp.clip_id join playlist pl on cp.playlists_id = pl.id where pl.code='" + code + "' order by cl.created desc";
-
-        log.debug( sql );
-        
-        return sessionFactory.getCurrentSession().createSQLQuery( sql ).addEntity( "clip", Clip.class ).list();
-    }
-
-    @Override
     public Clip getFirstInPlaylist( String code )
     {
         String sql = "select cl.* from clip cl join clip_playlist cp on cl.id = cp.clip_id join playlist pl on cp.playlists_id = pl.id where pl.code='" + code + "' limit 1";
@@ -131,18 +120,6 @@ public class HibernateClipDao
         log.debug( sql );
         
         return (Clip) sessionFactory.getCurrentSession().createSQLQuery( sql ).addEntity( "clip", Clip.class ).uniqueResult();
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Clip> getAssociations( String code )
-    {
-        String sql = "select cl.* from clip cl join clipcategory cc on cl.id = cc.clip_id where cc.category_id in (" +
-            "select category_id from clipcategory cc join clip cl on cc.clip_id = cl.id where cl.code='" + code + "') order by cl.created desc";
-
-        log.debug( sql );
-        
-        return sessionFactory.getCurrentSession().createSQLQuery( sql ).addEntity( "clip", Clip.class ).list();
     }
     
     @Override

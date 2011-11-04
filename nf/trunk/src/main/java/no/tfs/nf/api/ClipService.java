@@ -13,8 +13,6 @@ public interface ClipService
     
     List<Clip> getHierarchy( Category category );
     
-    List<Clip> getAssociations( String code );
-    
     Clip getLatest();
     
     List<Clip> getLatest( int number );

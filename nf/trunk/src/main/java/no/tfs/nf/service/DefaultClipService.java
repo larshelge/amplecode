@@ -81,21 +81,6 @@ public class DefaultClipService
     }
     
     @Override
-    public List<Clip> getAssociations( String uuid )
-    {
-        if ( uuid.startsWith( UuidUtils.PREFIX_CLIP ) )
-        {
-            return clipDao.getAssociations( uuid );
-        }
-        else if ( uuid.startsWith( UuidUtils.PREFIX_PLAYLIST ) )
-        {
-            return clipDao.getByPlaylist( uuid );
-        }
-        
-        throw new IllegalArgumentException( "Invalid uuid: " + uuid );
-    }
-
-    @Override
     public Clip getLatest()
     {
         return clipDao.getLatest();

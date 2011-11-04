@@ -11,13 +11,9 @@ public interface ClipDao
     
     List<Clip> getHierarchy( Category category );
     
-    List<Clip> getByPlaylist( String code );
-    
     Clip getByCode( String code );
     
     Clip getFirstInPlaylist( String code );
-    
-    List<Clip> getAssociations( String code );
     
     Clip getLatest();
     
