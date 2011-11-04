@@ -4,12 +4,32 @@
 
 <p class="title1">Statistikk</p>
 
-<p class="title2">Klipp per kategori</p>
+<table>
 
+<tr>
+<td class="title2">Klipp per kategori</td>
+<td class="title2">Visninger per klipp</td>
+</tr>
+
+<tr>
+
+<td valign="top">
 <ul>
 #foreach( $stat in $statistics.categoryClipCount )
-<li>$stat</li>
+<li>${stat.name}: ${stat.value}</li>
 #end
 </ul>
+</td>
+
+<td valign="top">
+<ul>
+#foreach( $stat in $statistics.viewCount )
+<li><a href="play?code=${stat.name}">${stat.name}</a>: ${stat.value}</li>
+#end
+</ul>
+</td>
+
+</tr>
+</table>
 
 #parse( "footer.vm" )

@@ -60,7 +60,21 @@ public class HibernateCategoryDao
             @Override
             public void processRow( ResultSet rs ) throws SQLException
             {
-                stats.getCategoryClipCount().add( rs.getString( "categoryname" ) + ": " + rs.getInt( "clipcount" ) );                
+                stats.getCategoryClipCount().add( new Statistics.Record( rs.getString( "categoryname" ), rs.getInt( "clipcount" ) ) );                
+            }
+        } );
+        
+        sql = 
+            "select cl.code, cl.views from clip cl " +
+            "where cl.views > 0 " +
+            "order by cl.views desc limit 100";
+        
+        jdbcTemplate.query( sql, new RowCallbackHandler()
+        {
+            @Override
+            public void processRow( ResultSet rs ) throws SQLException
+            {
+                stats.getViewCount().add( new Statistics.Record( rs.getString( "code" ), rs.getInt( "views" ) ) );
             }
         } );
         
