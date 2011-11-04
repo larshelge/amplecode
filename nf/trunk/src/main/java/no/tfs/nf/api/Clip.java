@@ -240,6 +240,13 @@ public class Clip
         return pName.length() > length ? StringUtils.substring( pName, 0, length - NAME_SUFFIX.length() ) + NAME_SUFFIX : pName;
     }
     
+    public String getEventName( int length )
+    {
+        String eName = event != null && event.getName() != null ? event.getName() : "";
+        
+        return eName.length() > length ? StringUtils.substring( eName, 0, length - NAME_SUFFIX.length() ) + NAME_SUFFIX : eName;
+    }
+    
     public boolean removeComment( int id )
     {
         Iterator<Comment> iterator = comments.iterator();

@@ -60,7 +60,7 @@ $( document ).ready( function() {
   	<div>
       $!{clip.getCategoryName( $length )}<br>
       $!{clip.getPersonName( $length )}<br>
-      $!{clip.event.name}#if( !${clip.event.name} )<br>#end
+      $!{clip.getEventName( $length )}#if( !${clip.event.name} )<br>#end
 	</div>
   </li>
 #end
