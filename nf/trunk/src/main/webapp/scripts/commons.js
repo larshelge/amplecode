@@ -324,8 +324,8 @@ function playVideoInternal( clip )
         
     $f( 'player' ).play();
     
-    var playerEmbed = '<object id="flowplayer" width="600" height="337" data="http://releases.flowplayer.org/swf/flowplayer-3.2.5.swf" ' +
-    		'type="application/x-shockwave-flash"><param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.5.swf" />' +
+    var playerEmbed = '<object id="flowplayer" width="600" height="337" data="http://releases.flowplayer.org/swf/flowplayer-3.2.7.swf" ' +
+    		'type="application/x-shockwave-flash"><param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.7.swf" />' +
     		'<param name="allowfullscreen" value="true" />' +
     		'<param name="flashvars" value=\'config={"clip":{"url":"' + url + '","autoPlay":false}}\' /></object>';
     
@@ -339,7 +339,11 @@ function playVideoInternal( clip )
     
     $( '#playerComments' ).load( 'comments?clipId=' + clip.id );
     
-    $( '#playerPlaylist' ).load( 'myPlaylists?clipId=' + clip.id );    
+    $( '#playerPlaylist' ).load( 'myPlaylists?clipId=' + clip.id );
+    
+    $( '#views' ).html( clip.views + ' visninger' );
+    
+    $.get( 'bumpViews', { id: clip.id } );   
 }
 
 function togglePlayerEmbed()

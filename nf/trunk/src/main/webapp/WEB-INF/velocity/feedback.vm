@@ -61,6 +61,7 @@ $( document ).ready( function()
 <input type="button" value="Spilleliste" onclick="togglePlayerPlaylist()" style="height:27px">
 #end
 <input type="button" value="Endre st&oslash;rrelse" onclick="changeViewMode()" style="height:27px">
+&nbsp;<span id="views"></span>
 </div>
 
 <div id="playerTags" style="display:block"></div>

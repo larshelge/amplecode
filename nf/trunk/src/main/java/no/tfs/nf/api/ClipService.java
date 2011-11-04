@@ -18,4 +18,6 @@ public interface ClipService
     Clip getLatest();
     
     List<Clip> getLatest( int number );
+    
+    boolean bumpViews( int id );
 }

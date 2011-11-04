@@ -145,4 +145,10 @@ public class ClipController
     {
         return new ModelAndView( "clips" ).addObject( "clips", clipService.getLatest( Paging.DEFAULT_PAGE_SIZE ) );
     }
+    
+    @RequestMapping("bumpViews")
+    public @ResponseBody Boolean bumpViews( @RequestParam Integer id )
+    {
+        return clipService.bumpViews( id );
+    }
 }

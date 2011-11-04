@@ -106,4 +106,19 @@ public class DefaultClipService
     {
         return clipDao.getLatest( number );
     }
+
+    @Override
+    public boolean bumpViews( int id )
+    {
+        Clip clip = clipDao.get( id );
+        
+        if ( clip != null )
+        {
+            clip.setViews( clip.getViews() + 1 );
+            
+            clipDao.update( clip );
+        }
+        
+        return clip != null;
+    }
 }

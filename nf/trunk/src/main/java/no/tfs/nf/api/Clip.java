@@ -80,6 +80,8 @@ public class Clip
     
     private Date created;
     
+    private int views;
+    
     public Clip()
     {
     }
@@ -200,6 +202,7 @@ public class Clip
         return categories;
     }
 
+    @JsonIgnore
     public String getCategoryName()
     {
         List<String> names = new ArrayList<String>();
@@ -213,14 +216,16 @@ public class Clip
         
         return categories != null && categories.size() > 0 ? StringUtils.join( names, ", " ) : "-";
     }
-    
+
+    @JsonIgnore
     public String getCategoryName( int length )
     {
         String cName = getCategoryName();
         
         return cName.length() > length ? StringUtils.substring( cName, 0, length - NAME_SUFFIX.length() ) + NAME_SUFFIX : cName;
     }
-    
+
+    @JsonIgnore
     public String getPersonName()
     {
         List<String> names = new ArrayList<String>();
@@ -232,14 +237,16 @@ public class Clip
 
         return persons != null && persons.size() > 0 ? StringUtils.join( names, ", " ) : "-";
     }
-    
+
+    @JsonIgnore
     public String getPersonName( int length )
     {
         String pName = getPersonName();
         
         return pName.length() > length ? StringUtils.substring( pName, 0, length - NAME_SUFFIX.length() ) + NAME_SUFFIX : pName;
     }
-    
+
+    @JsonIgnore
     public String getEventName( int length )
     {
         String eName = event != null && event.getName() != null ? event.getName() : "";
@@ -398,5 +405,15 @@ public class Clip
     public void setCreated( Date created )
     {
         this.created = created;
+    }
+
+    public int getViews()
+    {
+        return views;
+    }
+
+    public void setViews( int views )
+    {
+        this.views = views;
     }
 }
