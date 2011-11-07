@@ -91,6 +91,12 @@ public class DefaultClipService
     {
         return clipDao.getLatest( number );
     }
+    
+    @Override
+    public List<Clip> getByPlaylist( String code )
+    {
+        return clipDao.getByPlaylist( code );
+    }
 
     @Override
     public boolean bumpViews( int id )

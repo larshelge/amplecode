@@ -134,4 +134,15 @@ public class HibernateClipDao
     {
         return getCriteria( Restrictions.eq( "type", Type.REFERENCE ) ).addOrder( Order.desc( "created" ) ).setMaxResults( number ).list();
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Clip> getByPlaylist( String code )
+    {             
+        String sql = "select cl.* from clip cl join clip_playlist cp on cl.id = cp.clip_id join playlist pl on cp.playlists_id = pl.id where pl.code='" + code + "' order by cl.created desc";
+        
+        log.debug( sql );
+        
+        return sessionFactory.getCurrentSession().createSQLQuery( sql ).addEntity( "clip", Clip.class ).list();            
+    }
 }

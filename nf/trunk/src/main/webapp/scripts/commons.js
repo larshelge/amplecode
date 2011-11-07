@@ -84,8 +84,6 @@ function initReferences()
 		}
 	} );
 	
-	$( '#search' ).load( 'latestClips' );
-	
 	$.getJSON( 'latestClipId', function( id ) { 
 		latestClipId = id; 
 	} );
@@ -130,11 +128,22 @@ function initFeedback()
 		}
 	} );
 	
-	$( '#search' ).load( 'latestClips' );
-	
 	$.getJSON( 'latestClipId', function( id ) { 
 		latestClipId = id; 
 	} );
+}
+
+function loadLatestClips()
+{
+	$( '#search' ).load( 'latestClips' );
+}
+
+function loadPlaylist( code )
+{
+	if ( !isEmpty( code ) )
+	{
+		$( '#search' ).load( 'psearch?code=' + code );
+	}
 }
 
 // -----------------------------------------------------------------------------

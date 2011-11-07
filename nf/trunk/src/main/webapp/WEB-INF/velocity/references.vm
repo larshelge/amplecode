@@ -5,9 +5,15 @@
 $( document ).ready( function()
 {
     initReferences();
-        
+    
     #if ( ${code} )
     playVideoByCode( '${code}' );
+    #end
+    
+    #if ( ${playlist} )
+    loadPlaylist( '${code}' );	
+    #else
+    loadLatestClips();
     #end
 } );
 

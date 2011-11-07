@@ -18,4 +18,6 @@ public interface ClipDao
     Clip getLatest();
     
     List<Clip> getLatest( int number );
+    
+    List<Clip> getByPlaylist( String code );
 }

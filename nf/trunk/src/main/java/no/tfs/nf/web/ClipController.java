@@ -13,6 +13,7 @@ import no.tfs.nf.api.DocumentService;
 import no.tfs.nf.api.Type;
 import no.tfs.nf.api.UserService;
 import no.tfs.nf.util.Paging;
+import no.tfs.nf.util.UuidUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,7 +49,9 @@ public class ClipController
     @RequestMapping("/play")
     public ModelAndView play( @RequestParam String code )
     {
-        return new ModelAndView( "references" ).addObject( "code", code );
+        boolean playlist = code != null && code.startsWith( UuidUtils.PREFIX_PLAYLIST );
+        
+        return new ModelAndView( "references" ).addObject( "code", code ).addObject( "playlist", playlist );
     }
 
     @RequestMapping("/rsearch")
@@ -144,5 +147,11 @@ public class ClipController
     public @ResponseBody Boolean bumpViews( @RequestParam Integer id )
     {
         return clipService.bumpViews( id );
+    }
+    
+    @RequestMapping("/psearch")
+    public ModelAndView playlistSearch( @RequestParam String code )
+    {
+        return new ModelAndView( "clips" ).addObject( "clips", clipService.getByPlaylist( code ) );
     }
 }

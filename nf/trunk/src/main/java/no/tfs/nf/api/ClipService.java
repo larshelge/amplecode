@@ -17,5 +17,7 @@ public interface ClipService
     
     List<Clip> getLatest( int number );
     
+    List<Clip> getByPlaylist( String code );
+    
     boolean bumpViews( int id );
 }
