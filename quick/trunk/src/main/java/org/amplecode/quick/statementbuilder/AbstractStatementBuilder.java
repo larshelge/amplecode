@@ -279,7 +279,7 @@ public abstract class AbstractStatementBuilder
         if ( value != null )
         {
             value = value.endsWith( "\\" ) ? value.substring( 0, value.length() - 1 ) : value;
-            value = value.replaceAll( QUOTE, "\\\\" + QUOTE );
+            value = value.replaceAll( QUOTE, QUOTE + QUOTE );
         }
         
         return QUOTE + value + QUOTE;
