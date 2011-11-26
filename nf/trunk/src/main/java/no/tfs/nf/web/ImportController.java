@@ -62,4 +62,12 @@ public class ImportController
         
         return "forward:import";
     }
+    
+    @RequestMapping(value="/debug",method=RequestMethod.POST)
+    public @ResponseBody String debug( @RequestBody String payload )
+    {
+        log.info( payload );
+        
+        return SUCCESS;
+    }
 }
