@@ -42,7 +42,7 @@
 			</xs:complexType>					
 		</xs:element>
 	</xs:sequence>
-	<xs:attribute name="start" type="xs:int" use="required"/>
+	<xs:attribute name="offset" type="xs:int" use="required"/>
 	<xs:attribute name="filename" type="xs:string" use="required"/>
 	<xs:attribute name="team" type="xs:string" use="required"/>
 	<xs:attribute name="event" type="xs:string" use="required"/>
