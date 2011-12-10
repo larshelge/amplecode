@@ -9,6 +9,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -194,6 +195,8 @@ public class DefaultImportService
                 String source = UrlUtils.uploadLocation() + filename;
                 String target = UrlUtils.staticLocation() + filenameMap.get( filename );
                 
+                log.info( "Starting import of file, source: '" + source + ", target: '" + target + "'" );
+                
                 BufferedInputStream in = null;
                 BufferedOutputStream out = null;
                 
@@ -204,7 +207,11 @@ public class DefaultImportService
                     
                     IOUtils.copy( in, out );                    
 
-                    log.info( "Imported file, source: '" + source + ", target: '" + target + "'" );
+                    log.info( "Imported file successfully, source: '" + source + ", target: '" + target + "'" );
+                }
+                catch ( FileNotFoundException ex )
+                {
+                    log.error( "File was not found: " + source );
                 }
                 finally
                 {

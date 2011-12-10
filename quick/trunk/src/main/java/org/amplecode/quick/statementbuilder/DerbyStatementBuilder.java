@@ -115,18 +115,6 @@ public class DerbyStatementBuilder
     // -------------------------------------------------------------------------
 
     @Override
-    protected String encodeString( String value )
-    {
-        if ( value != null )
-        {
-            value = value.endsWith( "\\" ) ? value.substring( 0, value.length() - 1 ) : value;
-            value = value.replaceAll( QUOTE, QUOTE + QUOTE );
-        }
-        
-        return QUOTE + value + QUOTE;
-    }
-
-    @Override
     public String encodeBoolean( Boolean value )
     {
         return value ? "1" : "0";

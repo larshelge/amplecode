@@ -38,7 +38,7 @@ public class ImportController
     }
     
     @RequestMapping(value="/importStream",method=RequestMethod.POST)
-    @Secured({"ROLE_MANAGER"})
+    //@Secured({"ROLE_MANAGER"})
     public @ResponseBody String importStream( @RequestBody Svx svx )
         throws IOException
     {
@@ -61,5 +61,13 @@ public class ImportController
         importService.importFile( new ZipFile( file ) );
         
         return "forward:import";
+    }
+    
+    @RequestMapping(value="/debug",method=RequestMethod.POST)
+    public @ResponseBody String debug( @RequestBody String payload )
+    {
+        log.info( payload );
+        
+        return SUCCESS;
     }
 }

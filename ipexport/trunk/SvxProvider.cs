@@ -11,9 +11,18 @@ namespace IPExport
     ///  
     ///  It is required that three additional tables are present and populated:
     ///  
-    ///  GroupVariablesCode (VariableGroup, VariablePosition, VariableCode)
-    ///  PlayerCode (PlayerIndex, PlayerCode)
-    ///  TeamCode (TeamIndex, TeamCode)
+    ///  == GroupVariablesCode (VariableGroup, VariablePosition, VariableCode) ==
+    ///  VariableGroup: Refers to columns in Variables table, 1 = Starter, 2 = AttackType, 3 = FreeVar, 4 = Chances, 5 = GradeShort. 0 refers to Variables2 table.
+    ///  VariablePosition: Refers to number in respective variable group, eg. FreeVar2 has position 2. VariableGroup 0 refers to RecIndex column in Variables2 table.
+    ///  VariableCode: Refers to the NF unique code.
+    ///  
+    ///  == PlayerCode (PlayerIndex, PlayerCode) ==
+    ///  PlayerIndex: Refers to PlayerIndex column in PlayerArchive table.
+    ///  PlayerCode: Refers to the NF unique code.
+    ///  
+    ///  == TeamCode (TeamIndex, TeamCode) ==
+    ///  TeamIndex: Refers to TeamIndex column in TeamArchive table.
+    ///  TeamCode: Refers to the NF unique code.
     /// </summary>
     class SvxProvider
     {
