@@ -319,7 +319,12 @@ function playVideoInternal( clip )
     		streamserver: {
     			url: 'scripts/flowplayer.pseudostreaming.swf'
     		}
-    	}   	
+    	},
+    	onStart: function() {    		
+    		if ( clip.start ) {    		 
+    			this.seek( clip.start ); 
+    		}
+    	}
     } );
         
     $f( 'player' ).play();

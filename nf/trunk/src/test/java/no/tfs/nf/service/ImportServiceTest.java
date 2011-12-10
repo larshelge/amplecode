@@ -135,7 +135,7 @@ public class ImportServiceTest
         
         Iterator<XClip> clips = svx.getClips().getClip().iterator();
         XClip clip = clips.next();
-        assertEquals( 4, clip.getOffset() );
+        assertEquals( 4, clip.getStart() );
         assertEquals( "barcelona", clip.getTeam() );
         assertEquals( "v101.mp4", clip.getFilename() );
         assertEquals( "1", clip.getEvent() );

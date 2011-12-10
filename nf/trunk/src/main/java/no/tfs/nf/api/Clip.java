@@ -143,7 +143,7 @@ public class Clip
     
     public Clip fromX( XClip c )
     {
-        setStart( c.getOffset() );
+        setStart( c.getStart() );
         setFilename( c.getFilename() );
         return this;
     }

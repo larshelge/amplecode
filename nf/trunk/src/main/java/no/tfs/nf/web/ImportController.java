@@ -38,7 +38,7 @@ public class ImportController
     }
     
     @RequestMapping(value="/importStream",method=RequestMethod.POST)
-    //@Secured({"ROLE_MANAGER"})
+    @Secured({"ROLE_MANAGER"})
     public @ResponseBody String importStream( @RequestBody Svx svx )
         throws IOException
     {
