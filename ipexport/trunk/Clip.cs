@@ -11,7 +11,7 @@ namespace IPExport
     /// </summary>
     class Clip
     {
-        private int offset;
+        private int start;
         private string team;
         private string filename;
         private string event_;
@@ -22,9 +22,9 @@ namespace IPExport
         {
         }
 
-        public Clip(int offset, string team, string filename, string event_)
+        public Clip(int start, string team, string filename, string event_)
         {
-            this.offset = offset;
+            this.start = start;
             this.team = team;
             this.filename = filename;
             this.event_ = event_;
@@ -46,10 +46,10 @@ namespace IPExport
             }
         }
 
-        public int Offset
+        public int Start
         {
-            get { return offset; }
-            set { this.offset = value; }
+            get { return start; }
+            set { this.start = value; }
         }
 
         public string Team
