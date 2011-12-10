@@ -49,7 +49,7 @@ namespace IPExport
             // Using modulus on the values in the variable columns in MatchAnalysis to remove insignificant digits as only the last is relevant
 
             string clipSql =
-                "select MatchAnalyse.RecordFrameStart as offset, TeamCode.TeamCode as team, MatchAnalyse.VideoFileName as filename, " +
+                "select MatchAnalyse.RecordFrameStart as start, TeamCode.TeamCode as team, MatchAnalyse.VideoFileName as filename, " +
                 "PlayerCode.PlayerCode as person, MatchAnalyse.MatchIndex as event, " +
 
                 "(select GroupVariablesCode.VariableCode from GroupVariablesCode " +
@@ -76,7 +76,7 @@ namespace IPExport
             {
                 Clip clip = new Clip();
 
-                clip.Offset = (Convert.ToInt32(clipReader["offset"] != null ? clipReader["offset"] : 0) / ExportConstants.FRAMES_PER_SEC);
+                clip.Start = Math.Abs(Convert.ToInt32(clipReader["start"] != null ? clipReader["start"] : 0) / ExportConstants.FRAMES_PER_SEC);
                 clip.Team = Convert.ToString(clipReader["team"]);
                 clip.Filename = Convert.ToString(clipReader["filename"] != null ? clipReader["filename"] : "").Trim();
                 clip.Event = Convert.ToString(clipReader["event"]);

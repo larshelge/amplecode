@@ -44,7 +44,7 @@ namespace IPExport
             foreach (Clip clip in svx.Clips)
             {
                 writer.WriteStartElement("clip");
-                writer.WriteAttributeString("offset", Convert.ToString( clip.Offset ));
+                writer.WriteAttributeString("start", Convert.ToString( clip.Start ));
                 writer.WriteAttributeString("team", clip.Team);
                 writer.WriteAttributeString("filename", clip.Filename);
                 writer.WriteAttributeString("event", clip.Event);
