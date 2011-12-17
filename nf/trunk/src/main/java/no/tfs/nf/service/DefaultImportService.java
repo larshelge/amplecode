@@ -189,23 +189,27 @@ public class DefaultImportService
                 String source = UrlUtils.uploadLocation() + filename;
                 String target = UrlUtils.staticLocation() + filenameMap.get( filename );
                 
-                log.info( "Starting import of file, source: '" + source + ", target: '" + target + "'" );
+                log.info( "Starting import of file, source: '" + source + "', target: '" + target + "'" );
                 
                 BufferedInputStream in = null;
                 BufferedOutputStream out = null;
                 
                 try
                 {
-                    in = new BufferedInputStream( new FileInputStream( source ) );
+                    try
+                    {
+                        in = new BufferedInputStream( new FileInputStream( source ) );
+                    }
+                    catch ( FileNotFoundException ex )
+                    {
+                        log.error( "File was not found: '" + source + "'" );
+                    }
+                    
                     out = new BufferedOutputStream( new FileOutputStream( target ) );
                     
                     IOUtils.copy( in, out );                    
 
-                    log.info( "Imported file successfully, source: '" + source + ", target: '" + target + "'" );
-                }
-                catch ( FileNotFoundException ex )
-                {
-                    log.error( "File was not found: " + source );
+                    log.info( "Imported file successfully, source: '" + source + "', target: '" + target + "'" );
                 }
                 finally
                 {
