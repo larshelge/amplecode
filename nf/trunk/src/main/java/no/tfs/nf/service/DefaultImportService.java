@@ -156,7 +156,7 @@ public class DefaultImportService
         for ( XClip c : svx.getClips().getClip() )
         {
             Clip clip = new Clip().fromX( c );
-            clip.setType( Type.REFERENCE );
+            clip.setType( Type.FEEDBACK );
             clip.setTeam( teamService.getByCode( c.getTeam() ) );
             clip.setEvent( eventMap.get( c.getEvent() ) );
             clip.setFilename( filenameMap.get( c.getFilename() ) );
