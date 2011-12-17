@@ -41,7 +41,8 @@ namespace IPExport
                 event_.HomeTeam = Convert.ToString(eventReader["homeTeam"]);
                 event_.AwayTeam = Convert.ToString(eventReader["awayTeam"]);
 
-                svx.addEvent(event_);
+                svx.Event = event_;
+                continue;
             }
 
             // Loading Clips / MatchAnalyse
@@ -50,7 +51,7 @@ namespace IPExport
 
             string clipSql =
                 "select MatchAnalyse.RecordFrameStart as start, TeamCode.TeamCode as team, MatchAnalyse.VideoFileName as filename, " +
-                "PlayerCode.PlayerCode as person, MatchAnalyse.MatchIndex as event, " +
+                "PlayerCode.PlayerCode as person, " +
 
                 "(select GroupVariablesCode.VariableCode from GroupVariablesCode " +
                 "where GroupVariablesCode.VariableGroup=1 and (MatchAnalyse.PlayStart mod 10)=GroupVariablesCode.VariablePosition) as playStart, " +
@@ -82,7 +83,6 @@ namespace IPExport
                 clip.Start = Math.Abs(Convert.ToInt32(clipReader["start"] != null ? clipReader["start"] : 0) / ExportConstants.FRAMES_PER_SEC);
                 clip.Team = Convert.ToString(clipReader["team"]);
                 clip.Filename = Convert.ToString(clipReader["filename"] != null ? clipReader["filename"] : "").Trim();
-                clip.Event = Convert.ToString(clipReader["event"]);
 
                 clip.addCategory(Convert.ToString(clipReader["playStart"]));
                 clip.addCategory(Convert.ToString(clipReader["playPhase"]));

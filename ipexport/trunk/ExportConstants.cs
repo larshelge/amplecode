@@ -10,11 +10,11 @@ namespace IPExport
     /// </summary>
     class ExportConstants
     {
-        public static string SERVER_BASE_URL = "fotballab.no"; // Production network
+        //public static string SERVER_BASE_URL = "fotballab.no"; // Production network
         //public static string SERVER_BASE_URL = "178.79.133.34"; // Test server
-        //public static string SERVER_BASE_URL = "192.168.0.194"; // Local network
+        public static string SERVER_BASE_URL = "192.168.0.194"; // Local network
 
-        public static string UPLOAD_URL = "http://" + SERVER_BASE_URL + "/importStream"; // :8080/nf
+        public static string UPLOAD_URL = "http://" + SERVER_BASE_URL + ":8080/nf/importStream"; // Change
         public static string UPLOAD_TARGET = "interplay@" + SERVER_BASE_URL + ":upload";
 
         public static string DEBUG_FILENAME = "ipsys_export.xml";

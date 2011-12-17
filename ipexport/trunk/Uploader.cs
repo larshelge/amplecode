@@ -59,6 +59,9 @@ namespace IPExport
                 stream.Write(bytes, 0, bytes.Length);
                 stream.Close();
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                Console.WriteLine("Sent SXV, status: " + response.StatusDescription + ", code: " + response.StatusCode);
+
                 return response.StatusDescription;
             }
             catch (WebException ex)
