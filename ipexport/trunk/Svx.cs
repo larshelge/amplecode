@@ -10,22 +10,17 @@ namespace IPExport
     /// </summary>
     class Svx
     {
-        private List<Event> events = new List<Event>();
+        private Event event_ = null;
         private List<Clip> clips = new List<Clip>();
 
         public Svx()
         {
         }
 
-        public Svx(List<Event> events, List<Clip> clips)
+        public Svx(Event event_, List<Clip> clips)
         {
-            this.events = events;
+            this.event_ = event_;
             this.clips = clips;
-        }
-
-        public void addEvent(Event event_)
-        {
-            this.events.Add(event_);
         }
 
         public void addClip(Clip clip)
@@ -33,10 +28,10 @@ namespace IPExport
             this.clips.Add(clip);
         }
 
-        public List<Event> Events
+        public Event Event
         {
-            get { return events; }
-            set { this.events = value; }
+            get { return event_; }
+            set { this.event_ = value; }
         }
 
         public List<Clip> Clips

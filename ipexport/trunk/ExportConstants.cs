@@ -10,9 +10,11 @@ namespace IPExport
     /// </summary>
     class ExportConstants
     {
-        //public static string SERVER_BASE_URL = "192.168.0.194"; // Local network
-        public static string SERVER_BASE_URL = "178.79.133.34"; // Change
-        public static string UPLOAD_URL = "http://" + SERVER_BASE_URL + "/importStream"; // Change
+        //public static string SERVER_BASE_URL = "fotballab.no"; // Production network
+        //public static string SERVER_BASE_URL = "178.79.133.34"; // Test server
+        public static string SERVER_BASE_URL = "192.168.0.194"; // Local network
+
+        public static string UPLOAD_URL = "http://" + SERVER_BASE_URL + ":8080/nf/importStream"; // Change
         public static string UPLOAD_TARGET = "interplay@" + SERVER_BASE_URL + ":upload";
 
         public static string DEBUG_FILENAME = "ipsys_export.xml";
@@ -26,6 +28,7 @@ namespace IPExport
         public static string DATE_FORMAT = "yyyy-MM-dd";
         public static int FRAMES_PER_SEC = 25;
         public static string SCP_EXE = "pscp.exe";
+        public static string VIDEO_DIR = "video\\";
         public static string VIDEO_PATTERN = "*.mp4";
 
         public static int RESULT_SUCCESS = 0;

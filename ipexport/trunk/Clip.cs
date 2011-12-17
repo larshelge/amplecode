@@ -14,7 +14,6 @@ namespace IPExport
         private int start;
         private string team;
         private string filename;
-        private string event_;
         private List<string> categories = new List<string>();
         private List<string> persons = new List<string>();
 
@@ -22,12 +21,11 @@ namespace IPExport
         {
         }
 
-        public Clip(int start, string team, string filename, string event_)
+        public Clip(int start, string team, string filename)
         {
             this.start = start;
             this.team = team;
             this.filename = filename;
-            this.event_ = event_;
         }
 
         public void addCategory(string category)
@@ -62,12 +60,6 @@ namespace IPExport
         {
             get { return filename; }
             set { this.filename = value; }
-        }
-
-        public string Event
-        {
-            get { return event_; }
-            set { this.event_ = value; }
         }
 
         public List<string> Categories

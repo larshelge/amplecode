@@ -25,19 +25,18 @@ namespace IPExport
             writer.WriteAttributeString("xmlns:xsi", ExportConstants.XSI);
             writer.WriteAttributeString("xsi:schemaLocation", ExportConstants.XSI_LOCATION);
 
-            writer.WriteStartElement("events");
+            // Event
 
-            foreach (Event event_ in svx.Events)
-            {
-                writer.WriteStartElement("event");
-                writer.WriteAttributeString("date", event_.Date);
-                writer.WriteAttributeString("location", event_.Location);
-                writer.WriteAttributeString("homeTeam", event_.HomeTeam);
-                writer.WriteAttributeString("awayTeam", event_.AwayTeam);
-                writer.WriteEndElement();
-            }
+            Event event_ = svx.Event;
 
+            writer.WriteStartElement("event");
+            writer.WriteAttributeString("date", event_.Date);
+            writer.WriteAttributeString("location", event_.Location);
+            writer.WriteAttributeString("homeTeam", event_.HomeTeam);
+            writer.WriteAttributeString("awayTeam", event_.AwayTeam);
             writer.WriteEndElement();
+
+            // Clips
 
             writer.WriteStartElement("clips");
 
@@ -47,7 +46,6 @@ namespace IPExport
                 writer.WriteAttributeString("start", Convert.ToString( clip.Start ));
                 writer.WriteAttributeString("team", clip.Team);
                 writer.WriteAttributeString("filename", clip.Filename);
-                writer.WriteAttributeString("event", clip.Event);
 
                 if (clip.Categories != null && clip.Categories.Count > 0)
                 {
