@@ -16,7 +16,6 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -136,29 +135,24 @@ public class DefaultImportService
      */
     private void importData( Svx svx, Map<String, String> filenameMap )
     {
-        Map<String, Event> eventMap = new HashMap<String, Event>();
+        XEvent e = svx.getEvent();
         
-        for ( XEvent e : svx.getEvents().getEvent() )
-        {
-            Event event = new Event().fromX( e );
-            event.setHomeTeam( teamService.getByCode( e.getHomeTeam() ) );
-            event.setAwayTeam( teamService.getByCode( e.getAwayTeam() ) );
-            event.setCode( UUID.randomUUID().toString() );
-            event.setLogicalName();
-            eventService.save( event );
-            eventMap.put( event.getCode(), event );
-            
-            log.info( "Imported event " + event );
-        }
+        Event event = new Event().fromX( e );
+        event.setHomeTeam( teamService.getByCode( e.getHomeTeam() ) );
+        event.setAwayTeam( teamService.getByCode( e.getAwayTeam() ) );
+        event.setCode( UuidUtils.getEventUuid() );
+        event.setLogicalName();
+        
+        eventService.save( event );
+        
+        log.info( "Imported event " + event );
 
-        log.info( "Imported events" );
-        
         for ( XClip c : svx.getClips().getClip() )
         {
             Clip clip = new Clip().fromX( c );
             clip.setType( Type.FEEDBACK );
             clip.setTeam( teamService.getByCode( c.getTeam() ) );
-            clip.setEvent( eventMap.get( c.getEvent() ) );
+            clip.setEvent( event );
             clip.setFilename( filenameMap.get( c.getFilename() ) );
             
             if ( c.getCategories() != null && c.getCategories().getCategory() != null )

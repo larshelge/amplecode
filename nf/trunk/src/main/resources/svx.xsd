@@ -52,6 +52,8 @@
 	<xs:complexType>
 		<xs:sequence>
 			
+			<!-- Meta-data part -->
+			
 			<!-- Category -->
 			
 			<xs:element name="categories" minOccurs="0" maxOccurs="1">
@@ -91,6 +93,12 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			
+			<!-- Data part -->
+			
+			<!-- Event -->
+			
+			<xs:element name="event" minOccurs="0" maxOccurs="1" type="XEvent"/>
 			
 			<!-- Clips -->
 			
