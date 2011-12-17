@@ -11,18 +11,9 @@ namespace IPExport
     ///  
     ///  It is required that three additional tables are present and populated:
     ///  
-    ///  == GroupVariablesCode (VariableGroup, VariablePosition, VariableCode) ==
-    ///  VariableGroup: Refers to columns in Variables table, 1 = Starter, 2 = AttackType, 3 = FreeVar, 4 = Chances, 5 = GradeShort. 0 refers to Variables2 table.
-    ///  VariablePosition: Refers to number in respective variable group, eg. FreeVar2 has position 2. VariableGroup 0 refers to RecIndex column in Variables2 table.
-    ///  VariableCode: Refers to the NF unique code.
-    ///  
-    ///  == PlayerCode (PlayerIndex, PlayerCode) ==
-    ///  PlayerIndex: Refers to PlayerIndex column in PlayerArchive table.
-    ///  PlayerCode: Refers to the NF unique code.
-    ///  
-    ///  == TeamCode (TeamIndex, TeamCode) ==
-    ///  TeamIndex: Refers to TeamIndex column in TeamArchive table.
-    ///  TeamCode: Refers to the NF unique code.
+    ///  GroupVariablesCode (VariableGroup, VariablePosition, VariableCode)
+    ///  PlayerCode (PlayerIndex, PlayerCode)
+    ///  TeamCode (TeamIndex, TeamCode)
     /// </summary>
     class SvxProvider
     {
@@ -65,6 +56,9 @@ namespace IPExport
                 "where GroupVariablesCode.VariableGroup=1 and (MatchAnalyse.PlayStart mod 10)=GroupVariablesCode.VariablePosition) as playStart, " +
 
                 "(select GroupVariablesCode.VariableCode from GroupVariablesCode " +
+                "where GroupVariablesCode.VariableGroup=2 and (MatchAnalyse.PlayPhase mod 10)=GroupVariablesCode.VariablePosition) as playPhase, " +
+
+                "(select GroupVariablesCode.VariableCode from GroupVariablesCode " +
                 "where GroupVariablesCode.VariableGroup=3 and (MatchAnalyse.MVar1 mod 10)=GroupVariablesCode.VariablePosition) as freeVar, " +
 
                 "(select GroupVariablesCode.VariableCode from GroupVariablesCode " +
@@ -91,6 +85,7 @@ namespace IPExport
                 clip.Event = Convert.ToString(clipReader["event"]);
 
                 clip.addCategory(Convert.ToString(clipReader["playStart"]));
+                clip.addCategory(Convert.ToString(clipReader["playPhase"]));
                 clip.addCategory(Convert.ToString(clipReader["freeVar"]));
                 clip.addCategory(Convert.ToString(clipReader["freeVar2"]));
                 clip.addCategory(Convert.ToString(clipReader["chance"]));
