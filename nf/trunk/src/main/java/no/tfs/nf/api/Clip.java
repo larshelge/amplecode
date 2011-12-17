@@ -174,13 +174,19 @@ public class Clip
     
     public void addCategory( Category category )
     {
-        ClipCategory clipCategory = new ClipCategory( category, 1 );
-        this.clipCategories.add( clipCategory );
+        if ( category != null )
+        {
+            ClipCategory clipCategory = new ClipCategory( category, 1 );
+            this.clipCategories.add( clipCategory );
+        }
     }
     
     public void addPerson( Person person )
     {
-        this.persons.add( person );
+        if ( person != null )
+        {
+            this.persons.add( person );
+        }
     }
     
     /**
