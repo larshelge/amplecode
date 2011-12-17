@@ -18,12 +18,17 @@ namespace IPExport
         public bool upload(string username, string password)
         {
             Process upload = null;
-            string args = "-pw " + password + " " + ExportUtils.getExecutableDir() + ExportConstants.VIDEO_PATTERN + " " + ExportConstants.UPLOAD_TARGET;
-            
+            string videoDir = "\"" + ExportUtils.getExecutableDir() + ExportConstants.VIDEO_DIR + ExportConstants.VIDEO_PATTERN + "\"";
+
+            string args = "-pw " + password + " " + videoDir + " " + ExportConstants.UPLOAD_TARGET;
+
+            Console.WriteLine("Upload arguments: " + args);
+
             try
             {
                 upload = Process.Start(ExportConstants.SCP_EXE, args);
                 upload.WaitForExit();
+
                 return true;
             }
             catch (Exception ex)
@@ -33,7 +38,8 @@ namespace IPExport
                     upload.Close();
                 }
 
-                throw new Exception("Failed to upload", ex);
+                Console.WriteLine("Exception while uploading, message: " + ex.Message + ", data: " + ex.Data + ", trace: " + ex.StackTrace);
+                throw ex;
             }
         }
 
@@ -48,6 +54,7 @@ namespace IPExport
                 request.Method = ExportConstants.UPLOAD_METHOD;
                 request.ContentLength = bytes.Length;
                 request.Headers.Add("Authorization", authHeaderValue); // Requires user to be present on server
+
                 Stream stream = request.GetRequestStream();
                 stream.Write(bytes, 0, bytes.Length);
                 stream.Close();
@@ -56,7 +63,7 @@ namespace IPExport
             }
             catch (WebException ex)
             {
-                Console.WriteLine("Exception while uploading: " + ex.StackTrace);
+                Console.WriteLine("Exception while uploading, status: " + ex.Status + ", response: " + ex.Response + ", trace: " + ex.StackTrace);
                 throw ex;
             }
         }
