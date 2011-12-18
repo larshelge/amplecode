@@ -59,7 +59,7 @@ public class ClipController
     {
         int currentPage = page == null ? 1 : page;
         
-        ModelAndView mav = new ModelAndView( "clips" ).addObject( "query", query );
+        ModelAndView mav = new ModelAndView( "clips" ).addObject( "query", query ).addObject( "type", queryType );
 
         query = trimToNull( query );
         
