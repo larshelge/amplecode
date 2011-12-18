@@ -204,16 +204,6 @@ function searchQuery( query )
 	}
 }
 
-function searchPagedQuery( query, queryType, page )
-{
-	if ( !isEmpty( query ) )
-	{
-		$.postUTF8( 'rsearch', { "query":query, "queryType":queryType, "page":page }, function( data ) {
-			$( '#search' ).html( data );
-		} );
-	}
-}
-
 function searchHierarchy( id )
 {
 	var url = 'hsearch?id=' + id;
@@ -234,17 +224,37 @@ function searchReferences()
 	}
 }
 
+function searchPagedReferences( query, queryType, page )
+{
+	if ( !isEmpty( query ) && !isEmpty( page ) )
+	{
+		$.postUTF8( 'rsearch', { "query":query, "queryType":queryType, "page":page }, function( data ) {
+			$( '#search' ).html( data );
+		} );
+	}
+}
+
 function searchFeedback()
 {
-	var eventteam = $( '#eventteam' ).val();	
+	var eventTeam = $( '#eventteam' ).val();	
 	var person = $( '#person' ).val();	
 	var category = $( '#category' ).val();
 	var playlist = $( '#playlist' ).val();
 	
-	if ( !isEmpty( eventteam ) || !isEmpty( person ) || !isEmpty( category ) || !isEmpty( playlist ) )
+	if ( !isEmpty( eventTeam ) || !isEmpty( person ) || !isEmpty( category ) || !isEmpty( playlist ) )
 	{
-		$.postUTF8( 'fsearch', { "eventteam":eventteam, "person":person, "category":category, "playlist":playlist }, function( data ) {
-			 $( 'div#search' ).html( data );
+		$.postUTF8( 'fsearch', { "eventteam":eventTeam, "person":person, "category":category, "playlist":playlist }, function( data ) {
+			 $( '#search' ).html( data );
+		} );
+	}
+}
+
+function searchPagedFeedback( eventTeam, person, category, playlist, page )
+{
+	if ( !isEmpty( page ) )
+	{
+		$.postUTF8( 'fsearch', { "eventteam":eventTeam, "person":person, "category":category, "playlist":playlist, "page":page }, function( data ) {
+			 $( '#search' ).html( data );
 		} );
 	}
 }

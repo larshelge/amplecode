@@ -3,21 +3,33 @@
 <div class="paging">
 
 #if( $paging.previous )
-<a href="javascript:searchPagedQuery( '${query}', '${type}', '${paging.previousPage}' )">Forrige</a> 
+  #if ( ${searchType} == "references" )
+  <a href="javascript:searchPagedReferences( '${query}', '${type}', '${paging.previousPage}' )">Forrige</a> 
+  #else
+  <a href="javascript:searchPagedFeedback( '${eventTeam}', '${person}', '${category}', '${playlist}', '${paging.previousPage}' )">Forrige</a>
+  #end
 #else
 <label>Forrige</label>
 #end
 
 #foreach( $p in [${paging.startPage}..${paging.endPage}] )
 #if( $p != $paging.currentPage )
-<a href="javascript:searchPagedQuery( '${query}', '${type}', '${p}' )">${p}</a>
+  #if ( ${searchType} == "references" )
+  <a href="javascript:searchPagedReferences( '${query}', '${type}', '${p}' )">${p}</a>
+  #else
+  <a href="javascript:searchPagedFeedback( '${eventTeam}', '${person}', '${category}', '${playlist}', '${p}' )">${p}</a>
+  #end
 #else
 ${p}
 #end
 #end
 
 #if( $paging.next )
-<a href="javascript:searchPagedQuery( '${query}', '${type}', '${paging.nextPage}' )">Neste</a> 
+  #if ( ${searchType} == "references" )
+  <a href="javascript:searchPagedReferences( '${query}', '${type}', '${paging.nextPage}' )">Neste</a>
+  #else
+  <a href="javascript:searchPagedFeedback( '${eventTeam}', '${person}', '${category}', '${playlist}', '${paging.nextPage}' )">Neste</a>
+  #end
 #else
 <label>Neste</label>
 #end

@@ -28,6 +28,9 @@ public class ClipController
     private final static String TYPE_VIDEO = "video";
     private final static String TYPE_DOCUMENT = "document";
     
+    private final static String SEARCH_TYPE_REFERENCES = "references";
+    private final static String SEARCH_TYPE_FEEDBACK = "feedback";
+    
     @Autowired
     private ClipService clipService;
 
@@ -59,7 +62,9 @@ public class ClipController
     {
         int currentPage = page == null ? 1 : page;
         
-        ModelAndView mav = new ModelAndView( "clips" ).addObject( "query", query ).addObject( "type", queryType );
+        ModelAndView mav = new ModelAndView( "clips" ).
+            addObject( "searchType", SEARCH_TYPE_REFERENCES ).
+            addObject( "query", query );
 
         query = trimToNull( query );
         
@@ -93,9 +98,17 @@ public class ClipController
         @RequestParam(value="eventteam",required=false) String eventTeam,
         @RequestParam(value="person",required=false) String person,
         @RequestParam(value="category",required=false) String category,
-        @RequestParam(value="playlist",required=false) String playlist )
+        @RequestParam(value="playlist",required=false) String playlist,
+        @RequestParam(required=false) Integer page )
     {
-        ModelAndView mav = new ModelAndView( "clips" );
+        int currentPage = page == null ? 1 : page;
+        
+        ModelAndView mav = new ModelAndView( "clips" ).
+            addObject( "searchType", SEARCH_TYPE_FEEDBACK ).
+            addObject( "eventTeam", eventTeam ).
+            addObject( "person", person ).
+            addObject( "category", category ).
+            addObject( "playlist", playlist );
 
         eventTeam = trimToNull( eventTeam );
         category = trimToNull( category );
@@ -104,7 +117,12 @@ public class ClipController
         
         if ( !( category == null && eventTeam == null && person == null && playlist == null ) )
         {
-            mav.addObject( "clips", clipService.get( category, eventTeam, person, playlist ) );
+            List<Clip> clips = clipService.get( category, eventTeam, person, playlist );
+            
+            Paging paging = new Paging( currentPage, clips.size() );
+            
+            mav.addObject( "clips", clips.subList( paging.getStartPos(), paging.getEndPos() ) );
+            mav.addObject( "paging", paging );
         }
         
         return mav;
