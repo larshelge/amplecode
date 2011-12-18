@@ -41,7 +41,7 @@ $( document ).ready( function() {
 #set( $editable = true )
 #set( $length = 33 )
 #else
-#set( $editoable = false )
+#set( $editable = false )
 #set( $length = 38 )
 #end
 
