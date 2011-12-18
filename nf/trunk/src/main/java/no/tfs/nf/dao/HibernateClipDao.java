@@ -78,15 +78,13 @@ public class HibernateClipDao
         
         sql += " from clip cl left join team t on cl.team_id = t.id";
         
-        int first = 0;
+        sql += " where cl.type = '" + type.name() + "'";
         
         for ( String s : qSplit )
         {
-            String clause = first++ == 0 ? " where" : " and";
-            
             s = s.trim().toLowerCase();
             
-            sql += clause + " ( lower(t.name) = '" + s + "' or" +
+            sql += " and ( lower(t.name) = '" + s + "' or" +
                 " exists( select c.name from category c, clipcategory cc where c.id = cc.category_id and cc.clip_id = cl.id and lower(c.name) = '" + s + "' ) or" +
                 " exists( select pe.name from person pe, clip_person cp where pe.id = cp.persons_id and cp.clip_id = cl.id and lower(pe.name) = '" + s + "' ) )";
         }
