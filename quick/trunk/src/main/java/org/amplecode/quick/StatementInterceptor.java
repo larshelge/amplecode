@@ -63,7 +63,7 @@ public class StatementInterceptor
         {
             manager.initialise();
             
-            log.debug( "Initialised statement manager" );
+            log.error( "Initialised statement manager" );
         }
         
         try
