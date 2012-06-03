@@ -19,7 +19,7 @@
   
   <organization>
     <name>AmpleCode</name>
-    <url>http://amplecode.org</url>
+    <url>https://github.com/larshelge/amplecode</url>
   </organization>
   
   <developers>
@@ -63,9 +63,9 @@
   
   <distributionManagement>
     <repository>
-      <id>amplecode_maven2_repo</id>
-      <name>AmpleCode Maven 2 repository</name>
-      <url>scp://login.amplecode.org/var/www/amplecode/maven2</url>
+        <id>dhis2-amplecode-repo</id>
+        <name>DHIS 2 Amplecode Maven Repository</name>
+        <url>http://maven.dhis2.org/amplecode-local</url>
     </repository>
   </distributionManagement>
   
@@ -77,16 +77,6 @@
         <configuration>
           <source>1.5</source>
           <target>1.5</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration>
-          <links>
-            <link>http://java.sun.com/j2se/1.5.0/docs/api</link>
-            <link>http://static.springframework.org/spring/docs/2.0.x/api</link>
-          </links>
         </configuration>
       </plugin>
     </plugins>
