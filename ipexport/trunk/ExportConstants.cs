@@ -14,7 +14,7 @@ namespace IPExport
         //public static string SERVER_BASE_URL = "178.79.133.34"; // Test server
         public static string SERVER_BASE_URL = "192.168.0.194"; // Local network
 
-        public static string UPLOAD_URL = "http://" + SERVER_BASE_URL + ":8080/nf/importStream"; // Change
+        public static string UPLOAD_URL = "http://" + SERVER_BASE_URL + ":8085/nf/importStream"; // Change
         public static string UPLOAD_TARGET = "interplay@" + SERVER_BASE_URL + ":upload";
 
         public static string DEBUG_FILENAME = "ipsys_export.xml";
@@ -38,7 +38,7 @@ namespace IPExport
         public static string SERVER_USER = "interplay";
         public static string SERVER_PWD = "ip4321"; // TODO avoid storing passwords in clear text
         public static string APP_USER = "interplay@interplay.com";
-        public static string APP_PWD = "interplay";
+        public static string APP_PWD = "ip4321sports";
 
     }
 }
