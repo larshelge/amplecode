@@ -31,6 +31,8 @@ package org.amplecode.staxwax.writer;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.amplecode.staxwax.XMLException;
+
 /**
  * @author Lars Helge Overland
  * @version $Id: DefaultXMLStreamWriter.java 153 2009-11-02 14:18:49Z larshelg $
@@ -61,7 +63,7 @@ public class DefaultXMLStreamWriter
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to open document", ex );
+            throw new XMLException( "Failed to open document", ex );
         }        
     }
 
@@ -73,7 +75,7 @@ public class DefaultXMLStreamWriter
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to open element: " + name , ex );
+            throw new XMLException( "Failed to open element: " + name , ex );
         }
     }
     
@@ -93,7 +95,7 @@ public class DefaultXMLStreamWriter
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to open element: " + name, ex );
+            throw new XMLException( "Failed to open element: " + name, ex );
         }
     }
     
@@ -109,7 +111,7 @@ public class DefaultXMLStreamWriter
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to write element: " + name + ", value: " + value, ex );
+            throw new XMLException( "Failed to write element: " + name + ", value: " + value, ex );
         }
     }
     
@@ -133,7 +135,7 @@ public class DefaultXMLStreamWriter
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to write element: " + name + ", value: " + value, ex );
+            throw new XMLException( "Failed to write element: " + name + ", value: " + value, ex );
         }
     }
     
@@ -145,7 +147,7 @@ public class DefaultXMLStreamWriter
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to write characters: " + characters, ex );
+            throw new XMLException( "Failed to write characters: " + characters, ex );
         }
     }
     
@@ -157,7 +159,7 @@ public class DefaultXMLStreamWriter
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to write CData: " + cData, ex );
+            throw new XMLException( "Failed to write CData: " + cData, ex );
         }
     }
 
@@ -174,7 +176,7 @@ public class DefaultXMLStreamWriter
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to close element", ex );
+            throw new XMLException( "Failed to close element", ex );
         }
     }
     
@@ -190,7 +192,7 @@ public class DefaultXMLStreamWriter
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to close document", ex );
+            throw new XMLException( "Failed to close document", ex );
         }
     }
     
@@ -211,7 +213,7 @@ public class DefaultXMLStreamWriter
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to close writer", ex );
+            throw new XMLException( "Failed to close writer", ex );
         }       
     }
 
@@ -228,7 +230,7 @@ public class DefaultXMLStreamWriter
     {
         if ( string == null )
         {
-            throw new RuntimeException( "XML element or attribute can not be null" );
+            throw new XMLException( "XML element or attribute can not be null" );
         }
         
         return string;

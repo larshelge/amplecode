@@ -37,6 +37,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.amplecode.staxwax.XMLException;
 import org.amplecode.staxwax.factory.XMLFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -196,7 +197,7 @@ public class XMLWriterTest
         }
         catch ( Exception expected )
         {
-            assertEquals( expected.getClass(), RuntimeException.class );
+            assertEquals( expected.getClass(), XMLException.class );
         }
 
         try
@@ -207,7 +208,7 @@ public class XMLWriterTest
         }
         catch ( Exception expected )
         {
-            assertEquals( expected.getClass(), RuntimeException.class );
+            assertEquals( expected.getClass(), XMLException.class );
         }
         
         try
@@ -218,7 +219,7 @@ public class XMLWriterTest
         }
         catch ( Exception expected )
         {
-            assertEquals( expected.getClass(), RuntimeException.class );
+            assertEquals( expected.getClass(), XMLException.class );
         }
         
         try

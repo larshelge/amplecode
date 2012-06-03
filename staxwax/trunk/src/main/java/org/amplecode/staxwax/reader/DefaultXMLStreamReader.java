@@ -40,6 +40,7 @@ import java.util.Map;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import org.amplecode.staxwax.XMLException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -88,7 +89,7 @@ public class DefaultXMLStreamReader
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to get element value", ex );
+            throw new XMLException( "Failed to get element value", ex );
         }
     }
 
@@ -106,7 +107,7 @@ public class DefaultXMLStreamReader
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to move to start element", ex );
+            throw new XMLException( "Failed to move to start element", ex );
         }
     }
 
@@ -131,7 +132,7 @@ public class DefaultXMLStreamReader
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to move to start element", ex );
+            throw new XMLException( "Failed to move to start element", ex );
         }
     }
     
@@ -153,7 +154,7 @@ public class DefaultXMLStreamReader
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to move cursor to next element", ex );
+            throw new XMLException( "Failed to move cursor to next element", ex );
         }
     }
     
@@ -165,7 +166,7 @@ public class DefaultXMLStreamReader
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to move cursor to next element", ex );
+            throw new XMLException( "Failed to move cursor to next element", ex );
         }
     }
     
@@ -221,7 +222,7 @@ public class DefaultXMLStreamReader
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to read elements", ex );
+            throw new XMLException( "Failed to read elements", ex );
         }
     }
     
@@ -267,7 +268,7 @@ public class DefaultXMLStreamReader
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to read elements", ex );
+            throw new XMLException( "Failed to read elements", ex );
         }
     }
     
@@ -279,7 +280,7 @@ public class DefaultXMLStreamReader
         }
         catch ( XMLStreamException ex )
         {
-            throw new RuntimeException( "Failed to close reader", ex );
+            throw new XMLException( "Failed to close reader", ex );
         }
     }
 }
