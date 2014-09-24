@@ -135,9 +135,17 @@ public interface StatementBuilder
      * Creates an update SQL statement. Requires that the table name, identifier 
      * columns / values and columns / values are set.
      * 
-     * @return and update SQL statement.
+     * @return an update SQL statement.
      */
     String getUpdateStatement();
+    
+    /**
+     * Creates a delet SQL statement. Requires that table name and identifier
+     * columns/ values are set.
+     * 
+     * @return a delete SQL statement.
+     */
+    String getDeleteStatement();
 
     /**
      * Creates a select SQL statement. Requires that the table name and unique 

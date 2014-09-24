@@ -178,6 +178,26 @@ public abstract class AbstractStatementBuilder
         return buffer.toString();
     }
 
+    public String getDeleteStatement()
+    {
+        final StringBuffer buffer = new StringBuffer().
+            append( "DELETE FROM " ).append( tableName ).append( " WHERE " );
+        
+        for ( int i = 0; i < identifierColums.size(); i++ )
+        {
+            buffer.append( identifierColums.get( i ) + "=" + identifierValues.get( i ) );
+            
+            if ( i + 1 < identifierColums.size() )
+            {
+                buffer.append( " AND " );
+            }
+        }
+        
+        identifierValues.clear();
+        
+        return buffer.toString();            
+    }
+    
     public String getUniquenessStatement( boolean inclusive )
     {
         final String operator = inclusive ? " AND " : " OR ";

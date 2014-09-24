@@ -235,6 +235,28 @@ public abstract class AbstractBatchHandler<T>
             throw new RuntimeException( "Failed to update object", ex );
         }
     }
+    
+    public final void deleteObject( T object )
+    {
+        setIdentifierValues( object );
+        
+        final String sql = statementBuilder.getDeleteStatement();
+        
+        log.debug( "Delete SQL: " + sql );
+        
+        try
+        {
+            statement.executeUpdate( sql );
+        }
+        catch ( SQLException ex )
+        {
+            log.info( "Delete SQL: " + sql );
+
+            close();
+            
+            throw new RuntimeException( "Failed to delete object", ex );
+        }
+    }
 
     public final boolean objectExists( T object )
     {        

@@ -84,6 +84,13 @@ public interface BatchHandler<T>
     void updateObject( T object );
     
     /**
+     * Deletes an object.
+     * 
+     * @param object the object to delete.
+     */
+    void deleteObject( T object );
+    
+    /**
      * Checks whether this object exists in the database or not.
      * 
      * @param object the object to check.
