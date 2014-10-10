@@ -137,11 +137,6 @@ public interface XMLReader
     XMLStreamReader getXmlStreamReader();
     
     /**
-     * Logs all events which occurs while parsing the document for debugging purposes.
-     */
-    void dryRun();
-    
-    /**
      * Closes the underlying reader.
      */
     void closeReader();

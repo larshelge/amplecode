@@ -39,8 +39,6 @@ import javax.xml.stream.XMLStreamWriter;
 
 import org.amplecode.staxwax.reader.DefaultXMLStreamReader;
 import org.amplecode.staxwax.reader.XMLReader;
-import org.amplecode.staxwax.writer.DefaultIndentingXMLStreamWriter;
-import org.amplecode.staxwax.writer.DefaultLineBreakingXMLStreamWriter;
 import org.amplecode.staxwax.writer.DefaultXMLStreamWriter;
 import org.amplecode.staxwax.writer.XMLWriter;
 
@@ -58,8 +56,7 @@ import com.ctc.wstx.stax.WstxOutputFactory;
 public class XMLFactory
 {
     /**
-     * Creates an XMLWriter from a StAX-based XMLStreamWriter. The generated XML
-     * will be indented.
+     * Creates an XMLWriter from a StAX-based XMLStreamWriter.
      * 
      * @param outputStream the OutputStream to write to.
      * @return an XMLWriter.
@@ -72,45 +69,14 @@ public class XMLFactory
             
             XMLStreamWriter streamWriter = factory.createXMLStreamWriter( outputStream );
 
-            XMLWriter xmlWriter = new DefaultXMLStreamWriter( streamWriter );
-
-            XMLWriter indentingWriter = new DefaultIndentingXMLStreamWriter( xmlWriter );
-                
-            return indentingWriter;
+            return new DefaultXMLStreamWriter( streamWriter );
         }
         catch ( XMLStreamException ex )
         {
             throw new RuntimeException( "Failed to create XMLWriter", ex );
         }
     }
-    
-    /**
-     * Creates an XMLWriter from a StAX-based XMLStreamWriter. The generated XML
-     * will have a line break after each natural line end and not be indented.
-     * 
-     * @param outputStream the OutputStream to write to.
-     * @return an XMLWriter.
-     */
-    public static XMLWriter getPlainXMLWriter( OutputStream outputStream )
-    {
-        try
-        {
-            XMLOutputFactory factory = new WstxOutputFactory();
-            
-            XMLStreamWriter streamWriter = factory.createXMLStreamWriter( outputStream );
-
-            XMLWriter xmlWriter = new DefaultXMLStreamWriter( streamWriter );
-
-            XMLWriter lineBreakingWriter = new DefaultLineBreakingXMLStreamWriter( xmlWriter );
-            
-            return lineBreakingWriter;
-        }
-        catch ( XMLStreamException ex )
-        {
-            throw new RuntimeException( "Failed to create XMLWriter", ex );
-        }
-    }
-    
+        
     /**
      * Creates an XMLReader from a StAX-based XMLStreamReader.
      * 
@@ -125,9 +91,7 @@ public class XMLFactory
         
             XMLStreamReader streamReader = factory.createXMLStreamReader( inputStream );
             
-            XMLReader xmlReader = new DefaultXMLStreamReader( streamReader );
-            
-            return xmlReader;
+            return new DefaultXMLStreamReader( streamReader );
         }
         catch ( XMLStreamException ex )
         {

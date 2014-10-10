@@ -39,6 +39,14 @@ import javax.xml.stream.XMLStreamWriter;
 public interface XMLWriter
 {
     /**
+     * Writes the XML declaration to output.
+     * 
+     * @param encoding the encoding the XML file.
+     * @param version the version of the XML file.
+     */
+    void openDocument();
+    
+    /**
      * Writes the XML declaration to ouput.
      * 
      * @param encoding the encoding the XML file.
@@ -60,6 +68,14 @@ public interface XMLWriter
      * @param attributeNameValuePairs the attributes of the XML element given in key-value-pairs.
      */
     void openElement( String name, String... attributeNameValuePairs );
+
+    /**
+     * Writes an XML attribute to output.
+     * 
+     * @param name the attribute name.
+     * @param value the attribute value.
+     */
+    void writeAttribute( String name, String value );
     
     /**
      * Writes an XML start tag, value, and end tag to ouput.

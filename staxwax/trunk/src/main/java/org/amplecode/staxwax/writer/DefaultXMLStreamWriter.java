@@ -54,7 +54,14 @@ public class DefaultXMLStreamWriter
     // -------------------------------------------------------------------------
     // XMLWriter implementation
     // -------------------------------------------------------------------------
-    
+
+    @Override
+    public void openDocument()
+    {
+        openDocument( "UTF-8", "1.0" );
+    }
+
+    @Override
     public void openDocument( String encoding, String version )
     {
         try
@@ -67,6 +74,7 @@ public class DefaultXMLStreamWriter
         }        
     }
 
+    @Override
     public void openElement( String name )
     {
         try
@@ -78,7 +86,8 @@ public class DefaultXMLStreamWriter
             throw new XMLException( "Failed to open element: " + name , ex );
         }
     }
-    
+
+    @Override
     public void openElement( String name, String... attributeNameValuePairs )
     {
         try
@@ -89,7 +98,10 @@ public class DefaultXMLStreamWriter
             {
                 for ( int i = 0; i < attributeNameValuePairs.length; i += 2 )
                 {
-                    writer.writeAttribute( verifyNotNull( attributeNameValuePairs[ i ] ), replaceNull( attributeNameValuePairs[ i + 1 ] ) );
+                    if ( attributeNameValuePairs[ i + 1 ] != null )
+                    {
+                        writer.writeAttribute( verifyNotNull( attributeNameValuePairs[ i ] ), attributeNameValuePairs[ i + 1 ] );
+                    }
                 }
             }
         }
@@ -98,7 +110,24 @@ public class DefaultXMLStreamWriter
             throw new XMLException( "Failed to open element: " + name, ex );
         }
     }
-    
+
+    @Override
+    public void writeAttribute( String name, String value )
+    {
+        try
+        {
+            if ( value != null )
+            {
+                writer.writeAttribute( verifyNotNull( name ), value ); 
+            }
+        }
+        catch ( XMLStreamException ex )
+        {
+            throw new RuntimeException( "Failed to write attribute: " + name, ex );
+        }
+    }
+
+    @Override
     public void writeElement( String name, String value )
     {
         try
@@ -114,7 +143,8 @@ public class DefaultXMLStreamWriter
             throw new XMLException( "Failed to write element: " + name + ", value: " + value, ex );
         }
     }
-    
+
+    @Override
     public void writeElement( String name, String value, String... attributeNameValuePairs )
     {
         try
@@ -125,7 +155,10 @@ public class DefaultXMLStreamWriter
             {
                 for ( int i = 0; i < attributeNameValuePairs.length; i += 2 )
                 {
-                    writer.writeAttribute( verifyNotNull( attributeNameValuePairs[ i ] ), replaceNull( attributeNameValuePairs[ i + 1 ] ) );
+                    if ( attributeNameValuePairs[ i + 1 ] != null )
+                    {
+                        writer.writeAttribute( verifyNotNull( attributeNameValuePairs[ i ] ), attributeNameValuePairs[ i + 1 ] );
+                    }
                 }
             }
             
@@ -138,7 +171,8 @@ public class DefaultXMLStreamWriter
             throw new XMLException( "Failed to write element: " + name + ", value: " + value, ex );
         }
     }
-    
+
+    @Override
     public void writeCharacters( String characters )
     {
         try
@@ -150,7 +184,8 @@ public class DefaultXMLStreamWriter
             throw new XMLException( "Failed to write characters: " + characters, ex );
         }
     }
-    
+
+    @Override
     public void writeCData( String cData )
     {
         try
@@ -163,11 +198,13 @@ public class DefaultXMLStreamWriter
         }
     }
 
+    @Override
     public XMLStreamWriter getXmlStreamWriter()
     {
         return writer;
     }
-    
+
+    @Override
     public void closeElement()
     {
         try
@@ -179,7 +216,8 @@ public class DefaultXMLStreamWriter
             throw new XMLException( "Failed to close element", ex );
         }
     }
-    
+
+    @Override
     public void closeDocument()
     {
         try
@@ -195,7 +233,8 @@ public class DefaultXMLStreamWriter
             throw new XMLException( "Failed to close document", ex );
         }
     }
-    
+
+    @Override
     public void closeWriter()
     {
         try
@@ -223,7 +262,7 @@ public class DefaultXMLStreamWriter
     
     private String replaceNull( String string )
     {
-        return string != null ? string : new String();
+        return string != null ? string : "";
     }
     
     private String verifyNotNull( String string )
