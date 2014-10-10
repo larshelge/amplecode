@@ -28,7 +28,7 @@ package org.amplecode.quick.statement;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 
 import org.amplecode.quick.StatementManager;
 import org.junit.Before;
