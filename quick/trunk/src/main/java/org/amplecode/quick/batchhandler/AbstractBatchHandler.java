@@ -35,6 +35,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.amplecode.quick.BatchHandler;
 import org.amplecode.quick.JdbcConfiguration;
@@ -65,6 +68,8 @@ public abstract class AbstractBatchHandler<T>
     private IdentifierExtractor identifierExtractor;
     
     private StringBuffer sqlBuffer;
+    
+    private final Set<Integer> uniqueValues = new HashSet<>();
     
     private final int maxLength = 200000; // Number of characters in statement accepted by DBMS
 
@@ -176,6 +181,19 @@ public abstract class AbstractBatchHandler<T>
     
     public final void addObject( T object )
     {
+        setUniqueValues( object );
+        
+        List<String> uniqueList = statementBuilder.getUniqueValues();
+        
+        boolean exists = uniqueList != null && !uniqueList.isEmpty() ? !uniqueValues.add( uniqueList.hashCode() ) : false;
+        
+        if ( exists )
+        {
+            log.warn( "Duplicate object: " + object );
+                        
+            return;
+        }
+
         setValues( object );
         
         sqlBuffer.append( statementBuilder.getInsertStatementValues() );        
@@ -185,7 +203,7 @@ public abstract class AbstractBatchHandler<T>
         if ( sqlBuffer.length() > maxLength )
         {
             try
-            {   
+            {
                 sqlBuffer.deleteCharAt( sqlBuffer.length() - 1 );
                 
                 statement.executeUpdate( sqlBuffer.toString() );
@@ -200,6 +218,8 @@ public abstract class AbstractBatchHandler<T>
                 sqlBuffer = new StringBuffer( maxLength ).append( getInsertStatementOpening() );
                 
                 statementCount = 0;
+                
+                uniqueValues.clear();
             }
             catch ( SQLException ex )
             {
@@ -322,6 +342,8 @@ public abstract class AbstractBatchHandler<T>
                 }
                 
                 statementCount = 0;
+                
+                uniqueValues.clear();
             }
             
             return identifiers;
@@ -366,7 +388,7 @@ public abstract class AbstractBatchHandler<T>
     }
     
     // -------------------------------------------------------------------------
-    // Overrideable set-methods
+    // Override set-methods
     // -------------------------------------------------------------------------
 
     /**
@@ -407,7 +429,7 @@ public abstract class AbstractBatchHandler<T>
     }
     
     // -------------------------------------------------------------------------
-    // Overrideable get-methods
+    // Override get-methods
     // -------------------------------------------------------------------------
 
     /**

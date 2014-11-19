@@ -37,7 +37,6 @@ import org.amplecode.quick.statement.JdbcStatementManager;
 
 /**
  * @author Lars Helge Overland
- * @version $Id$
  */
 public class DefaultBatchHandlerFactory
     implements BatchHandlerFactory

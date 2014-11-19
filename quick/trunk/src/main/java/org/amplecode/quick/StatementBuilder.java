@@ -1,5 +1,7 @@
 package org.amplecode.quick;
 
+import java.util.List;
+
 /*
  * Copyright (c) 2008, the original author or authors.
  * All rights reserved.
@@ -125,7 +127,7 @@ public interface StatementBuilder
     
     /**
      * Creates a value list for an insert SQL statement. Requires that the table 
-     * name, auto-increment column and values are set.
+     * name, auto-increment column and values are set. Clears values.
      * 
      * @return the value list of and insert SQL statement.
      */
@@ -133,7 +135,8 @@ public interface StatementBuilder
     
     /**
      * Creates an update SQL statement. Requires that the table name, identifier 
-     * columns / values and columns / values are set.
+     * columns / values and columns / values are set. Clears values and identifier
+     * values.
      * 
      * @return an update SQL statement.
      */
@@ -141,7 +144,7 @@ public interface StatementBuilder
     
     /**
      * Creates a delet SQL statement. Requires that table name and identifier
-     * columns/ values are set.
+     * columns/ values are set. Clears identifier values.
      * 
      * @return a delete SQL statement.
      */
@@ -149,7 +152,7 @@ public interface StatementBuilder
 
     /**
      * Creates a select SQL statement. Requires that the table name and unique 
-     * columns / values are set.
+     * columns / values are set. Clears unique values.
      * 
      * @param inclusive defines whether the unique properties are inclusive or 
      *        exclusive, implying whether all or any must be equal for the object 
@@ -160,11 +163,18 @@ public interface StatementBuilder
 
     /**
      * Creates a select SQL statement. Requires that the table name, identifier 
-     * columns and match columns / values are set.
+     * columns and match columns / values are set. Clears match values.
      * 
      * @return a select SQL statement.
      */
     String getIdentifierStatement();
+    
+    /**
+     * Returns the list of unique values for this object. Clears unique values.
+     * 
+     * @return a list of unique values.
+     */
+    List<String> getUniqueValues();
     
     /**
      * Returns the name of a SQL double column type.

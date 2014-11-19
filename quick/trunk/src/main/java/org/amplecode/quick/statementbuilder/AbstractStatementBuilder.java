@@ -240,6 +240,13 @@ public abstract class AbstractStatementBuilder
         return sqlBuffer.toString();
     }
     
+    public List<String> getUniqueValues()
+    {
+        List<String> list = new ArrayList<>( uniqueValues );
+        uniqueValues.clear();
+        return list;
+    }
+        
     public void setMatchColumnToFirstUniqueColumn()
     {
         if ( uniqueColumns.size() > 0 )
