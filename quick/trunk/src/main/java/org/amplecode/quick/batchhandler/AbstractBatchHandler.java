@@ -47,6 +47,7 @@ import org.amplecode.quick.factory.StatementBuilderFactory;
 import org.amplecode.quick.identifier.IdentifierExtractor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Lars Helge Overland
@@ -69,7 +70,7 @@ public abstract class AbstractBatchHandler<T>
     
     private StringBuffer sqlBuffer;
     
-    private final Set<Integer> uniqueValues = new HashSet<>();
+    private final Set<String> uniqueValues = new HashSet<>();
     
     private final int maxLength = 200000; // Number of characters in statement accepted by DBMS
 
@@ -185,12 +186,14 @@ public abstract class AbstractBatchHandler<T>
         
         List<String> uniqueList = statementBuilder.getUniqueValues();
         
-        boolean exists = uniqueList != null && !uniqueList.isEmpty() ? !uniqueValues.add( uniqueList.hashCode() ) : false;
+        String uniqueKey = StringUtils.collectionToCommaDelimitedString( uniqueList );
+        
+        boolean exists = uniqueList != null && !uniqueList.isEmpty() ? !uniqueValues.add( uniqueKey ) : false;
         
         if ( exists )
         {
             log.warn( "Duplicate object: " + object );
-                        
+            
             return;
         }
 
