@@ -60,11 +60,13 @@ public interface BatchHandler<T>
     BatchHandler<T> setTableName( String name );
     
     /**
-     * Adds an object to the BatchHandler.
+     * Adds an object to the BatchHandler. Checks if the value is a duplicate,
+     * i.e. already added, before adding.
      * 
      * @param object the object to add.
+     * @return true if the object was added, false if not.
      */
-    void addObject( T object );
+    boolean addObject( T object );
     
     /**
      * Inserts an object directly.

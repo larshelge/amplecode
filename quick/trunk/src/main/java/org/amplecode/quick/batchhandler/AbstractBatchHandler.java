@@ -180,7 +180,7 @@ public abstract class AbstractBatchHandler<T>
         }
     }
     
-    public final void addObject( T object )
+    public final boolean addObject( T object )
     {
         setUniqueValues( object );
         
@@ -194,7 +194,7 @@ public abstract class AbstractBatchHandler<T>
         {
             log.warn( "Duplicate object: " + object );
             
-            return;
+            return false;
         }
 
         setValues( object );
@@ -233,6 +233,8 @@ public abstract class AbstractBatchHandler<T>
                 throw new RuntimeException( "Failed to add objects", ex );
             }
         }
+        
+        return true;
     }
     
     public final void updateObject( T object )
