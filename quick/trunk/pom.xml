@@ -13,10 +13,6 @@
   
   <url>https://github.com/larshelge/amplecode</url>
   
-  <scm>
-    <url>https://github.com/larshelge/amplecode</url>
-  </scm>
-  
   <organization>
     <name>AmpleCode</name>
     <url>https://github.com/larshelge/amplecode</url>
@@ -26,6 +22,8 @@
     <developer>
       <name>Lars Helge Oeverland</name>
       <email>larshelge@gmail.com</email>
+      <organization>UiO</organization>
+      <organizationUrl>http://www.uio.no/</organizationUrl>
     </developer>
   </developers>
   
@@ -35,7 +33,13 @@
       <url>http://amplecode.org/license/license_bsd.txt</url>
     </license>
   </licenses>
-
+  
+  <scm>
+    <connection>scm:git:git@github.com:larshelge/amplecode.git</connection>
+    <developerConnection>scm:git:git@github.com:larshelge/amplecode.git</developerConnection>
+    <url>git@github.com:larshelge/amplecode.git</url>
+  </scm>
+  
   <issueManagement>
 	<system>GitHub</system>
 	<url>https://github.com/larshelge/amplecode</url>

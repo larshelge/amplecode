@@ -11,11 +11,7 @@
   
   <description>Light-weight convenience framework for high-performance XML writing and parsing.</description>
 
-  <url>http://amplecode.org/wiki/StaxWax</url>
-  
-  <scm>
-    <url>svn+ssh://svn.amplecode.org/var/svn/repo/staxwax</url>
-  </scm>
+  <url>https://github.com/larshelge/amplecode</url>
   
   <organization>
     <name>AmpleCode</name>
@@ -23,24 +19,32 @@
   </organization>
   
   <developers>
-	<developer>
+    <developer>
       <name>Lars Helge Oeverland</name>
       <email>larshelge@gmail.com</email>
+      <organization>UiO</organization>
+      <organizationUrl>http://www.uio.no/</organizationUrl>
     </developer>
   </developers>
-
+  
   <licenses>
     <license>
       <name>BSD</name>
       <url>http://amplecode.org/license/license_bsd.txt</url>
     </license>
   </licenses>
-    
+  
+  <scm>
+    <connection>scm:git:git@github.com:larshelge/amplecode.git</connection>
+    <developerConnection>scm:git:git@github.com:larshelge/amplecode.git</developerConnection>
+    <url>git@github.com:larshelge/amplecode.git</url>
+  </scm>
+  
   <issueManagement>
-	<system>Trac</system>
-	<url>http://www.amplecode.org/report</url>
+	<system>GitHub</system>
+	<url>https://github.com/larshelge/amplecode</url>
   </issueManagement>
-	
+
   <dependencies>
     <dependency>
       <groupId>stax</groupId>
