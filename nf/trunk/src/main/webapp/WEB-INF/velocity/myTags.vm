@@ -1,9 +1,0 @@
-<table class="myTable">
-#set( $columns = 4 )
-#foreach( $tag in $tags )
-#set( $count = $velocityCount % $columns )
-#if ( $count == 1 )<tr>#end
-<td class="myItem" onclick="searchQuery( '${tag.name}' )" title="$!{tag.name}">$!{tag.getSubName( 23 )}</td>
-#if ( $count == 0 )</tr>#end
-#end
-</table>
