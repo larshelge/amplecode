@@ -11,11 +11,7 @@
   
   <description>Light-weight convenience framework for high-performance XML writing and parsing.</description>
 
-  <url>http://amplecode.org/wiki/StaxWax</url>
-  
-  <scm>
-    <url>svn+ssh://svn.amplecode.org/var/svn/repo/staxwax</url>
-  </scm>
+  <url>https://github.com/larshelge/amplecode</url>
   
   <organization>
     <name>AmpleCode</name>
@@ -23,24 +19,32 @@
   </organization>
   
   <developers>
-	<developer>
+    <developer>
       <name>Lars Helge Oeverland</name>
       <email>larshelge@gmail.com</email>
+      <organization>UiO</organization>
+      <organizationUrl>http://www.uio.no/</organizationUrl>
     </developer>
   </developers>
-
+  
   <licenses>
     <license>
       <name>BSD</name>
       <url>http://amplecode.org/license/license_bsd.txt</url>
     </license>
   </licenses>
-    
+  
+  <scm>
+    <connection>scm:git:git@github.com:larshelge/amplecode.git</connection>
+    <developerConnection>scm:git:git@github.com:larshelge/amplecode.git</developerConnection>
+    <url>git@github.com:larshelge/amplecode.git</url>
+  </scm>
+  
   <issueManagement>
-	<system>Trac</system>
-	<url>http://www.amplecode.org/report</url>
+	<system>GitHub</system>
+	<url>https://github.com/larshelge/amplecode</url>
   </issueManagement>
-	
+
   <dependencies>
     <dependency>
       <groupId>stax</groupId>
@@ -66,11 +70,10 @@
   </dependencies>
 	
   <distributionManagement>
-    <repository>
-        <id>dhis2-amplecode-repo</id>
-        <name>DHIS 2 Amplecode Maven Repository</name>
-        <url>http://maven.dhis2.org/amplecode-local</url>
-    </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
   
   <build>
@@ -82,6 +85,57 @@
           <source>1.7</source>
           <target>1.7</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.10.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.5</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
