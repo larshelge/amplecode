@@ -160,7 +160,7 @@ public final class ListProcessQueue<P extends ProcessQueueConstraints>
     public static <P extends ProcessQueueConstraints> ProcessQueue<P> newSynchronizedInstance()
     {
         return (ProcessQueue<P>) Proxy.newProxyInstance( ListProcessQueue.class.getClassLoader(),
-            new Class[] { ProcessQueue.class }, new SynchronizedInvocationHandler( new ListProcessQueue() ) );
+            new Class[] { ProcessQueue.class }, new SynchronizedInvocationHandler( new ListProcessQueue<>() ) );
     }
 
     private static class SynchronizedInvocationHandler
