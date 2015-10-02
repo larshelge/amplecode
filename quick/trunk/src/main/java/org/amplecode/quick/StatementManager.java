@@ -32,7 +32,6 @@ package org.amplecode.quick;
  * Interface which provides 
  * 
  * @author Lars Helge Overland
- * @version $Id$
  */
 public interface StatementManager
 {    
@@ -68,6 +67,8 @@ public interface StatementManager
     
     /**
      * Returns the current JdbcConfiguration.
+     * 
+     * @return JDBC configuration.
      */
     JdbcConfiguration getConfiguration();
 }

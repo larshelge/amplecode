@@ -37,7 +37,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * @author Lars Helge Overland
- * @version $Id$
  */
 public class StatementInterceptor
 {

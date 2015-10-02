@@ -32,7 +32,6 @@ package org.amplecode.quick;
  * Enum holding fields for various DBMSs.
  * 
  * @author Lars Helge Overland
- * @version $Id$
  */
 public enum StatementDialect
 {

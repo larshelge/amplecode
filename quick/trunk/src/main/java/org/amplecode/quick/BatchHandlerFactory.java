@@ -32,13 +32,13 @@ package org.amplecode.quick;
  * Factory which produces BatchHandler instances.
  * 
  * @author Lars Helge Overland
- * @version $Id$
  */
 public interface BatchHandlerFactory
 {
     /**
      * Creates a BatchHandler instance.
      * 
+     * @param <T> type.
      * @param clazz the BatchHandler class to create.
      * @return a BatchHandler instance.
      */

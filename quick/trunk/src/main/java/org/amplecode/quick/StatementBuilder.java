@@ -35,7 +35,6 @@ import java.util.List;
  * typically be produced by a factory and be related to a specific DBMS.
  * 
  * @author Lars Helge Overland
- * @version $Id$
  */
 public interface StatementBuilder
 {
@@ -143,7 +142,7 @@ public interface StatementBuilder
     String getUpdateStatement();
     
     /**
-     * Creates a delet SQL statement. Requires that table name and identifier
+     * Creates a delete SQL statement. Requires that table name and identifier
      * columns/ values are set. Clears identifier values.
      * 
      * @return a delete SQL statement.
@@ -185,7 +184,7 @@ public interface StatementBuilder
     
     /**
      * Sets the first match column to the first unique column. Useful as standard
-     * behaviour.
+     * behavior.
      */
     void setMatchColumnToFirstUniqueColumn();
 }

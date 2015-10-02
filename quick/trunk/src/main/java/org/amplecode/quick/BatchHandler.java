@@ -41,11 +41,15 @@ public interface BatchHandler<T>
     /**
      * Initializes the BatchHandler by acquiring a database connection, creating a
      * statement object and initializing a SQL statement.
+     * 
+     * @return this batch handler.
      */
     BatchHandler<T> init();
     
     /**
      * Returns the current JdbcConfiguration.
+     * 
+     * @return jdbc configuration.
      */
     JdbcConfiguration getConfiguration();
     
@@ -54,6 +58,7 @@ public interface BatchHandler<T>
      * will set this property itself.
      * 
      * @param name the name of the database table.
+     * @return this batch handler.
      */
     BatchHandler<T> setTableName( String name );
     
@@ -99,9 +104,6 @@ public interface BatchHandler<T>
     /**
      * Flushes the BatchHandler by executing a potential remaining statement, and
      * closing the statement object and the database connection.
-     * 
-     * @return a Collection of the generated identifiers for objects with auto 
-     *         incrementing identifiers.
      */
     void flush();
 }

@@ -32,7 +32,6 @@ package org.amplecode.quick;
  * Represents configuration for a JDBC database connection.
  * 
  * @author Lars Helge Overland
- * @version $Id$
  */
 public class JdbcConfiguration
 {

@@ -35,7 +35,6 @@ import java.sql.Statement;
  * Interface which wraps a JDBC Connection and Statement and provides caching.
  * 
  * @author Lars Helge Overland
- * @version $Id$
  */
 public interface StatementHolder
 {
