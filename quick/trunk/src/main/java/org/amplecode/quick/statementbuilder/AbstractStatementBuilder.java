@@ -39,7 +39,6 @@ import org.amplecode.quick.StatementBuilder;
 
 /**
  * @author Lars Helge Overland
- * @version $Id$
  */
 public abstract class AbstractStatementBuilder
     implements StatementBuilder
@@ -166,11 +165,13 @@ public abstract class AbstractStatementBuilder
         {
             buffer.append( identifierColums.get( i ) + "=" + identifierValues.get( i ) );
             
-            if ( i + 1 < identifierColums.size() )
+            if ( ( i + 1 ) < identifierColums.size() )
             {
                 buffer.append( " AND " );
             }
         }
+        
+        buffer.append( ";" );
         
         values.clear();
         identifierValues.clear();
@@ -187,11 +188,13 @@ public abstract class AbstractStatementBuilder
         {
             buffer.append( identifierColums.get( i ) + "=" + identifierValues.get( i ) );
             
-            if ( i + 1 < identifierColums.size() )
+            if ( ( i + 1 ) < identifierColums.size() )
             {
                 buffer.append( " AND " );
             }
         }
+
+        buffer.append( ";" );
         
         identifierValues.clear();
         
@@ -202,42 +205,42 @@ public abstract class AbstractStatementBuilder
     {
         final String operator = inclusive ? " AND " : " OR ";
                 
-        final StringBuffer sqlBuffer = new StringBuffer().
+        final StringBuffer buffer = new StringBuffer().
             append( "SELECT " ).append( uniqueColumns.get( 0 ) ).append( " FROM " ).append( tableName ).append( " WHERE " );
         
         for ( int i = 0; i < uniqueColumns.size(); i++ )
         {
-            sqlBuffer.append( uniqueColumns.get( i ) + "=" + uniqueValues.get( i ) );
+            buffer.append( uniqueColumns.get( i ) + "=" + uniqueValues.get( i ) );
             
             if ( i + 1 < uniqueColumns.size() )
             {
-                sqlBuffer.append( operator );
+                buffer.append( operator );
             }
         }
         
         uniqueValues.clear();
         
-        return sqlBuffer.toString();
+        return buffer.toString();
     }
     
     public String getIdentifierStatement()
     {        
-        final StringBuffer sqlBuffer = new StringBuffer().
+        final StringBuffer buffer = new StringBuffer().
             append( "SELECT " ).append( identifierColums.get( 0 ) ).append( " FROM " ).append( tableName ).append( " WHERE " );
         
         for ( int i = 0; i < matchColumns.size(); i++ )
         {
-            sqlBuffer.append( matchColumns.get( i ) + "=" + matchValues.get( i ) );
+            buffer.append( matchColumns.get( i ) + "=" + matchValues.get( i ) );
             
             if ( i + 1 < matchColumns.size() )
             {
-                sqlBuffer.append( " AND " );
+                buffer.append( " AND " );
             }
         }
         
         matchValues.clear();
         
-        return sqlBuffer.toString();
+        return buffer.toString();
     }
     
     public List<String> getUniqueValues()

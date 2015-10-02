@@ -37,7 +37,6 @@ import org.amplecode.quick.StatementHolder;
 
 /**
  * @author Lars Helge Overland
- * @version $Id$
  */
 public class DefaultStatementHolder
     implements StatementHolder

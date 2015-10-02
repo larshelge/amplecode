@@ -28,7 +28,6 @@ package org.amplecode.quick;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.util.Collection;
 
 /**
  * Interface responsible for performing batch and regular JDBC operations. Batch 
@@ -36,7 +35,6 @@ import java.util.Collection;
  * will utilize multiple insert SQL statements for high performance.
  * 
  * @author Lars Helge Overland
- * @version $Id$
  */
 public interface BatchHandler<T>
 {
@@ -67,16 +65,6 @@ public interface BatchHandler<T>
      * @return true if the object was added, false if not.
      */
     boolean addObject( T object );
-    
-    /**
-     * Inserts an object directly.
-     * 
-     * @param object the object to insert.
-     * @param returnGeneratedIdentifier return generated indentifier or not.
-     * @return the generated identifier if returnGeneratedIdentifier is true and
-     *         the underlying table has an auto-increment identifier, 0 elsewise.
-     */
-    int insertObject( T object, boolean returnGeneratedIdentifier );
     
     /**
      * Updates an object.
@@ -112,8 +100,8 @@ public interface BatchHandler<T>
      * Flushes the BatchHandler by executing a potential remaining statement, and
      * closing the statement object and the database connection.
      * 
-     * @return a Collection of the generated identifiers for objects with auto incrementing
-     *         identifiers.
+     * @return a Collection of the generated identifiers for objects with auto 
+     *         incrementing identifiers.
      */
-    Collection<Integer> flush();
+    void flush();
 }

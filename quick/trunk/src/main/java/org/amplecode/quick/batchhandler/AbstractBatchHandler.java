@@ -33,8 +33,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,22 +40,24 @@ import java.util.Set;
 import org.amplecode.quick.BatchHandler;
 import org.amplecode.quick.JdbcConfiguration;
 import org.amplecode.quick.StatementBuilder;
-import org.amplecode.quick.factory.IdentifierExtractorFactory;
 import org.amplecode.quick.factory.StatementBuilderFactory;
-import org.amplecode.quick.identifier.IdentifierExtractor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 
 /**
  * @author Lars Helge Overland
- * @version $Id$
  */
 public abstract class AbstractBatchHandler<T>
     implements BatchHandler<T>
 {
-    private Log log = LogFactory.getLog( AbstractBatchHandler.class );
-    
+    private static final Log log = LogFactory.getLog( AbstractBatchHandler.class );
+
+    /**
+     * Number of characters in statement accepted by DBMS.
+     */
+    private static final int MAX_LENGTH = 200000;
+
     private JdbcConfiguration configuration;
     
     private Connection connection;
@@ -65,21 +65,13 @@ public abstract class AbstractBatchHandler<T>
     private Statement statement;
     
     protected StatementBuilder statementBuilder;
+        
+    private StringBuffer addObjectSqlBuffer;
     
-    private IdentifierExtractor identifierExtractor;
+    private final Set<String> uniqueObjects = new HashSet<>();
     
-    private StringBuilder addObjectSql;
-    
-    private final Set<String> uniqueValues = new HashSet<>();
-    
-    private final int maxLength = 200000; // Number of characters in statement accepted by DBMS
-
-    private Collection<Integer> identifiers;
-
-    private int statementCount = 0;
-    
-    private boolean hasNoAutoIncrementPrimaryKey = false;
-    
+    private int addObjectStatementCount = 0;
+        
     private boolean uniqueColumnsAreInclusive = false;
     
     // -------------------------------------------------------------------------
@@ -91,12 +83,10 @@ public abstract class AbstractBatchHandler<T>
     {   
     }
     
-    protected AbstractBatchHandler( JdbcConfiguration configuration, boolean hasNoAutoIncrementPrimaryKey, boolean uniqueColumnsAreInclusive )
+    protected AbstractBatchHandler( JdbcConfiguration configuration, boolean uniqueColumnsAreInclusive )
     {
         this.configuration = configuration;
         this.statementBuilder = StatementBuilderFactory.createStatementBuilder( configuration.getDialect() );
-        this.identifierExtractor = IdentifierExtractorFactory.createIdentifierExtractor( configuration.getDialect() );
-        this.hasNoAutoIncrementPrimaryKey = hasNoAutoIncrementPrimaryKey;
         this.uniqueColumnsAreInclusive = uniqueColumnsAreInclusive;
     }
 
@@ -104,6 +94,9 @@ public abstract class AbstractBatchHandler<T>
     // BatchHandler implementation
     // -------------------------------------------------------------------------
     
+    //TODO call init from factory
+    
+    @Override
     public final BatchHandler<T> init()
     {
         try
@@ -115,9 +108,8 @@ public abstract class AbstractBatchHandler<T>
                 configuration.getUsername(),
                 configuration.getPassword() );
 
-            this.addObjectSql = new StringBuilder( maxLength );
-            this.identifiers = new ArrayList<Integer>();
-            this.statementCount = 0;
+            this.addObjectSqlBuffer = new StringBuffer( MAX_LENGTH );
+            this.addObjectStatementCount = 0;
             
             statement = connection.createStatement();
             
@@ -128,7 +120,7 @@ public abstract class AbstractBatchHandler<T>
             setMatchColumns();
             setColumns();
                         
-            this.addObjectSql.append( getInsertStatementOpening() ); // Initial opening for addObject
+            this.addObjectSqlBuffer.append( getInsertStatementOpening() ); // Initial opening for addObject
             
             return this;
         }
@@ -139,49 +131,22 @@ public abstract class AbstractBatchHandler<T>
             throw new RuntimeException( "Failed to create statement", ex );
         }
     }
-    
+
+    @Override
     public JdbcConfiguration getConfiguration()
     {
         return configuration;
     }
-    
+
+    @Override
     public BatchHandler<T> setTableName( String name )
     {
         statementBuilder.setTableName( name );
         
         return this;
     }
-        
-    public final int insertObject( T object, boolean returnGeneratedIdentifier )
-    {
-        StringBuilder sql = null;
-        
-        try
-        {
-            setValues( object );
-            
-            sql = new StringBuilder( getInsertStatementOpening() );
-                        
-            sql.append( statementBuilder.getInsertStatementValues() );
-            
-            sql.deleteCharAt( sql.length() - 1 ); 
-            
-            log.debug( "Insert SQL: " + sql );
-            
-            statement.executeUpdate( sql.toString() );
-            
-            return returnGeneratedIdentifier ? identifierExtractor.extract( statement ) : 0;
-        }
-        catch ( SQLException ex )
-        {
-            log.info( "Insert SQL: " + sql );
 
-            close();
-            
-            throw new RuntimeException( "Failed to insert " + object.getClass().getName(), ex );
-        }
-    }
-    
+    @Override
     public final boolean addObject( T object )
     {
         setUniqueValues( object );
@@ -190,7 +155,7 @@ public abstract class AbstractBatchHandler<T>
         
         String uniqueKey = StringUtils.collectionToCommaDelimitedString( uniqueList );
         
-        boolean exists = uniqueList != null && !uniqueList.isEmpty() ? !uniqueValues.add( uniqueKey ) : false;
+        boolean exists = uniqueList != null && !uniqueList.isEmpty() ? !uniqueObjects.add( uniqueKey ) : false;
         
         if ( exists )
         {
@@ -201,34 +166,29 @@ public abstract class AbstractBatchHandler<T>
 
         setValues( object );
         
-        addObjectSql.append( statementBuilder.getInsertStatementValues() );        
+        addObjectSqlBuffer.append( statementBuilder.getInsertStatementValues() );        
         
-        statementCount++;
+        addObjectStatementCount++;
         
-        if ( addObjectSql.length() > maxLength )
+        if ( addObjectSqlBuffer.length() > MAX_LENGTH )
         {
             try
             {
-                addObjectSql.deleteCharAt( addObjectSql.length() - 1 );
+                addObjectSqlBuffer.deleteCharAt( addObjectSqlBuffer.length() - 1 );
                 
-                statement.executeUpdate( addObjectSql.toString() );
+                statement.executeUpdate( addObjectSqlBuffer.toString() );
                 
-                log.debug( "Add SQL: " + addObjectSql );
+                log.debug( "Add SQL: " + addObjectSqlBuffer );
+                                
+                addObjectSqlBuffer = new StringBuffer( MAX_LENGTH ).append( getInsertStatementOpening() );
                 
-                if ( !hasNoAutoIncrementPrimaryKey )
-                {
-                    identifiers.addAll( identifierExtractor.extract( statement, statementCount ) );
-                }
+                addObjectStatementCount = 0;
                 
-                addObjectSql = new StringBuilder( maxLength ).append( getInsertStatementOpening() );
-                
-                statementCount = 0;
-                
-                uniqueValues.clear();
+                uniqueObjects.clear();
             }
             catch ( SQLException ex )
             {
-                log.info( "Add SQL: " + addObjectSql );
+                log.info( "Add SQL: " + addObjectSqlBuffer );
 
                 close();
                 
@@ -238,7 +198,8 @@ public abstract class AbstractBatchHandler<T>
         
         return true;
     }
-    
+
+    @Override
     public final void updateObject( T object )
     {        
         setIdentifierValues( object );
@@ -262,7 +223,8 @@ public abstract class AbstractBatchHandler<T>
             throw new RuntimeException( "Failed to update object", ex );
         }
     }
-    
+
+    @Override
     public final void deleteObject( T object )
     {
         setIdentifierValues( object );
@@ -285,6 +247,7 @@ public abstract class AbstractBatchHandler<T>
         }
     }
 
+    @Override
     public final boolean objectExists( T object )
     {        
         setUniqueValues( object );
@@ -307,6 +270,10 @@ public abstract class AbstractBatchHandler<T>
         }
     }
     
+    /**
+     * TODO remove this method.
+     */
+    @Override
     public final int getObjectIdentifier( Object object )
     {        
         setMatchValues( object );
@@ -330,34 +297,28 @@ public abstract class AbstractBatchHandler<T>
             throw new RuntimeException( "Failed to get object identifier", ex );            
         }        
     }
-    
-    public final Collection<Integer> flush()
+
+    @Override
+    public final void flush()
     {
         try
         {
-            if ( addObjectSql.length() > 2 && statementCount != 0 )
+            if ( addObjectSqlBuffer.length() > 2 && addObjectStatementCount > 0 )
             {
-                addObjectSql.deleteCharAt( addObjectSql.length() - 1 );
+                addObjectSqlBuffer.deleteCharAt( addObjectSqlBuffer.length() - 1 );
                 
-                log.debug( "Flush SQL: " + addObjectSql );
+                log.debug( "Flush SQL: " + addObjectSqlBuffer );
                 
-                statement.executeUpdate( addObjectSql.toString() );
+                statement.executeUpdate( addObjectSqlBuffer.toString() );
+                                
+                addObjectStatementCount = 0;
                 
-                if ( !hasNoAutoIncrementPrimaryKey )
-                {
-                    identifiers.addAll( identifierExtractor.extract( statement, statementCount ) );
-                }
-                
-                statementCount = 0;
-                
-                uniqueValues.clear();
+                uniqueObjects.clear();
             }
-            
-            return identifiers;
         }
         catch ( SQLException ex )
         {
-            log.info( "Flush SQL: " + addObjectSql );
+            log.info( "Flush SQL: " + addObjectSqlBuffer );
             
             throw new RuntimeException( "Failed to flush BatchHandler", ex );
         }
@@ -366,6 +327,10 @@ public abstract class AbstractBatchHandler<T>
             close();
         }
     }
+
+    // -------------------------------------------------------------------------
+    // Supportive methods
+    // -------------------------------------------------------------------------
 
     private void close()
     {
@@ -398,38 +363,23 @@ public abstract class AbstractBatchHandler<T>
     // Override set-methods
     // -------------------------------------------------------------------------
 
-    /**
-     * Should be overridden by subclasses with auto-increment columns.
-     */
     protected void setAutoIncrementColumn()
     {   
     }
     
-    /**
-     * Should be overridden by subclasses with primary key columns.
-     */
     protected void setIdentifierColumns()
     {   
     }
     
-    /**
-     * Should be overridden by subclasses with primary key columns.
-     */
     protected void setIdentifierValues( T object )
     {   
     }
 
-    /**
-     * Could be overridden by subclasses with unique columns.
-     */
     protected void setMatchColumns()
     {
         statementBuilder.setMatchColumnToFirstUniqueColumn();
     }
 
-    /**
-     * Could be overridden by subclasses with unique columns.
-     */
     protected void setMatchValues( Object object )
     {
         statementBuilder.setMatchValue( object );
@@ -439,9 +389,6 @@ public abstract class AbstractBatchHandler<T>
     // Override get-methods
     // -------------------------------------------------------------------------
 
-    /**
-     * Could be overridden by subclasses in special cases.
-     */
     protected String getInsertStatementOpening()
     {
         return statementBuilder.getInsertStatementOpening();

@@ -40,7 +40,7 @@ public class DataValueBatchHandler
 
     public DataValueBatchHandler( JdbcConfiguration config )
     {
-        super( config, true, true );
+        super( config, true );
     }
 
     @Override

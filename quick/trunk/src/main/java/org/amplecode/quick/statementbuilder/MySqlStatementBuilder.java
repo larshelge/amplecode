@@ -28,10 +28,8 @@ package org.amplecode.quick.statementbuilder;
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 /**
  * @author Lars Helge Overland
- * @version $Id$
  */
 public class MySqlStatementBuilder
     extends AbstractStatementBuilder

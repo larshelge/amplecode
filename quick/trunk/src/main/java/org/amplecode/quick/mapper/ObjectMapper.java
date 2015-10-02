@@ -35,7 +35,6 @@ import java.util.HashSet;
 
 /**
  * @author Lars Helge Overland
- * @version $Id$
  */
 public class ObjectMapper<T>
 {

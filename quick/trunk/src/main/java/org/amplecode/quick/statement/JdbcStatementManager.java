@@ -39,7 +39,6 @@ import org.amplecode.quick.StatementManager;
 
 /**
  * @author Lars Helge Overland
- * @version $Id$
  */
 public class JdbcStatementManager
     implements StatementManager

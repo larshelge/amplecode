@@ -39,7 +39,6 @@ import org.springframework.beans.factory.FactoryBean;
  * instances if more customized configuration is needed.
  * 
  * @author Lars Helge Overland
- * @version $Id$
  */
 public class JdbcConfigurationFactoryBean
     implements FactoryBean<JdbcConfiguration>

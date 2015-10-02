@@ -42,7 +42,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author Lars Helge Overland
- * @version $Id$
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath*:/META-INF/beans.xml"})

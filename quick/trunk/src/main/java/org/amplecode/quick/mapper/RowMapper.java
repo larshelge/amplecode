@@ -33,7 +33,6 @@ import java.sql.SQLException;
 
 /**
  * @author Lars Helge Overland
- * @version $Id$
  */
 public interface RowMapper<T>
 {
