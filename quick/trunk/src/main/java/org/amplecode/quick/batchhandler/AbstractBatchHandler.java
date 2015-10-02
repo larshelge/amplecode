@@ -68,7 +68,7 @@ public abstract class AbstractBatchHandler<T>
     
     private IdentifierExtractor identifierExtractor;
     
-    private StringBuffer sqlBuffer;
+    private StringBuilder addObjectSql;
     
     private final Set<String> uniqueValues = new HashSet<>();
     
@@ -115,7 +115,7 @@ public abstract class AbstractBatchHandler<T>
                 configuration.getUsername(),
                 configuration.getPassword() );
 
-            this.sqlBuffer = new StringBuffer( maxLength );
+            this.addObjectSql = new StringBuilder( maxLength );
             this.identifiers = new ArrayList<Integer>();
             this.statementCount = 0;
             
@@ -128,7 +128,7 @@ public abstract class AbstractBatchHandler<T>
             setMatchColumns();
             setColumns();
                         
-            this.sqlBuffer.append( getInsertStatementOpening() ); // Initial opening for addObject
+            this.addObjectSql.append( getInsertStatementOpening() ); // Initial opening for addObject
             
             return this;
         }
@@ -154,25 +154,27 @@ public abstract class AbstractBatchHandler<T>
         
     public final int insertObject( T object, boolean returnGeneratedIdentifier )
     {
+        StringBuilder sql = null;
+        
         try
         {
             setValues( object );
             
-            sqlBuffer = new StringBuffer( getInsertStatementOpening() );
+            sql = new StringBuilder( getInsertStatementOpening() );
                         
-            sqlBuffer.append( statementBuilder.getInsertStatementValues() );
+            sql.append( statementBuilder.getInsertStatementValues() );
             
-            sqlBuffer.deleteCharAt( sqlBuffer.length() - 1 ); 
+            sql.deleteCharAt( sql.length() - 1 ); 
             
-            log.debug( "Insert SQL: " + sqlBuffer );
+            log.debug( "Insert SQL: " + sql );
             
-            statement.executeUpdate( sqlBuffer.toString() );
+            statement.executeUpdate( sql.toString() );
             
             return returnGeneratedIdentifier ? identifierExtractor.extract( statement ) : 0;
         }
         catch ( SQLException ex )
         {
-            log.info( "Insert SQL: " + sqlBuffer );
+            log.info( "Insert SQL: " + sql );
 
             close();
             
@@ -199,26 +201,26 @@ public abstract class AbstractBatchHandler<T>
 
         setValues( object );
         
-        sqlBuffer.append( statementBuilder.getInsertStatementValues() );        
+        addObjectSql.append( statementBuilder.getInsertStatementValues() );        
         
         statementCount++;
         
-        if ( sqlBuffer.length() > maxLength )
+        if ( addObjectSql.length() > maxLength )
         {
             try
             {
-                sqlBuffer.deleteCharAt( sqlBuffer.length() - 1 );
+                addObjectSql.deleteCharAt( addObjectSql.length() - 1 );
                 
-                statement.executeUpdate( sqlBuffer.toString() );
+                statement.executeUpdate( addObjectSql.toString() );
                 
-                log.debug( "Add SQL: " + sqlBuffer );
+                log.debug( "Add SQL: " + addObjectSql );
                 
                 if ( !hasNoAutoIncrementPrimaryKey )
                 {
                     identifiers.addAll( identifierExtractor.extract( statement, statementCount ) );
                 }
                 
-                sqlBuffer = new StringBuffer( maxLength ).append( getInsertStatementOpening() );
+                addObjectSql = new StringBuilder( maxLength ).append( getInsertStatementOpening() );
                 
                 statementCount = 0;
                 
@@ -226,7 +228,7 @@ public abstract class AbstractBatchHandler<T>
             }
             catch ( SQLException ex )
             {
-                log.info( "Add SQL: " + sqlBuffer );
+                log.info( "Add SQL: " + addObjectSql );
 
                 close();
                 
@@ -333,13 +335,13 @@ public abstract class AbstractBatchHandler<T>
     {
         try
         {
-            if ( sqlBuffer.length() > 2 && statementCount != 0 )
+            if ( addObjectSql.length() > 2 && statementCount != 0 )
             {
-                sqlBuffer.deleteCharAt( sqlBuffer.length() - 1 );
+                addObjectSql.deleteCharAt( addObjectSql.length() - 1 );
                 
-                log.debug( "Flush SQL: " + sqlBuffer );
+                log.debug( "Flush SQL: " + addObjectSql );
                 
-                statement.executeUpdate( sqlBuffer.toString() );
+                statement.executeUpdate( addObjectSql.toString() );
                 
                 if ( !hasNoAutoIncrementPrimaryKey )
                 {
@@ -355,7 +357,7 @@ public abstract class AbstractBatchHandler<T>
         }
         catch ( SQLException ex )
         {
-            log.info( "Flush SQL: " + sqlBuffer );
+            log.info( "Flush SQL: " + addObjectSql );
             
             throw new RuntimeException( "Failed to flush BatchHandler", ex );
         }
