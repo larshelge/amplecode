@@ -46,7 +46,8 @@ public class H2StatementBuilder
     // -------------------------------------------------------------------------
     // AbstractStatementBuilder implementation
     // -------------------------------------------------------------------------
-    
+
+    @Override
     public String getInsertStatementOpening()
     {
         final StringBuffer buffer = new StringBuffer();
@@ -67,7 +68,8 @@ public class H2StatementBuilder
                 
         return buffer.toString();
     }
-        
+
+    @Override
     public String getInsertStatementValues()
     {
         final StringBuffer buffer = new StringBuffer();
@@ -90,7 +92,8 @@ public class H2StatementBuilder
         
         return buffer.toString();
     }
-        
+
+    @Override
     public String getDoubleColumnType()
     {
         return "DOUBLE";

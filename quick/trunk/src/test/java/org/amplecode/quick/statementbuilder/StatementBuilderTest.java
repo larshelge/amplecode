@@ -54,8 +54,7 @@ public class StatementBuilderTest
         builder.setColumn( "type" );        
         builder.setValue( "johns' element" );
         builder.setValue( "hard /ware" );
-
-        assertEquals( "SELECT id FROM element WHERE ", builder.getIdentifierStatement() );
+        
         assertEquals( "INSERT INTO element (id,name,type) VALUES ", builder.getInsertStatementOpening() );
         assertEquals( "(nextval('hibernate_sequence'),'johns'' element','hard /ware'),", builder.getInsertStatementValues() );
         assertEquals( "SELECT name FROM element WHERE name='johns'' element'", builder.getUniquenessStatement( true ) );

@@ -73,6 +73,7 @@ public class JdbcStatementManager
     // StatementManager implementation
     // -------------------------------------------------------------------------
 
+    @Override
     public void initialise()
     {
         Connection connection = getConnection();
@@ -81,7 +82,8 @@ public class JdbcStatementManager
         
         holderTag.set( holder );
     }
-    
+
+    @Override
     public StatementHolder getHolder()
     {
         StatementHolder holder = holderTag.get();
@@ -93,7 +95,8 @@ public class JdbcStatementManager
         
         return new DefaultStatementHolder( getConnection(), false );        
     }
-    
+
+    @Override
     public StatementHolder getHolder( boolean autoCommit )
     {
         try
@@ -109,7 +112,8 @@ public class JdbcStatementManager
             throw new RuntimeException( ex );
         }
     }
-    
+
+    @Override
     public void destroy()
     {
         StatementHolder holder = holderTag.get();
@@ -121,7 +125,8 @@ public class JdbcStatementManager
             holderTag.remove();
         }
     }
-    
+
+    @Override
     public JdbcConfiguration getConfiguration()
     {
         return inMemory ? IN_MEMORY_JDBC_CONFIG : jdbcConfiguration;

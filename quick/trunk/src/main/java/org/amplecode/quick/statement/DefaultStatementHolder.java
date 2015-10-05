@@ -58,27 +58,32 @@ public class DefaultStatementHolder
         this.pooled = pooled;
         this.statement = createStatement();
     }
-    
+
+    @Override
     public Statement getStatement()
     {
         return statement != null ? statement : createStatement();
     }
-    
+
+    @Override
     public Connection getConnection()
     {
         return connection;
     }
-    
+
+    @Override
     public boolean isPooled()
     {
         return pooled;
     }
-    
+
+    @Override
     public int executeUpdate( final String sql )
     {
         return executeUpdate( sql, false );
     }
-    
+
+    @Override
     public int executeUpdate( final String sql, final boolean ignoreException )
     {
         try
@@ -99,7 +104,8 @@ public class DefaultStatementHolder
             close();
         }
     }
-    
+
+    @Override
     public Integer queryForInteger( final String sql )
     {
         try
@@ -120,6 +126,7 @@ public class DefaultStatementHolder
         }
     }
 
+    @Override
     public Double queryForDouble( final String sql )
     {
         try
@@ -139,7 +146,8 @@ public class DefaultStatementHolder
             close();
         }
     }
-    
+
+    @Override
     public String queryForString( final String sql )
     {
         try
@@ -159,7 +167,8 @@ public class DefaultStatementHolder
             close();
         }
     }
-    
+
+    @Override
     public int update( final String sql )
     {
         try
@@ -178,6 +187,7 @@ public class DefaultStatementHolder
         }
     }
 
+    @Override
     public void close()
     {
         if ( !pooled )
@@ -185,7 +195,8 @@ public class DefaultStatementHolder
             forceClose();
         }
     }
-    
+
+    @Override
     public void forceClose()
     {
         if ( statement != null )

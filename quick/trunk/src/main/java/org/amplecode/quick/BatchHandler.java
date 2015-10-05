@@ -94,14 +94,6 @@ public interface BatchHandler<T>
     boolean objectExists( T object );
     
     /**
-     * Returns the identifier of the object with the given name.
-     * 
-     * @param object the value to uniquely identify the object to get the identifier from.
-     * @return the identifier of the object with the given name, 0 if object does not exist.
-     */
-    int getObjectIdentifier( Object object );
-    
-    /**
      * Flushes the BatchHandler by executing a potential remaining statement, and
      * closing the statement object and the database connection.
      */

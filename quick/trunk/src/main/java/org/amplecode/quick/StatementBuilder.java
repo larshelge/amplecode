@@ -161,14 +161,6 @@ public interface StatementBuilder
     String getUniquenessStatement( boolean inclusive );
 
     /**
-     * Creates a select SQL statement. Requires that the table name, identifier 
-     * columns and match columns / values are set. Clears match values.
-     * 
-     * @return a select SQL statement.
-     */
-    String getIdentifierStatement();
-    
-    /**
      * Returns the list of unique values for this object. Clears unique values.
      * 
      * @return a list of unique values.

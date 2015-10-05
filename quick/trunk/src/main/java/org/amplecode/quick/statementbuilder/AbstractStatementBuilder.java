@@ -222,27 +222,7 @@ public abstract class AbstractStatementBuilder
         
         return buffer.toString();
     }
-    
-    public String getIdentifierStatement()
-    {        
-        final StringBuffer buffer = new StringBuffer().
-            append( "SELECT " ).append( identifierColums.get( 0 ) ).append( " FROM " ).append( tableName ).append( " WHERE " );
         
-        for ( int i = 0; i < matchColumns.size(); i++ )
-        {
-            buffer.append( matchColumns.get( i ) + "=" + matchValues.get( i ) );
-            
-            if ( i + 1 < matchColumns.size() )
-            {
-                buffer.append( " AND " );
-            }
-        }
-        
-        matchValues.clear();
-        
-        return buffer.toString();
-    }
-    
     public List<String> getUniqueValues()
     {
         List<String> list = new ArrayList<>( uniqueValues );

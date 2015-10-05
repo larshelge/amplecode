@@ -114,6 +114,7 @@ public class JdbcConfigurationFactoryBean
     // FactoryBean implementation
     // -------------------------------------------------------------------------
 
+    @Override
     public JdbcConfiguration getObject()
         throws Exception
     {

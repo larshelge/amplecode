@@ -67,6 +67,7 @@ public class DefaultBatchHandlerFactory
     // BatchHandlerFactory implementation
     // -------------------------------------------------------------------------
 
+    @Override
     public <T> BatchHandler<T> createBatchHandler( Class<? extends BatchHandler<T>> clazz )
     {
         return createBatchHandler( clazz, inMemory ? JdbcStatementManager.IN_MEMORY_JDBC_CONFIG : jdbcConfiguration );

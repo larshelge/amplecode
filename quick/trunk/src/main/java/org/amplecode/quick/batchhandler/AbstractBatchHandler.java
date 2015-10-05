@@ -30,7 +30,6 @@ package org.amplecode.quick.batchhandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
@@ -270,34 +269,6 @@ public abstract class AbstractBatchHandler<T>
         }
     }
     
-    /**
-     * TODO remove this method.
-     */
-    @Override
-    public final int getObjectIdentifier( Object object )
-    {        
-        setMatchValues( object );
-        
-        final String sql = statementBuilder.getIdentifierStatement();
-        
-        log.debug( "Identifier SQL: " + sql );
-        
-        try
-        {
-            final ResultSet resultSet = statement.executeQuery( sql );  
-            
-            return resultSet.next() ? resultSet.getInt( 1 ) : 0;
-        }
-        catch ( SQLException ex )
-        {
-            log.info( "Identifier SQL: " + sql );
-
-            close();
-            
-            throw new RuntimeException( "Failed to get object identifier", ex );            
-        }        
-    }
-
     @Override
     public final void flush()
     {

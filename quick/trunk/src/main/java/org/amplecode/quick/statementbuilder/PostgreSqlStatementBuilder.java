@@ -49,6 +49,7 @@ public class PostgreSqlStatementBuilder
     // AbstractStatementBuilder implementation
     // -------------------------------------------------------------------------
 
+    @Override
     public String getInsertStatementOpening()
     {
         final StringBuffer buffer = new StringBuffer();
@@ -75,6 +76,7 @@ public class PostgreSqlStatementBuilder
         return buffer.toString();
     }
 
+    @Override
     public String getInsertStatementValues()
     {
         final StringBuffer buffer = new StringBuffer();
@@ -103,6 +105,7 @@ public class PostgreSqlStatementBuilder
         return buffer.toString();
     }
 
+    @Override
     public String getDoubleColumnType()
     {
         return "DOUBLE PRECISION";

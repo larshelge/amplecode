@@ -36,8 +36,8 @@ package org.amplecode.quick;
  */
 public interface Statement
 {
-    final String NUMERIC_COLUMN_TYPE = "INTEGER NOT NULL";
-    final String LONG_TEXT_COLUMN_TYPE = "VARCHAR (160)";
+    final String NUMERIC_COLUMN_TYPE = "integer not null";
+    final String LONG_TEXT_COLUMN_TYPE = "varchar(230)";
     final String SPACE = " ";
     final String SEPARATOR = ", ";
     final String EMPTY = "";
