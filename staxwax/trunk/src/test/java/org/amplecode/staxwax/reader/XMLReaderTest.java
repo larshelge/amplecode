@@ -241,4 +241,18 @@ public class XMLReaderTest
             i++;
         }
     }
+    
+    @Test
+    public void testReadAttributes()
+    {
+        XMLReader reader = XMLFactory.getXMLReader( inputStreamB );
+        
+        reader.moveToStartElement( ELEMENT_NAME );
+        
+        Map<String, String> attributeValues = reader.readAttributes();
+        
+        assertEquals( 2, attributeValues.size() );
+        assertEquals( "code1", attributeValues.get( "code" ) );
+        assertEquals( "uuid1", attributeValues.get( "uuid" ) );
+    }
 }

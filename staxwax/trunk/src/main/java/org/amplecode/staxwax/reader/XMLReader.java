@@ -130,6 +130,14 @@ public interface XMLReader
     Map<String, String> readElements( String elementName );
     
     /**
+     * Reads attributes at the current start element and returns a mapping of
+     * attribute name sand values. Requires current node to be a start element.
+     * 
+     * @return a map of attribute names and values.
+     */
+    Map<String, String> readAttributes();
+    
+    /**
      * Provides the underlying XMLStreamReader.
      * 
      * @return the underlying XMLStreamReader.

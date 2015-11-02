@@ -227,6 +227,26 @@ public class DefaultXMLStreamReader
             throw new XMLException( "Failed to read elements", ex );
         }
     }
+    
+    @Override
+    public Map<String, String> readAttributes()
+    {
+        Map<String, String> attributes = new HashMap<>();
+
+        if ( reader.getEventType() != START_ELEMENT )
+        {
+            throw new XMLException( "Trying to retrieve attributes from non START_ELEMENT node" );
+        }
+
+        // Read attributes
+        
+        for ( int i = 0; i < reader.getAttributeCount(); i++ )
+        {
+            attributes.put( reader.getAttributeLocalName( i ), reader.getAttributeValue( i ) );
+        }
+
+        return attributes;
+    }
 
     @Override
     public XMLStreamReader getXmlStreamReader()

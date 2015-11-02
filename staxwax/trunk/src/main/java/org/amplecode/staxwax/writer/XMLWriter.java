@@ -40,9 +40,6 @@ public interface XMLWriter
 {
     /**
      * Writes the XML declaration to output.
-     * 
-     * @param encoding the encoding the XML file.
-     * @param version the version of the XML file.
      */
     void openDocument();
     
@@ -117,15 +114,11 @@ public interface XMLWriter
     
     /**
      * Writes an XML end tag to output.
-     * 
-     * @param name the name of the XML element.
      */
     void closeElement();
     
     /**
      * Writes XML end tags to start tags which have not been terminated to output.
-     * 
-     * @param encoding the encoding of the XML file.
      */
     void closeDocument();
     
